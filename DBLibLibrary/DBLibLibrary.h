@@ -45,5 +45,6 @@ public:
 	virtual ~ArtLit();
 };
 
-bool recordExistenceCheck(std::string nameBook, std::string nameAutor,
+DBLIBLIBRARY bool recordExistenceCheck(std::string nameBook, std::string nameAutor,
 	std::string yearsOfRelease, std::string availability); // Проверка наличия строки в базе данных
+DBLIBLIBRARY bool recordExistenceCheck(std::string inputText, std::string typeOfLit); // Проверка наличия строки в базе данных

@@ -28,3 +28,31 @@ bool recordExistenceCheck(std::string nameBook,
 	}
 }
 
+bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
+{
+	std::string typeLit;
+	if (typeOfLit == "Техническая") {
+		typeLit = TechLitDBname;
+	}
+	else typeLit = ArtLitDBname;
+	bool found = false;	//
+	std::string stringForComparison; // Строка с которой сравнивают
+	int quantOfRepeat = 0; // Количество повторений
+	std::ifstream fin;
+	fin.open(typeLit);
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			getline(fin, stringForComparison);
+			found = stringForComparison.find(inputText) != std::string::npos;
+			if (found == true) {
+				return found;
+				quantOfRepeat++;
+				break;
+			}
+		}
+		if (found == false) return found; // Если в файле нет этой записи
+	}
+	else {
+		std::cout << "Ошибка открытия файла" << std::endl;
+	}
+}

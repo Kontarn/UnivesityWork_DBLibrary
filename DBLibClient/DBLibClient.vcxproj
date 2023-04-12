@@ -141,6 +141,7 @@
     <ClCompile Include="AddElementsToDBForm.cpp" />
     <ClCompile Include="AutorizationForm.cpp" />
     <ClCompile Include="ChoiceOfMethodEditForm.cpp" />
+    <ClCompile Include="EditDBForm.cpp" />
     <ClCompile Include="FindArtBookForm.cpp" />
     <ClCompile Include="FindForEditForm.cpp" />
     <ClCompile Include="FindTechBookForm.cpp" />
@@ -154,6 +155,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ChoiceOfMethodEditForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="EditDBForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="FindForEditForm.h">
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChoiceOfMethodEditForm.resx">
       <DependentUpon>ChoiceOfMethodEditForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditDBForm.resx">
+      <DependentUpon>EditDBForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FindArtBookForm.resx">
       <DependentUpon>FindArtBookForm.h</DependentUpon>
