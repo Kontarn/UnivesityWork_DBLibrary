@@ -35,8 +35,19 @@ System::Void DBLibClient::AddElementsToDBForm::выходНаНачальныйЭкранToolStripMen
 
 System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	
-	
+	System::String^ nameBook = nameBookTextBox->Text;
+	System::String^ AutorName = AutorNameTextBox->Text;
+	System::String^ yearsOfRelease = yearOfReleaseTextBox->Text;
+	System::String^ Availability = AvailabilityTextBox->Text;
+	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
+	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(AutorName).ToPointer();
+	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearsOfRelease).ToPointer();
+	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(Availability).ToPointer();
+	std::string sNameBook(cNameBook);
+	std::string sAutorName(cAutorName);
+	std::string sYearsOfRelease(cYearsOfRelease);
+	std::string sAvailability(cAvailability);
+
 	if (typeBookComboBox->Text == "Техническая") {
 		TechLit Tlit;
 		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" || yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
@@ -44,23 +55,13 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 		}
 		else {
 
-			//System::String^ nameBook = nameBookTextBox->Text;
-			//System::String^ AutorName = AutorNameTextBox->Text;
-			//System::String^ yearsOfRelease = yearOfReleaseTextBox->Text;
-			//System::String^ Availability = AvailabilityTextBox->Text;
-			//char* cNameBook = (char*)Marshal::StringToHGlobalAnsi(nameBook).ToPointer();
-			//char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(AutorName).ToPointer();
-			//char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearsOfRelease).ToPointer();
-			//char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(Availability).ToPointer();
-			//Tlit.addLine(cNameBook, cAutorName, cYearsOfRelease, cAvailability);
-			//Marshal::FreeHGlobal((IntPtr)cNameBook);
-			//Marshal::FreeHGlobal((IntPtr)cAutorName);
-			//Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
-			//Marshal::FreeHGlobal((IntPtr)cAvailability);
-			MessageBox::Show("Временно не работает", "Успешно");
-
+			if (Tlit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability) == true) {
+				MessageBox::Show("Данные добавлены в раздел технические", "Успешно");
+			}
+			else {
+				MessageBox::Show("Запись уже существует, введите другую", "Ошибка");
+			}
 		}
-
 	}
 	else if (typeBookComboBox->Text == "Художественная") {
 		ArtLit Alit;
@@ -68,28 +69,20 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
-			System::String^ nameBook = nameBookTextBox->Text;
-			System::String^ AutorName = AutorNameTextBox->Text;
-			System::String^ yearsOfRelease = yearOfReleaseTextBox->Text;
-			System::String^ Availability = AvailabilityTextBox->Text;
-			char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
-			char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(AutorName).ToPointer();
-			char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearsOfRelease).ToPointer();
-			char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(Availability).ToPointer();
-			std::string sNameBook(cNameBook);
-			std::string sAutorName(cAutorName);
-			std::string sYearsOfRelease(cYearsOfRelease);
-			std::string sAvailability(cAvailability);
-			Alit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability);
-			Marshal::FreeHGlobal((IntPtr)cNameBook);
-			Marshal::FreeHGlobal((IntPtr)cAutorName);
-			Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
-			Marshal::FreeHGlobal((IntPtr)cAvailability);
-			MessageBox::Show("Данные добавлены в раздел художественные", "Успешно");
+			if (Alit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability) == true) {
+				MessageBox::Show("Данные добавлены в раздел художественные", "Успешно");
+			}
+			else {
+				MessageBox::Show("Запись уже существует, введите другую", "Ошибка");
+			}
+			
 		}
-
 	}
 	else MessageBox::Show("Тип добавляемой литературы не выбран", "Ошибка");
+	Marshal::FreeHGlobal((IntPtr)cNameBook);
+	Marshal::FreeHGlobal((IntPtr)cAutorName);
+	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
+	Marshal::FreeHGlobal((IntPtr)cAvailability);
 }
 
 

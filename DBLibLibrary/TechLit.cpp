@@ -1,0 +1,61 @@
+#include "pch.h"
+#include "DBLibLibrary.h"
+
+TechLit::TechLit()
+{
+	nameBook = new std::string;
+	nameAutor = new std::string;
+	yearsOfRelease = new std::string;
+	availability = new std::string;
+}
+// Добавляем запись
+bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
+	std::string& yearsOfRelease, std::string& availability) {
+	std::fstream fout;
+	// Проверяем наличие записи в файле
+	if (recordExistenceCheck(nameBook, nameAutor, yearsOfRelease, availability) == false)
+	{ // Если записи нет, то добавляем и возвращаем true
+		fout.open(TechLitDBname, std::fstream::in | std::fstream::out | std::fstream::app);
+		if (fout.is_open()) {
+			fout << nameBook << ", " << nameAutor << ", " << yearsOfRelease << "; " << availability << "\n";
+			fout.close();
+		}
+		else std::cout << "Ошибка открытия файла 'DBLibArt.txt'" << std::endl;
+		return true;
+	}
+	// Если запись уже есть, то возвращаем false
+	else return false;
+
+}
+// Ищет строку в файле
+//char* TechLit::recordExistenceCheck(char* inputLine)
+//{
+//	std::ifstream fin;
+//	std::string str; // Строка для сравнения
+//	std::string InputLine(inputLine); 
+//	bool found = false;
+//	fin.open(TechLitDBname);
+//	if (fin.is_open()) {
+//		while (!fin.eof()) {
+//			getline(fin, str);
+//			found = str.find(InputLine) != std::string::npos;
+//			if (found) {
+//				return inputLine;
+//				break;
+//			}
+//
+//		}
+//		if (found == false) {
+//			return 0;
+//		}
+//	}
+//	else {
+//		std::cout << "Ошибка открытия файла" << std::endl;
+//	}
+//}
+TechLit::~TechLit() {
+	delete nameAutor;
+	delete nameBook;
+	delete yearsOfRelease;
+	delete availability;
+}

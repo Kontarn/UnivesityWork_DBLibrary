@@ -1,4 +1,5 @@
 #pragma once
+
 #ifdef DBLIBLIBRARY_EXPORTS
 	#define DBLIBLIBRARY __declspec(dllexport)
 #else
@@ -14,7 +15,7 @@
 
 class DBLIBLIBRARY Library {
 public:
-	virtual void addLine(std::string& nameBook, std::string& nameAutor,
+	virtual bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability) = 0;
 	//virtual char* recordExistenceCheck(char* inputLine) = 0;
 };
@@ -26,9 +27,9 @@ class DBLIBLIBRARY TechLit : public Library {
 
 public:
 	TechLit();
-	void addLine(std::string& nameBook, std::string& nameAutor,
+	bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability) override;
-	//char* recordExistenceCheck(char* inputLine); // Проверка наличия строки в базе данных
+	//char* recordExistenceCheck(char* inputLine); 
 	virtual ~TechLit();
 };
 class DBLIBLIBRARY ArtLit : public Library {
@@ -38,11 +39,11 @@ class DBLIBLIBRARY ArtLit : public Library {
 	std::string* availability;			// Наличие в библиотеке
 public:
 	ArtLit();
-	void addLine(std::string& nameBook, std::string& nameAutor,
+	bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability) override;
-	bool recordExistenceCheck(std::string nameBook, std::string nameAutor,
-		std::string yearsOfRelease, std::string availability);
-	~ArtLit();
+	
+	virtual ~ArtLit();
 };
-//DBLIBLIBRARY char* bufferStr(char* nameBook,
-//	char* nameAutor, char* yearsOfRelease, char* available);
+
+bool recordExistenceCheck(std::string nameBook, std::string nameAutor,
+	std::string yearsOfRelease, std::string availability); // Проверка наличия строки в базе данных
