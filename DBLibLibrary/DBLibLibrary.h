@@ -8,8 +8,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#define TechLitDBname	"..\\..\\DBLibLibrary\\DBLibLibrary\\DBLibTech.txt"
-#define ArtLitDBname	"..\\..\\DBLibLibrary\\DBLibLibrary\\DBLitArt.txt"
+#define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
+#define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
 //DBLIBLIBRARY_API void Test();
 
 class DBLIBLIBRARY Library {

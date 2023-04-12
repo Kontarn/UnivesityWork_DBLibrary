@@ -169,7 +169,8 @@
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="DBLitArt.txt" />
+    <Text Include="DBLibArt.txt" />
+    <Text Include="DBLibTech.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
