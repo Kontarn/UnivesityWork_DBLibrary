@@ -42,6 +42,13 @@ namespace DBLibClient {
 	private: System::Windows::Forms::ToolStripMenuItem^ выход»зѕрограммыToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ выходЌаЌачальныйЁкранToolStripMenuItem;
 	private: System::Windows::Forms::Button^ BackToFindButton;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearsOfRelease;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+	private: System::Windows::Forms::Button^ EditDBButton;
+	private: System::Windows::Forms::Button^ DeleteLineDBButton;
 
 	private:
 		/// <summary>
@@ -61,7 +68,15 @@ namespace DBLibClient {
 			this->выход»зѕрограммыToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->выходЌаЌачальныйЁкранToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->BackToFindButton = (gcnew System::Windows::Forms::Button());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->yearsOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EditDBButton = (gcnew System::Windows::Forms::Button());
+			this->DeleteLineDBButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -71,7 +86,7 @@ namespace DBLibClient {
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->выходToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(513, 33);
+			this->menuStrip1->Size = System::Drawing::Size(880, 33);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -101,19 +116,82 @@ namespace DBLibClient {
 			// 
 			// BackToFindButton
 			// 
-			this->BackToFindButton->Location = System::Drawing::Point(356, 198);
+			this->BackToFindButton->Location = System::Drawing::Point(738, 509);
 			this->BackToFindButton->Name = L"BackToFindButton";
-			this->BackToFindButton->Size = System::Drawing::Size(130, 59);
+			this->BackToFindButton->Size = System::Drawing::Size(130, 45);
 			this->BackToFindButton->TabIndex = 1;
 			this->BackToFindButton->Text = L"Ќазад";
 			this->BackToFindButton->UseVisualStyleBackColor = true;
 			this->BackToFindButton->Click += gcnew System::EventHandler(this, &EditDBForm::BackToFindButton_Click);
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->nameBook,
+					this->nameAutor, this->yearsOfRelease, this->Availability
+			});
+			this->dataGridView1->Location = System::Drawing::Point(57, 110);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 62;
+			this->dataGridView1->RowTemplate->Height = 28;
+			this->dataGridView1->Size = System::Drawing::Size(665, 150);
+			this->dataGridView1->TabIndex = 2;
+			// 
+			// nameBook
+			// 
+			this->nameBook->HeaderText = L"Ќазвание";
+			this->nameBook->MinimumWidth = 8;
+			this->nameBook->Name = L"nameBook";
+			this->nameBook->Width = 150;
+			// 
+			// nameAutor
+			// 
+			this->nameAutor->HeaderText = L"јвтор";
+			this->nameAutor->MinimumWidth = 8;
+			this->nameAutor->Name = L"nameAutor";
+			this->nameAutor->Width = 150;
+			// 
+			// yearsOfRelease
+			// 
+			this->yearsOfRelease->HeaderText = L"√од выпуска";
+			this->yearsOfRelease->MinimumWidth = 8;
+			this->yearsOfRelease->Name = L"yearsOfRelease";
+			this->yearsOfRelease->Width = 150;
+			// 
+			// Availability
+			// 
+			this->Availability->HeaderText = L"Ќаличие";
+			this->Availability->MinimumWidth = 8;
+			this->Availability->Name = L"Availability";
+			this->Availability->Width = 150;
+			// 
+			// EditDBButton
+			// 
+			this->EditDBButton->Location = System::Drawing::Point(574, 509);
+			this->EditDBButton->Name = L"EditDBButton";
+			this->EditDBButton->Size = System::Drawing::Size(158, 45);
+			this->EditDBButton->TabIndex = 3;
+			this->EditDBButton->Text = L"–едактировать";
+			this->EditDBButton->UseVisualStyleBackColor = true;
+			// 
+			// DeleteLineDBButton
+			// 
+			this->DeleteLineDBButton->Location = System::Drawing::Point(408, 509);
+			this->DeleteLineDBButton->Name = L"DeleteLineDBButton";
+			this->DeleteLineDBButton->Size = System::Drawing::Size(160, 45);
+			this->DeleteLineDBButton->TabIndex = 4;
+			this->DeleteLineDBButton->Text = L"”далить запись";
+			this->DeleteLineDBButton->UseVisualStyleBackColor = true;
+			// 
 			// EditDBForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(513, 278);
+			this->ClientSize = System::Drawing::Size(880, 566);
+			this->Controls->Add(this->DeleteLineDBButton);
+			this->Controls->Add(this->EditDBButton);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->BackToFindButton);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
@@ -122,6 +200,7 @@ namespace DBLibClient {
 			this->Text = L"–едактирование записей";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

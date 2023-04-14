@@ -7,6 +7,7 @@ TechLit::TechLit()
 	nameAutor = new std::string;
 	yearsOfRelease = new std::string;
 	availability = new std::string;
+	littleDB = new std::vector <std::string>;
 }
 // Добавляем запись
 bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
@@ -26,6 +27,20 @@ bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
 	// Если запись уже есть, то возвращаем false
 	else return false;
 
+}
+void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
+{
+	std::ifstream fin;
+	fin.open(TechLitDBname);
+	std::string stringForComparison; // Строка с которой сравнивают
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			getline(fin, stringForComparison);
+			if (stringForComparison.find(inpText) != std::string::npos) {
+				littleDB->push_back(stringForComparison);
+			}
+		}
+	}
 }
 // Ищет строку в файле
 //char* TechLit::recordExistenceCheck(char* inputLine)
@@ -58,4 +73,5 @@ TechLit::~TechLit() {
 	delete nameBook;
 	delete yearsOfRelease;
 	delete availability;
+	delete littleDB;
 }

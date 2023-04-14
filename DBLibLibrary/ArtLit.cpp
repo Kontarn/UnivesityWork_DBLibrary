@@ -27,6 +27,10 @@ bool ArtLit::addLine(std::string& nameBook, std::string& nameAutor,
 	// Если запись уже есть, то возвращаем false
 	else return false;
 }
+void ArtLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
+{
+	std::string str = nullptr;
+}
 // проверяет присутствие записи в базе
 
 

@@ -43,43 +43,21 @@ namespace DBLibClient {
 	protected:
 	private: System::Windows::Forms::ToolStripMenuItem^ выходToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ вернутсяНаНачальныйЭкранToolStripMenuItem1;
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^ выходИзПрограммыToolStripMenuItem1;
 	private: System::Windows::Forms::ComboBox^ choiceOfTypeBook;
-
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ nameBookTextBox;
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Button^ FindButton;
-
 	private: System::Windows::Forms::Button^ BackToStartMenu;
 	private: System::Windows::Forms::Label^ label3;
-
 	private: System::Windows::Forms::Button^ BackToMenu;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Button^ helpOfSearchButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+	private: System::Windows::Forms::Button^ EditEntryButton;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -104,10 +82,15 @@ namespace DBLibClient {
 			this->BackToStartMenu = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->BackToMenu = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->helpOfSearchButton = (gcnew System::Windows::Forms::Button());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->EditEntryButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -118,7 +101,7 @@ namespace DBLibClient {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(658, 35);
+			this->menuStrip1->Size = System::Drawing::Size(991, 35);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -151,7 +134,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Техническая", L"Художественная" });
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Техническая", L"Художественная" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(17, 212);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(741, 401);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -159,7 +142,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 187);
+			this->label1->Location = System::Drawing::Point(736, 373);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 22);
 			this->label1->TabIndex = 2;
@@ -167,14 +150,14 @@ namespace DBLibClient {
 			// 
 			// nameBookTextBox
 			// 
-			this->nameBookTextBox->Location = System::Drawing::Point(16, 103);
+			this->nameBookTextBox->Location = System::Drawing::Point(13, 403);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
-			this->nameBookTextBox->Size = System::Drawing::Size(631, 28);
+			this->nameBookTextBox->Size = System::Drawing::Size(437, 28);
 			this->nameBookTextBox->TabIndex = 3;
 			// 
 			// FindButton
 			// 
-			this->FindButton->Location = System::Drawing::Point(564, 208);
+			this->FindButton->Location = System::Drawing::Point(186, 453);
 			this->FindButton->Name = L"FindButton";
 			this->FindButton->Size = System::Drawing::Size(83, 34);
 			this->FindButton->TabIndex = 6;
@@ -184,7 +167,7 @@ namespace DBLibClient {
 			// 
 			// BackToStartMenu
 			// 
-			this->BackToStartMenu->Location = System::Drawing::Point(450, 208);
+			this->BackToStartMenu->Location = System::Drawing::Point(869, 453);
 			this->BackToStartMenu->Name = L"BackToStartMenu";
 			this->BackToStartMenu->Size = System::Drawing::Size(108, 34);
 			this->BackToStartMenu->TabIndex = 8;
@@ -195,7 +178,7 @@ namespace DBLibClient {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(13, 46);
+			this->label3->Location = System::Drawing::Point(12, 378);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(249, 22);
 			this->label3->TabIndex = 9;
@@ -203,7 +186,7 @@ namespace DBLibClient {
 			// 
 			// BackToMenu
 			// 
-			this->BackToMenu->Location = System::Drawing::Point(336, 208);
+			this->BackToMenu->Location = System::Drawing::Point(755, 453);
 			this->BackToMenu->Name = L"BackToMenu";
 			this->BackToMenu->Size = System::Drawing::Size(108, 34);
 			this->BackToMenu->TabIndex = 11;
@@ -211,26 +194,9 @@ namespace DBLibClient {
 			this->BackToMenu->UseVisualStyleBackColor = true;
 			this->BackToMenu->Click += gcnew System::EventHandler(this, &FindForEditForm::BackToMenu_Click);
 			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(13, 78);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(92, 22);
-			this->label2->TabIndex = 12;
-			this->label2->Text = L"Название";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(273, 78);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(0, 22);
-			this->label4->TabIndex = 13;
-			// 
 			// helpOfSearchButton
 			// 
-			this->helpOfSearchButton->Location = System::Drawing::Point(488, 152);
+			this->helpOfSearchButton->Location = System::Drawing::Point(456, 400);
 			this->helpOfSearchButton->Name = L"helpOfSearchButton";
 			this->helpOfSearchButton->Size = System::Drawing::Size(159, 35);
 			this->helpOfSearchButton->TabIndex = 14;
@@ -238,14 +204,65 @@ namespace DBLibClient {
 			this->helpOfSearchButton->UseVisualStyleBackColor = true;
 			this->helpOfSearchButton->Click += gcnew System::EventHandler(this, &FindForEditForm::helpOfSearchButton_Click);
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->nameBook,
+					this->nameAutor, this->yearOfRelease, this->Availability
+			});
+			this->dataGridView1->Location = System::Drawing::Point(13, 38);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 62;
+			this->dataGridView1->RowTemplate->Height = 28;
+			this->dataGridView1->Size = System::Drawing::Size(964, 313);
+			this->dataGridView1->TabIndex = 15;
+			// 
+			// nameBook
+			// 
+			this->nameBook->HeaderText = L"Название";
+			this->nameBook->MinimumWidth = 8;
+			this->nameBook->Name = L"nameBook";
+			this->nameBook->Width = 350;
+			// 
+			// nameAutor
+			// 
+			this->nameAutor->HeaderText = L"Автор";
+			this->nameAutor->MinimumWidth = 8;
+			this->nameAutor->Name = L"nameAutor";
+			this->nameAutor->Width = 250;
+			// 
+			// yearOfRelease
+			// 
+			this->yearOfRelease->HeaderText = L"Год выпуска";
+			this->yearOfRelease->MinimumWidth = 8;
+			this->yearOfRelease->Name = L"yearOfRelease";
+			this->yearOfRelease->Width = 150;
+			// 
+			// Availability
+			// 
+			this->Availability->HeaderText = L"Наличие";
+			this->Availability->MinimumWidth = 8;
+			this->Availability->Name = L"Availability";
+			this->Availability->Width = 150;
+			// 
+			// EditEntryButton
+			// 
+			this->EditEntryButton->Location = System::Drawing::Point(13, 453);
+			this->EditEntryButton->Name = L"EditEntryButton";
+			this->EditEntryButton->Size = System::Drawing::Size(167, 34);
+			this->EditEntryButton->TabIndex = 16;
+			this->EditEntryButton->Text = L"Редактирование";
+			this->EditEntryButton->UseVisualStyleBackColor = true;
+			// 
 			// FindForEditForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(658, 254);
+			this->ClientSize = System::Drawing::Size(991, 499);
+			this->Controls->Add(this->EditEntryButton);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->helpOfSearchButton);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label2);
 			this->Controls->Add(this->BackToMenu);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->BackToStartMenu);
@@ -257,15 +274,13 @@ namespace DBLibClient {
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->MainMenuStrip = this->menuStrip1;
-			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(680, 310);
-			this->MinimumSize = System::Drawing::Size(680, 310);
 			this->Name = L"FindForEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Поиск наличия записи";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

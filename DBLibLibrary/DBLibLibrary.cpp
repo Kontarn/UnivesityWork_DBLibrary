@@ -56,3 +56,38 @@ bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
 		std::cout << "Ошибка открытия файла" << std::endl;
 	}
 }
+// Разрезает полученную запись данных и присваивает параметрам
+DBLIBLIBRARY void splitEntry(std::string inpText, std::string& nameBook, 
+	std::string nameAutor, std::string& yearOfRelease, std::string& availability)
+{
+	std::string InpText=inpText;
+	std::string INPText;
+	std::size_t pos = 0;
+	// nameBook - название книги
+	pos = InpText.find(",", pos);
+	INPText = inpText;
+	INPText.erase(pos);
+	nameBook = INPText;
+	// nameAutor - ФИО автора
+	INPText = inpText;
+	INPText.erase(0, pos + 2);
+	pos = 0;
+	pos = INPText.find(",", pos);
+	INPText.erase(pos);
+	nameAutor = INPText;
+	// yearOfRelease - год выпуска книги
+	pos = 0;
+	INPText = inpText;
+	pos = INPText.find_last_of(",");
+	INPText.erase(0, pos + 2);
+	pos = 0;
+	pos = INPText.find(";", pos);
+	INPText.erase(pos);
+	yearOfRelease = INPText;
+	// availability - наличие книиги в библиотеке
+	pos = 0;
+	INPText = inpText;
+	pos = INPText.find(";", pos);
+	INPText.erase(0, pos + 2);
+	availability = INPText;
+}

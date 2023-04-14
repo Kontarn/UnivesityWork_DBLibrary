@@ -31,25 +31,23 @@ System::Void DBLibClient::FindForEditForm::BackToMenu_Click(System::Object^ send
 
 System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	System::String^ nameBook = nameBookTextBox->Text;
+	System::String^ request = nameBookTextBox->Text; // Введённые данные
 	System::String^ typeOfLit = choiceOfTypeBook->Text;
-	//System::String^ AutorName = nameAutorTextBox->Text;
-	//System::String^ yearsOfRelease = yearsOfReleaseTextBox->Text;
-	//System::String^ Availability = AvailabilityTextBox->Text;
-	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
+	char* cRequest = (char*)(Marshal::StringToHGlobalAnsi(request)).ToPointer();
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	//char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(AutorName).ToPointer();
-	//char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearsOfRelease).ToPointer();
-	//char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(Availability).ToPointer();
-	std::string sNameBook(cNameBook);
+	std::string sRequest(cRequest);
 	std::string sTypeOfLit(cTypeOfLit);
-	//std::string sAutorName(cAutorName);
-	//std::string sYearsOfRelease(cYearsOfRelease);
-	//std::string sAvailability(cAvailability);
+	std::vector <std::string> littleDB;
+	std::string nameBook;
+	std::string nameAutor;
+	std::string yearOfRelease;
+	std::string availability;
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для поиска", "Внимание");
 	else if (choiceOfTypeBook->Text == "Техническая") {
-		
-		if (recordExistenceCheck(sNameBook, sTypeOfLit) == true) {
+		TechLit tLit;
+		tLit.searchByRequest(&littleDB, sRequest);
+		splitEntry(littleDB[0], nameBook, nameAutor, yearOfRelease, availability);
+		/*if (recordExistenceCheck(sNameBook, sTypeOfLit) == true) {
 			EditDBForm^ form = gcnew EditDBForm();
 			this->Hide();
 			form->Show();
@@ -57,25 +55,21 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 		else {
 			MessageBox::Show("Запись отсутствует в базе данных технической литературы \
 либо выберите другую базу данных, либо добавьте запись", "Ошибка");
-		}
+		}*/
 	}
 	else if (choiceOfTypeBook->Text == "Художественная") {
-		if (recordExistenceCheck(sNameBook, sTypeOfLit) == true) {
-			EditDBForm^ form = gcnew EditDBForm();
-			this->Hide();
-			form->Show();
-		}
-		else {
-			MessageBox::Show("Запись отсутствует в базе данных художественной литературы \
-либо выберите другую базу данных, либо добавьте запись", "Ошибка");
-		}
+		//if (recordExistenceCheck(sNameBook, sTypeOfLit) == true) {
+		//	EditDBForm^ form = gcnew EditDBForm();
+		//	this->Hide();
+		//	form->Show();
+		//}
+//		else {
+//			MessageBox::Show("Запись отсутствует в базе данных художественной литературы \
+//либо выберите другую базу данных, либо добавьте запись", "Ошибка");
+//		}
 	}
-	Marshal::FreeHGlobal((IntPtr)cNameBook);
+	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
-
-	//Marshal::FreeHGlobal((IntPtr)cAutorName);
-	//Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
-	//Marshal::FreeHGlobal((IntPtr)cAvailability);
 }
 
 System::Void DBLibClient::FindForEditForm::helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e)
