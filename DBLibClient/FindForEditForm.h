@@ -58,6 +58,9 @@ namespace DBLibClient {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
 	private: System::Windows::Forms::Button^ EditEntryButton;
+	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
+	private: System::Windows::Forms::Button^ ShowAllLinesButton;
+	private: System::Windows::Forms::Button^ ExitButton;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -89,6 +92,9 @@ namespace DBLibClient {
 			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->EditEntryButton = (gcnew System::Windows::Forms::Button());
+			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
+			this->ExitButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -255,11 +261,33 @@ namespace DBLibClient {
 			this->EditEntryButton->Text = L"Редактирование";
 			this->EditEntryButton->UseVisualStyleBackColor = true;
 			// 
+			// ShowAllLinesButton
+			// 
+			this->ShowAllLinesButton->Location = System::Drawing::Point(275, 453);
+			this->ShowAllLinesButton->Name = L"ShowAllLinesButton";
+			this->ShowAllLinesButton->Size = System::Drawing::Size(213, 34);
+			this->ShowAllLinesButton->TabIndex = 17;
+			this->ShowAllLinesButton->Text = L"Показать все записи";
+			this->ShowAllLinesButton->UseVisualStyleBackColor = true;
+			this->ShowAllLinesButton->Click += gcnew System::EventHandler(this, &FindForEditForm::ShowAllLinesButton_Click);
+			// 
+			// ExitButton
+			// 
+			this->ExitButton->Location = System::Drawing::Point(641, 453);
+			this->ExitButton->Name = L"ExitButton";
+			this->ExitButton->Size = System::Drawing::Size(108, 34);
+			this->ExitButton->TabIndex = 18;
+			this->ExitButton->Text = L"Выход";
+			this->ExitButton->UseVisualStyleBackColor = true;
+			this->ExitButton->Click += gcnew System::EventHandler(this, &FindForEditForm::ExitButton_Click);
+			// 
 			// FindForEditForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(991, 499);
+			this->Controls->Add(this->ExitButton);
+			this->Controls->Add(this->ShowAllLinesButton);
 			this->Controls->Add(this->EditEntryButton);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->helpOfSearchButton);
@@ -293,5 +321,7 @@ private: System::Void BackToStartMenu_Click(System::Object^ sender, System::Even
 private: System::Void BackToMenu_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void FindButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ExitButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

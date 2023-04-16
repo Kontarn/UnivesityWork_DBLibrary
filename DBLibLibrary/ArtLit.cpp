@@ -1,6 +1,12 @@
 #include "pch.h"
 #include "DBLibLibrary.h"
 
+
+//Leaks::~Leaks()
+//{
+//	_CrtCheckMemory();
+//}
+//Leaks _l;
 ArtLit::ArtLit() {
 	nameBook = new std::string;
 	nameAutor = new std::string;
@@ -27,11 +33,35 @@ bool ArtLit::addLine(std::string& nameBook, std::string& nameAutor,
 	// Если запись уже есть, то возвращаем false
 	else return false;
 }
+// Ищет все записи, которые содержат введённую пользователем строку
 void ArtLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
 {
-	std::string str = nullptr;
+	std::ifstream fin;
+	fin.open(ArtLitDBname);
+	std::string stringForComparison; // Строка с которой сравнивают
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			getline(fin, stringForComparison);
+			if (stringForComparison.find(inpText) != std::string::npos) {
+				littleDB->push_back(stringForComparison);
+			}
+		}
+	}
 }
-// проверяет присутствие записи в базе
+// Добавляет все записи файла txt в vector
+void ArtLit::showAllLines(std::vector<std::string>* littleDB)
+{
+	std::ifstream fin;
+	std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
+	fin.open(ArtLitDBname);
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			getline(fin, str);
+			littleDB->push_back(str);
+		}
+	}
+	fin.close();
+}
 
 
 ArtLit::~ArtLit() {

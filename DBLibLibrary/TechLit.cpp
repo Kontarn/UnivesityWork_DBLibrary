@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "DBLibLibrary.h"
 
+Leaks::~Leaks()
+{
+	_CrtCheckMemory();
+}
+Leaks _l;
 TechLit::TechLit()
 {
 	nameBook = new std::string;
@@ -28,6 +33,7 @@ bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
 	else return false;
 
 }
+// Ищет все записи, которые содержат введённую пользователем строку
 void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
 {
 	std::ifstream fin;
@@ -41,6 +47,20 @@ void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string i
 			}
 		}
 	}
+}
+// Добавляет все записи файла txt в vector
+void TechLit::showAllLines(std::vector<std::string>* littleDB)
+{
+	std::ifstream fin;
+	std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
+	fin.open(TechLitDBname);
+	if (fin.is_open()) {
+		while (!fin.eof()) {
+			getline(fin, str);
+			littleDB->push_back(str);
+		}
+	}
+	fin.close();
 }
 // Ищет строку в файле
 //char* TechLit::recordExistenceCheck(char* inputLine)

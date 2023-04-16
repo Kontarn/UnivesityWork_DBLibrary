@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "DBLibLibrary.h"
 
+// Проверяет введённые данные на наличие в файле
 bool recordExistenceCheck(std::string nameBook, 
 	std::string nameAutor, std::string yearsOfRelease, std::string availability)
 {
@@ -27,7 +28,7 @@ bool recordExistenceCheck(std::string nameBook,
 		std::cout << "Ошибка открытия файла" << std::endl;
 	}
 }
-
+// Функция делает то же самое что и функция выше, только данные передаются одной строкой
 bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -56,9 +57,9 @@ bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
 		std::cout << "Ошибка открытия файла" << std::endl;
 	}
 }
-// Разрезает полученную запись данных и присваивает параметрам
+// Разрезает полученную запись данных и присваивает атрибутам
 DBLIBLIBRARY void splitEntry(std::string inpText, std::string& nameBook, 
-	std::string nameAutor, std::string& yearOfRelease, std::string& availability)
+	std::string& nameAutor, std::string& yearOfRelease, std::string& availability)
 {
 	std::string InpText=inpText;
 	std::string INPText;
@@ -91,3 +92,5 @@ DBLIBLIBRARY void splitEntry(std::string inpText, std::string& nameBook,
 	INPText.erase(0, pos + 2);
 	availability = INPText;
 }
+
+
