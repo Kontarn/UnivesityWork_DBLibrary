@@ -31,7 +31,7 @@ bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
 	}
 	// Если запись уже есть, то возвращаем false
 	else return false;
-
+	fout.close();
 }
 // Ищет все записи, которые содержат введённую пользователем строку
 void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
@@ -47,6 +47,7 @@ void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string i
 			}
 		}
 	}
+	fin.close();
 }
 // Добавляет все записи файла txt в vector
 void TechLit::showAllLines(std::vector<std::string>* littleDB)
@@ -57,10 +58,36 @@ void TechLit::showAllLines(std::vector<std::string>* littleDB)
 	if (fin.is_open()) {
 		while (!fin.eof()) {
 			getline(fin, str);
-			littleDB->push_back(str);
+			if (str != "") {
+				littleDB->push_back(str);
+			}
 		}
 	}
 	fin.close();
+}
+void TechLit::deleteLine(std::string delLine)
+{
+	std::set <std::string> strSet;
+	std::string getStrFile;
+	std::fstream fs(TechLitDBname, std::fstream::in | std::fstream::app);
+	fs.seekg(0);
+	// Заполняем контейнер всеми элементами кроме выбранного
+	while (!fs.eof()) {
+		getline(fs, getStrFile);
+		if (getStrFile.find(delLine)) {
+			strSet.insert(getStrFile);
+		}
+	}
+	//strSet.insert(delLine);
+	fs.close();
+	// Чистим файл для перезаписи
+	std::fstream clear_file(TechLitDBname, std::ios::out);
+	clear_file << "";
+	clear_file.close();
+	fs.open(TechLitDBname, std::fstream::out | std::fstream::app);
+	for (auto it = strSet.begin(); it != strSet.end(); ++it) {
+		fs << *it << "\n";
+	}
 }
 // Ищет строку в файле
 //char* TechLit::recordExistenceCheck(char* inputLine)

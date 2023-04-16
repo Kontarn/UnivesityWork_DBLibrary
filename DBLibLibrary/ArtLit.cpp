@@ -47,6 +47,7 @@ void ArtLit::searchByRequest(std::vector <std::string>* littleDB, std::string in
 			}
 		}
 	}
+	fin.close();
 }
 // Добавляет все записи файла txt в vector
 void ArtLit::showAllLines(std::vector<std::string>* littleDB)
@@ -61,6 +62,30 @@ void ArtLit::showAllLines(std::vector<std::string>* littleDB)
 		}
 	}
 	fin.close();
+}
+
+void ArtLit::deleteLine(std::string delLine)
+{
+	std::set <std::string> strSet;
+	std::string getStrFile;
+	std::fstream fs(ArtLitDBname, std::fstream::in | std::fstream::app);
+	fs.seekg(0);
+	// Заполняем контейнер всеми элементами кроме выбранного
+	while (!fs.eof()) {
+		getline(fs, getStrFile);
+		if (getStrFile.find(delLine)) {
+			strSet.insert(getStrFile);
+		}
+	}
+	//strSet.insert(delLine);
+	fs.close();
+	std::fstream clear_file(ArtLitDBname, std::ios::out);
+	clear_file.close();
+	fs.open(ArtLitDBname, std::fstream::out | std::fstream::app);
+	for (auto it = strSet.begin(); it != strSet.end(); ++it) {
+		fs << *it << "\n";
+	}
+	
 }
 
 

@@ -27,6 +27,7 @@ bool recordExistenceCheck(std::string nameBook,
 	else {
 		std::cout << "Ошибка открытия файла" << std::endl;
 	}
+	fin.close();
 }
 // Функция делает то же самое что и функция выше, только данные передаются одной строкой
 bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
@@ -56,6 +57,7 @@ bool recordExistenceCheck(std::string inputText, std::string typeOfLit)
 	else {
 		std::cout << "Ошибка открытия файла" << std::endl;
 	}
+	fin.close();
 }
 // Разрезает полученную запись данных и присваивает атрибутам
 DBLIBLIBRARY void splitEntry(std::string inpText, std::string& nameBook, 

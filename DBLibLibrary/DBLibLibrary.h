@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
 #define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
 #define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
 
@@ -25,6 +26,7 @@ public:
 	// Функция производит поиск по запросу и возвращает все найденные записи
 	virtual void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) = 0;
 	virtual void showAllLines(std::vector <std::string>* littleDB) = 0;
+	virtual void deleteLine(std::string delLine)=0;
 };
 class DBLIBLIBRARY TechLit : public Library {
 	std::string* nameBook;				// Название книги
@@ -38,6 +40,7 @@ public:
 		std::string& yearsOfRelease, std::string& availability) override;
 	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) override;
 	void showAllLines(std::vector <std::string>* littleDB) override;
+	void deleteLine(std::string delLine) override;
 	virtual ~TechLit();
 };
 class DBLIBLIBRARY ArtLit : public Library {
@@ -51,6 +54,7 @@ public:
 		std::string& yearsOfRelease, std::string& availability) override;
 	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) override;
 	void showAllLines(std::vector <std::string>* littleDb) override;
+	void deleteLine(std::string delLine) override;
 	virtual ~ArtLit();
 };
 

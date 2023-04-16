@@ -4,6 +4,7 @@
 #include "EditDBForm.h"
 #include <string>
 #include <vcclr.h>
+#include <set>
 
 namespace DBLibClient {
 
@@ -61,6 +62,7 @@ namespace DBLibClient {
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ ShowAllLinesButton;
 	private: System::Windows::Forms::Button^ ExitButton;
+	private: System::Windows::Forms::Button^ deleteLineButton;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -95,6 +97,7 @@ namespace DBLibClient {
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
 			this->ExitButton = (gcnew System::Windows::Forms::Button());
+			this->deleteLineButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -140,7 +143,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Техническая", L"Художественная" });
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Техническая", L"Художественная" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(741, 401);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 398);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -148,7 +151,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(736, 373);
+			this->label1->Location = System::Drawing::Point(706, 373);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 22);
 			this->label1->TabIndex = 2;
@@ -165,7 +168,7 @@ namespace DBLibClient {
 			// 
 			this->FindButton->Location = System::Drawing::Point(186, 453);
 			this->FindButton->Name = L"FindButton";
-			this->FindButton->Size = System::Drawing::Size(83, 34);
+			this->FindButton->Size = System::Drawing::Size(75, 34);
 			this->FindButton->TabIndex = 6;
 			this->FindButton->Text = L"Поиск";
 			this->FindButton->UseVisualStyleBackColor = true;
@@ -192,9 +195,9 @@ namespace DBLibClient {
 			// 
 			// BackToMenu
 			// 
-			this->BackToMenu->Location = System::Drawing::Point(755, 453);
+			this->BackToMenu->Location = System::Drawing::Point(790, 453);
 			this->BackToMenu->Name = L"BackToMenu";
-			this->BackToMenu->Size = System::Drawing::Size(108, 34);
+			this->BackToMenu->Size = System::Drawing::Size(73, 34);
 			this->BackToMenu->TabIndex = 11;
 			this->BackToMenu->Text = L"Назад";
 			this->BackToMenu->UseVisualStyleBackColor = true;
@@ -202,7 +205,7 @@ namespace DBLibClient {
 			// 
 			// helpOfSearchButton
 			// 
-			this->helpOfSearchButton->Location = System::Drawing::Point(456, 400);
+			this->helpOfSearchButton->Location = System::Drawing::Point(466, 400);
 			this->helpOfSearchButton->Name = L"helpOfSearchButton";
 			this->helpOfSearchButton->Size = System::Drawing::Size(159, 35);
 			this->helpOfSearchButton->TabIndex = 14;
@@ -260,12 +263,13 @@ namespace DBLibClient {
 			this->EditEntryButton->TabIndex = 16;
 			this->EditEntryButton->Text = L"Редактирование";
 			this->EditEntryButton->UseVisualStyleBackColor = true;
+			this->EditEntryButton->Click += gcnew System::EventHandler(this, &FindForEditForm::EditEntryButton_Click);
 			// 
 			// ShowAllLinesButton
 			// 
-			this->ShowAllLinesButton->Location = System::Drawing::Point(275, 453);
+			this->ShowAllLinesButton->Location = System::Drawing::Point(267, 453);
 			this->ShowAllLinesButton->Name = L"ShowAllLinesButton";
-			this->ShowAllLinesButton->Size = System::Drawing::Size(213, 34);
+			this->ShowAllLinesButton->Size = System::Drawing::Size(193, 34);
 			this->ShowAllLinesButton->TabIndex = 17;
 			this->ShowAllLinesButton->Text = L"Показать все записи";
 			this->ShowAllLinesButton->UseVisualStyleBackColor = true;
@@ -273,19 +277,30 @@ namespace DBLibClient {
 			// 
 			// ExitButton
 			// 
-			this->ExitButton->Location = System::Drawing::Point(641, 453);
+			this->ExitButton->Location = System::Drawing::Point(710, 453);
 			this->ExitButton->Name = L"ExitButton";
-			this->ExitButton->Size = System::Drawing::Size(108, 34);
+			this->ExitButton->Size = System::Drawing::Size(74, 34);
 			this->ExitButton->TabIndex = 18;
 			this->ExitButton->Text = L"Выход";
 			this->ExitButton->UseVisualStyleBackColor = true;
 			this->ExitButton->Click += gcnew System::EventHandler(this, &FindForEditForm::ExitButton_Click);
+			// 
+			// deleteLineButton
+			// 
+			this->deleteLineButton->Location = System::Drawing::Point(466, 453);
+			this->deleteLineButton->Name = L"deleteLineButton";
+			this->deleteLineButton->Size = System::Drawing::Size(159, 34);
+			this->deleteLineButton->TabIndex = 19;
+			this->deleteLineButton->Text = L"Удалить запись";
+			this->deleteLineButton->UseVisualStyleBackColor = true;
+			this->deleteLineButton->Click += gcnew System::EventHandler(this, &FindForEditForm::deleteLineButton_Click);
 			// 
 			// FindForEditForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(991, 499);
+			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
 			this->Controls->Add(this->ShowAllLinesButton);
 			this->Controls->Add(this->EditEntryButton);
@@ -323,5 +338,7 @@ private: System::Void FindButton_Click(System::Object^ sender, System::EventArgs
 private: System::Void helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ExitButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

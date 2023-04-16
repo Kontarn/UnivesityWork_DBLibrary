@@ -94,7 +94,7 @@ System::Void DBLibClient::FindForEditForm::helpOfSearchButton_Click(System::Obje
 
 System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-
+	setlocale(LC_ALL, "ru");
 	TechLit Tlit;
 	ArtLit Alit;
 	std::vector <std::string> littleDB; 
@@ -141,4 +141,46 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 System::Void DBLibClient::FindForEditForm::ExitButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	Application::Exit();
+}
+
+System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	return System::Void();
+}
+// Удаление записи из базы данных
+System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	TechLit Tlit;
+	ArtLit Alit;
+	if (dataGridView1->SelectedRows->Count != 1) {
+		MessageBox::Show("Выберите одну строку для удаления", "Ошибка");
+		return;
+	}
+	// Узнаём индекс выбранной строки
+	int indexLine = dataGridView1->SelectedRows[0]->Index;
+	// Считываем данные
+	String^ nameBook = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	String^ availability = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
+	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
+	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
+	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(availability).ToPointer();
+	std::string sNameBook(cNameBook);
+	std::string sAutorName(cAutorName);
+	std::string sYearsOfRelease(cYearsOfRelease);
+	std::string sAvailability(cAvailability);
+	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
+	if (choiceOfTypeBook->Text == "Техническая") {
+		Tlit.deleteLine(line);
+	}
+	else if (choiceOfTypeBook->Text == "Художественная") {
+		Alit.deleteLine(line);
+	}
+	Marshal::FreeHGlobal((IntPtr)cNameBook);
+	Marshal::FreeHGlobal((IntPtr)cAutorName);
+	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
+	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	MessageBox::Show("Данные успешно удалены", "Успешно");
 }
