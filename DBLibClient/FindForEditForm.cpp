@@ -142,10 +142,42 @@ System::Void DBLibClient::FindForEditForm::ExitButton_Click(System::Object^ send
 {
 	Application::Exit();
 }
-
+// Кнопка редактирования записей
 System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	return System::Void();
+	TechLit Tlit;
+	ArtLit Alit;
+	if (dataGridView1->SelectedRows->Count != 1) {
+		MessageBox::Show("Выберите одну строку для удаления", "Ошибка");
+		return;
+	}
+	int indexLine = dataGridView1->SelectedRows[0]->Index;
+	String^ nameBook = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[1]->Value->ToString();
+	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[2]->Value->ToString();
+	String^ availability = dataGridView1->Rows[indexLine]->Cells[3]->Value->ToString();
+	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
+	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
+	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
+	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(availability).ToPointer();
+	std::string sNameBook(cNameBook);
+	std::string sAutorName(cAutorName);
+	std::string sYearsOfRelease(cYearsOfRelease);
+	std::string sAvailability(cAvailability);
+	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
+
+	if (choiceOfTypeBook->Text == "Техническая") {
+		Tlit.deleteLine(line);
+	}
+	else if (choiceOfTypeBook->Text == "Художественная") {
+		Alit.deleteLine(line);
+	}
+
+	Marshal::FreeHGlobal((IntPtr)cNameBook);
+	Marshal::FreeHGlobal((IntPtr)cAutorName);
+	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
+	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	MessageBox::Show("Данные успешно отредактированы", "Успешно");
 }
 // Удаление записи из базы данных
 System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -160,9 +192,9 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	int indexLine = dataGridView1->SelectedRows[0]->Index;
 	// Считываем данные
 	String^ nameBook = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
-	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
-	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
-	String^ availability = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
+	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[1]->Value->ToString();
+	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[2]->Value->ToString();
+	String^ availability = dataGridView1->Rows[indexLine]->Cells[3]->Value->ToString();
 	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
 	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
 	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
@@ -172,12 +204,15 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
 	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
+	/*dataGridView1->Rows->Clear();
+	dataGridView1->Refresh();*/
 	if (choiceOfTypeBook->Text == "Техническая") {
 		Tlit.deleteLine(line);
 	}
 	else if (choiceOfTypeBook->Text == "Художественная") {
 		Alit.deleteLine(line);
 	}
+	
 	Marshal::FreeHGlobal((IntPtr)cNameBook);
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);

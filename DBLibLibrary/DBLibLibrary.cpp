@@ -3,15 +3,19 @@
 
 // Проверяет введённые данные на наличие в файле
 bool recordExistenceCheck(std::string nameBook, 
-	std::string nameAutor, std::string yearsOfRelease, std::string availability)
+	std::string nameAutor, std::string yearsOfRelease, std::string availability, std::string typeOfLit)
 {
-	
+	std::string typeLit;
+	if (typeOfLit == "Техническая") {
+		typeLit = TechLitDBname;
+	}
+	else typeLit = ArtLitDBname;
 	std::string StringToTest = nameBook + ", " + nameAutor + ", " + yearsOfRelease + "; " + availability;
 	bool found = false;	//
 	std::string stringForComparison; // Строка с которой сравнивают
 	int quantOfRepeat = 0; // Количество повторений
 	std::ifstream fin;
-	fin.open(ArtLitDBname);
+	fin.open(typeLit);
 	if (fin.is_open()) {
 		while (!fin.eof()) {
 			getline(fin, stringForComparison);

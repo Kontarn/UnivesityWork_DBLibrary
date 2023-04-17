@@ -39,23 +39,27 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	System::String^ AutorName = AutorNameTextBox->Text;
 	System::String^ yearsOfRelease = yearOfReleaseTextBox->Text;
 	System::String^ Availability = AvailabilityTextBox->Text;
+	System::String^ typeOfLit = typeBookComboBox->Text;
 	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
 	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(AutorName).ToPointer();
 	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearsOfRelease).ToPointer();
 	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(Availability).ToPointer();
+	char* cTypeOfLit = (char*)Marshal::StringToHGlobalAnsi(typeOfLit).ToPointer();
 	std::string sNameBook(cNameBook);
 	std::string sAutorName(cAutorName);
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
+	std::string sTypeOfLit(cTypeOfLit);
 
 	if (typeBookComboBox->Text == "Техническая") {
 		TechLit Tlit;
-		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" || yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
+		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" 
+			|| yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
 
-			if (Tlit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability) == true) {
+			if (Tlit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел технические", "Успешно");
 			}
 			else {
@@ -65,11 +69,12 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	}
 	else if (typeBookComboBox->Text == "Художественная") {
 		ArtLit Alit;
-		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" || yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
+		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" 
+			|| yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
-			if (Alit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability) == true) {
+			if (Alit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел художественные", "Успешно");
 			}
 			else {

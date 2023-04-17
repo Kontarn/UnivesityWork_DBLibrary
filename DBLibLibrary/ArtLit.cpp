@@ -15,10 +15,10 @@ ArtLit::ArtLit() {
 }
 
 bool ArtLit::addLine(std::string& nameBook, std::string& nameAutor,
-	std::string& yearsOfRelease, std::string& availability) {
+	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit) {
 	std::fstream fout;
 	// Проверяем наличие записи в файле
-	if (recordExistenceCheck(nameBook, nameAutor, yearsOfRelease, availability) == false)
+	if (recordExistenceCheck(nameBook, nameAutor, yearsOfRelease, availability, typeOfLit) == false)
 	{ // Если записи нет, то добавляем и возвращаем true
 		fout.open(ArtLitDBname, std::fstream::in | std::fstream::out | std::fstream::app);
 		if (fout.is_open()) {
@@ -58,7 +58,9 @@ void ArtLit::showAllLines(std::vector<std::string>* littleDB)
 	if (fin.is_open()) {
 		while (!fin.eof()) {
 			getline(fin, str);
-			littleDB->push_back(str);
+			if (str != "") {
+				littleDB->push_back(str);
+			}
 		}
 	}
 	fin.close();
@@ -79,7 +81,9 @@ void ArtLit::deleteLine(std::string delLine)
 	}
 	//strSet.insert(delLine);
 	fs.close();
+	// Чистим файл для перезаписи
 	std::fstream clear_file(ArtLitDBname, std::ios::out);
+	clear_file << "";
 	clear_file.close();
 	fs.open(ArtLitDBname, std::fstream::out | std::fstream::app);
 	for (auto it = strSet.begin(); it != strSet.end(); ++it) {

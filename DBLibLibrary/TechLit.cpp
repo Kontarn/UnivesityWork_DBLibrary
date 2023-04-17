@@ -16,22 +16,23 @@ TechLit::TechLit()
 }
 // Добавляем запись
 bool TechLit::addLine(std::string& nameBook, std::string& nameAutor,
-	std::string& yearsOfRelease, std::string& availability) {
+	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit) {
 	std::fstream fout;
 	// Проверяем наличие записи в файле
-	if (recordExistenceCheck(nameBook, nameAutor, yearsOfRelease, availability) == false)
+	if (recordExistenceCheck(nameBook, nameAutor, yearsOfRelease, availability, typeOfLit) == false)
 	{ // Если записи нет, то добавляем и возвращаем true
 		fout.open(TechLitDBname, std::fstream::in | std::fstream::out | std::fstream::app);
 		if (fout.is_open()) {
+			std::cout << "Файл 'DBLibTech.txt' успешно открыт" << std::endl;
+
 			fout << nameBook << ", " << nameAutor << ", " << yearsOfRelease << "; " << availability << "\n";
 			fout.close();
 		}
-		else std::cout << "Ошибка открытия файла 'DBLibArt.txt'" << std::endl;
+		else std::cout << "Ошибка открытия файла 'DBLibTech.txt'" << std::endl;
 		return true;
 	}
 	// Если запись уже есть, то возвращаем false
 	else return false;
-	fout.close();
 }
 // Ищет все записи, которые содержат введённую пользователем строку
 void TechLit::searchByRequest(std::vector <std::string>* littleDB, std::string inpText)
@@ -89,32 +90,6 @@ void TechLit::deleteLine(std::string delLine)
 		fs << *it << "\n";
 	}
 }
-// Ищет строку в файле
-//char* TechLit::recordExistenceCheck(char* inputLine)
-//{
-//	std::ifstream fin;
-//	std::string str; // Строка для сравнения
-//	std::string InputLine(inputLine); 
-//	bool found = false;
-//	fin.open(TechLitDBname);
-//	if (fin.is_open()) {
-//		while (!fin.eof()) {
-//			getline(fin, str);
-//			found = str.find(InputLine) != std::string::npos;
-//			if (found) {
-//				return inputLine;
-//				break;
-//			}
-//
-//		}
-//		if (found == false) {
-//			return 0;
-//		}
-//	}
-//	else {
-//		std::cout << "Ошибка открытия файла" << std::endl;
-//	}
-//}
 TechLit::~TechLit() {
 	delete nameAutor;
 	delete nameBook;

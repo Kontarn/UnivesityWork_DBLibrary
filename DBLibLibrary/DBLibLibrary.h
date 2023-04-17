@@ -22,11 +22,11 @@ struct DBLIBLIBRARY Leaks {
 class DBLIBLIBRARY Library {
 public:
 	virtual bool addLine(std::string& nameBook, std::string& nameAutor,
-		std::string& yearsOfRelease, std::string& availability) = 0;
+		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit) = 0;
 	// Функция производит поиск по запросу и возвращает все найденные записи
 	virtual void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) = 0;
 	virtual void showAllLines(std::vector <std::string>* littleDB) = 0;
-	virtual void deleteLine(std::string delLine)=0;
+	virtual void deleteLine(std::string delLine) = 0;
 };
 class DBLIBLIBRARY TechLit : public Library {
 	std::string* nameBook;				// Название книги
@@ -37,7 +37,7 @@ class DBLIBLIBRARY TechLit : public Library {
 public:
 	TechLit();
 	bool addLine(std::string& nameBook, std::string& nameAutor,
-		std::string& yearsOfRelease, std::string& availability) override;
+		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit) override;
 	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) override;
 	void showAllLines(std::vector <std::string>* littleDB) override;
 	void deleteLine(std::string delLine) override;
@@ -51,7 +51,7 @@ class DBLIBLIBRARY ArtLit : public Library {
 public:
 	ArtLit();
 	bool addLine(std::string& nameBook, std::string& nameAutor,
-		std::string& yearsOfRelease, std::string& availability) override;
+		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit) override;
 	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText) override;
 	void showAllLines(std::vector <std::string>* littleDb) override;
 	void deleteLine(std::string delLine) override;
@@ -59,7 +59,7 @@ public:
 };
 
 DBLIBLIBRARY bool recordExistenceCheck(std::string nameBook, std::string nameAutor,
-	std::string yearsOfRelease, std::string availability); // Проверка наличия строки в базе данных
+	std::string yearsOfRelease, std::string availability, std::string typeOfLit); // Проверка наличия строки в базе данных
 DBLIBLIBRARY bool recordExistenceCheck(std::string inputText, std::string typeOfLit); // Проверка наличия строки в базе данных
 DBLIBLIBRARY void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 	std::string& yearOfRelease, std::string& availability);
