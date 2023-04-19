@@ -32,13 +32,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DBLibLibrary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArtLit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TechLit.cpp">
+    <ClCompile Include="Admin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

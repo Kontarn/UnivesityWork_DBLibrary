@@ -50,16 +50,16 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
 	std::string sTypeOfLit(cTypeOfLit);
-
+	Admin admin;
 	if (typeBookComboBox->Text == "Техническая") {
-		TechLit Tlit;
+		
 		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" 
 			|| yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
 
-			if (Tlit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
+			if (admin.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел технические", "Успешно");
 			}
 			else {
@@ -68,13 +68,13 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 		}
 	}
 	else if (typeBookComboBox->Text == "Художественная") {
-		ArtLit Alit;
+		
 		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" 
 			|| yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
-			if (Alit.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
+			if (admin.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел художественные", "Успешно");
 			}
 			else {
