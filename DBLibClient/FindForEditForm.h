@@ -1,7 +1,7 @@
 #pragma once
 #include "StartMenuForm.h"
 #include "DBLibLibrary.h"
-#include "EditDBForm.h"
+#include "editingWindowForm.h"
 #include <string>
 #include <vcclr.h>
 #include <set>
@@ -143,7 +143,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Техническая", L"Художественная" });
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Техническая", L"Художественная" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 398);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 401);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -151,7 +151,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(706, 373);
+			this->label1->Location = System::Drawing::Point(706, 378);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 22);
 			this->label1->TabIndex = 2;
@@ -205,9 +205,9 @@ namespace DBLibClient {
 			// 
 			// helpOfSearchButton
 			// 
-			this->helpOfSearchButton->Location = System::Drawing::Point(466, 400);
+			this->helpOfSearchButton->Location = System::Drawing::Point(466, 401);
 			this->helpOfSearchButton->Name = L"helpOfSearchButton";
-			this->helpOfSearchButton->Size = System::Drawing::Size(159, 35);
+			this->helpOfSearchButton->Size = System::Drawing::Size(159, 30);
 			this->helpOfSearchButton->TabIndex = 14;
 			this->helpOfSearchButton->Text = L"Правила поиска";
 			this->helpOfSearchButton->UseVisualStyleBackColor = true;

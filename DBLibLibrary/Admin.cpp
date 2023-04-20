@@ -10,8 +10,7 @@ Admin::Admin()
 	littleDB = new std::vector <std::string>;
 }
 
-
-// Функция делает то же самое что и функция выше, только данные передаются одной строкой
+// Ищет похожие записи в выбранной БД
 bool Admin::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -35,9 +34,6 @@ bool Admin::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 			}
 		}
 		if (found == false) return found; // Если в файле нет этой записи
-	}
-	else {
-		std::cout << "Ошибка открытия файла" << std::endl;
 	}
 	fin.close();
 }
@@ -76,7 +72,7 @@ void Admin::splitEntry(std::string inpText, std::string& nameBook,
 	INPText.erase(0, pos + 2);
 	availability = INPText;
 }
-
+// Добавляет запись в БД
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
 	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
 {
@@ -103,7 +99,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 	// Если запись уже есть, то возвращаем false
 	else return false;
 }
-
+// Ищет запись по введённому запросу
 void Admin::searchByRequest(std::vector<std::string>* littleDB, std::string inpText, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -124,6 +120,7 @@ void Admin::searchByRequest(std::vector<std::string>* littleDB, std::string inpT
 	}
 	fin.close();
 }
+// Добавляет все записи из файла в контейнер для последующего вывода
 void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -144,7 +141,7 @@ void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfL
 	}
 	fin.close();
 }
-
+// Удаляет строку из файла
 void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -163,7 +160,6 @@ void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 			strSet.insert(getStrFile);
 		}
 	}
-	//strSet.insert(delLine);
 	fs.close();
 	// Чистим файл для перезаписи
 	std::fstream clear_file(typeLit, std::ios::out);
@@ -173,6 +169,41 @@ void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 	for (auto it = strSet.begin(); it != strSet.end(); ++it) {
 		fs << *it << "\n";
 	}
+}
+// Перезаписывает файл с отредактированной записью
+void Admin::EditingNotation(std::string sourceString, std::string changedLine,
+	std::string typeOfLit) // sourceString исходная строка, changedLine изменённая строка
+{
+	std::string typeLit;
+	if (typeOfLit == "Техническая") {
+		typeLit = TechLitDBname;
+	}
+	else if (typeOfLit == "Художественная") {
+		typeLit = ArtLitDBname;
+	}
+	std::set <std::string> strSet;
+	std::string getStrFile; // Хранит строку считанную из файла
+	std::fstream fs(typeLit, std::fstream::in | std::fstream::app);
+	fs.seekg(0);
+	// Заполняем контейнер всеми элементами кроме выбранного
+	while (!fs.eof()) {
+		getline(fs, getStrFile);
+		if (getStrFile.find(sourceString)) {
+			strSet.insert(getStrFile);
+		}
+	}
+	fs.close();
+	// Чистим файл для перезаписи
+	std::fstream clear_file(typeLit, std::ios::out);
+	clear_file << "";
+	clear_file.close();
+	// Перезаписываем без выбранной строки
+	fs.open(typeLit, std::fstream::out | std::fstream::app);
+	for (auto it = strSet.begin(); it != strSet.end(); ++it) {
+		fs << *it << "\n";
+	}
+	// Добавляем изменённую строку
+	fs << changedLine << "\n";
 }
 
 Admin::~Admin()

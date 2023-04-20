@@ -1,34 +1,31 @@
 #include "FindForEditForm.h"
-
-
+// Полный выход из программы
 System::Void DBLibClient::FindForEditForm::выходИзПрограммыToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
 {
     Application::Exit();
 }
-
+// Кнопка выхода на начальный экран, которая лежит в menuStrip
 System::Void DBLibClient::FindForEditForm::вернутсяНаНачальныйЭкранToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	StartMenuForm^ form = gcnew StartMenuForm();
 	this->Hide();
 	form->Show();
 }
-
+// Кнопка выхода на начальный экран
 System::Void DBLibClient::FindForEditForm::BackToStartMenu_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	StartMenuForm^ form = gcnew StartMenuForm();
 	this->Hide();
 	form->Show();
 }
-
-
-
+// Возвращает в окно выбора способа редактирования
 System::Void DBLibClient::FindForEditForm::BackToMenu_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	ChoiceOfMethodEditForm^ form = gcnew ChoiceOfMethodEditForm();
 	this->Hide();
 	form->Show();
 }
-
+// Ищем определённую запись в выбранной таблице
 System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 
@@ -86,14 +83,14 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
-
+// Выводит правила для ввода 
 System::Void DBLibClient::FindForEditForm::helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	MessageBox::Show("При поиске по более чем одному параметру требуется соответствовать следующиму шаблону,	\
 		ввод производится без скобок(Название книги, Имя автора, Год выпуска книги; наличие в библиотеке)		\
 		\nПример: Война и мир, Л.Н. Толстой или Война и мир, Л.Н. Толстой, 1865", "Внимание");
 }
-
+// Показывает все записи в определённой таблице
 System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	setlocale(LC_ALL, "ru");
@@ -143,7 +140,7 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 	}
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
-
+// Выход из программы
 System::Void DBLibClient::FindForEditForm::ExitButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	Application::Exit();
@@ -153,40 +150,38 @@ System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^
 {
 	Admin admin;
 	if (dataGridView1->SelectedRows->Count != 1) {
-		MessageBox::Show("Выберите одну строку для удаления", "Ошибка");
+		MessageBox::Show("Выберите поле для редактирования, а после нажмите кнопку редактировать", "Ошибка");
 		return;
 	}
-	int indexLine = dataGridView1->SelectedRows[0]->Index;
+	
+	int indexLine = dataGridView1->SelectedRows[0]->Index; // Запоминает индекс выбранной стрки
+	
+	String^ typeOfLit = choiceOfTypeBook->Text;
 	String^ nameBook = dataGridView1->Rows[indexLine]->Cells[0]->Value->ToString();
 	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[1]->Value->ToString();
 	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[2]->Value->ToString();
 	String^ availability = dataGridView1->Rows[indexLine]->Cells[3]->Value->ToString();
+	
 	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
 	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
 	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
 	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(availability).ToPointer();
+	
 	std::string sNameBook(cNameBook);
 	std::string sAutorName(cAutorName);
 	std::string sYearsOfRelease(cYearsOfRelease);
-	System::String^ typeOfLit = choiceOfTypeBook->Text;
-	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	std::string sTypeOfLit(cTypeOfLit);
 	std::string sAvailability(cAvailability);
+	
 	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
-
-	if (choiceOfTypeBook->Text == "Техническая") {
-		admin.deleteLine(line, sTypeOfLit);
-	}
-	else if (choiceOfTypeBook->Text == "Художественная") {
-		admin.deleteLine(line, sTypeOfLit);
-	}
+	// Переходим в форму для редактирования
+	editingWindowForm^ form = gcnew editingWindowForm(nameBook, nameAutor, yearOfRelease, availability, typeOfLit);
+	
+	form->ShowDialog();
 
 	Marshal::FreeHGlobal((IntPtr)cNameBook);
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
-	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
-	MessageBox::Show("Данные успешно отредактированы", "Успешно");
 }
 // Удаление записи из базы данных
 System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -223,7 +218,6 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	else if (choiceOfTypeBook->Text == "Художественная") {
 		admin.deleteLine(line, sTypeOfLit);
 	}
-	
 	Marshal::FreeHGlobal((IntPtr)cNameBook);
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);

@@ -36,7 +36,7 @@
     <ClCompile Include="AddElementsToDBForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditDBForm.cpp">
+    <ClCompile Include="editingWindowForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="AddElementsToDBForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditDBForm.h">
+    <ClInclude Include="editingWindowForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
