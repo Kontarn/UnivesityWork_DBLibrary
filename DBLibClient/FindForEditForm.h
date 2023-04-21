@@ -326,7 +326,7 @@ namespace DBLibClient {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
+			
 		}
 #pragma endregion
 	private: System::Void âûõîäÈçÏğîãğàììûToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
@@ -340,5 +340,7 @@ private: System::Void ShowAllLinesButton_Click(System::Object^ sender, System::E
 private: System::Void ExitButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e);
+	   
 };
+
 }

@@ -1,4 +1,5 @@
 #include "FindForEditForm.h"
+
 // Полный выход из программы
 System::Void DBLibClient::FindForEditForm::выходИзПрограммыToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -210,8 +211,6 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
 	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
-	/*dataGridView1->Rows->Clear();
-	dataGridView1->Refresh();*/
 	if (choiceOfTypeBook->Text == "Техническая") {
 		admin.deleteLine(line, sTypeOfLit);
 	}
@@ -223,5 +222,5 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
-	MessageBox::Show("Данные успешно удалены", "Успешно");
+	MessageBox::Show("Данные успешно удалены.\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
 }

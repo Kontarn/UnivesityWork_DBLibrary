@@ -11,10 +11,14 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <algorithm>
 #define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
 #define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
 
 
+struct DBLIBLIBRARY Leaks {
+	~Leaks();
+};
 
 
 class DBLIBLIBRARY Library {
@@ -51,8 +55,9 @@ public:
 	void EditingNotation(std::string sourceString, std::string changedLine, 
 		std::string typeOfLit);
 	~Admin();
+	
 };
 //class DBLIBLIBRARY User : public Admin {
-//	std::string pass;
+//	
 //};
 // 

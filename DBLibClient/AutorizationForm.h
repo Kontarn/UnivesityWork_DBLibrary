@@ -44,6 +44,7 @@ namespace DBLibClient {
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::Button^ Autorization;
 	private: System::Windows::Forms::Button^ BackToStartMenu;
+	private: System::Windows::Forms::Label^ label1;
 
 
 	private:
@@ -67,6 +68,7 @@ namespace DBLibClient {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->Autorization = (gcnew System::Windows::Forms::Button());
 			this->BackToStartMenu = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
@@ -79,7 +81,7 @@ namespace DBLibClient {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(383, 36);
+			this->menuStrip1->Size = System::Drawing::Size(383, 35);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -90,7 +92,7 @@ namespace DBLibClient {
 					this->âûõîäÈçÏðîãðàììûToolStripMenuItem
 			});
 			this->âûõîäToolStripMenuItem->Name = L"âûõîäToolStripMenuItem";
-			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 30);
+			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 29);
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			// 
 			// âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem
@@ -145,11 +147,21 @@ namespace DBLibClient {
 			this->BackToStartMenu->UseVisualStyleBackColor = true;
 			this->BackToStartMenu->Click += gcnew System::EventHandler(this, &AutorizationForm::BackToStartMenu_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(33, 35);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(132, 22);
+			this->label1->TabIndex = 5;
+			this->label1->Text = L"Ïàðîëü: Admin";
+			// 
 			// AutorizationForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(383, 185);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->BackToStartMenu);
 			this->Controls->Add(this->Autorization);
 			this->Controls->Add(this->menuStrip1);

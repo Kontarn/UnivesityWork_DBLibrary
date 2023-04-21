@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "DBLibLibrary.h"
 
+
 Admin::Admin()
 {
 	nameBook = new std::string;
@@ -9,33 +10,41 @@ Admin::Admin()
 	availability = new std::string;
 	littleDB = new std::vector <std::string>;
 }
-
+Leaks::~Leaks() {
+	_CrtDumpMemoryLeaks();
+}
 // Ищет похожие записи в выбранной БД
 bool Admin::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
+	std::string otherTypeLit;
 	if (typeOfLit == "Техническая") {
 		typeLit = TechLitDBname;
 	}
-	else typeLit = ArtLitDBname;
-	bool found = false;	//
+	else if (typeOfLit == "Художественная") { typeLit = ArtLitDBname; }
+	std::set <std::string> TechLit;
+	std::set <std::string> ArtLit;
+	bool found = false;	// 
 	std::string stringForComparison; // Строка с которой сравнивают
 	int quantOfRepeat = 0; // Количество повторений
 	std::ifstream fin;
-	fin.open(typeLit);
-	if (fin.is_open()) {
-		while (!fin.eof()) {
-			getline(fin, stringForComparison);
-			found = stringForComparison.find(inputText) != std::string::npos;
-			if (found == true) {
-				return found;
-				quantOfRepeat++;
-				break;
-			}
-		}
-		if (found == false) return found; // Если в файле нет этой записи
-	}
+	fin.open(TechLitDBname);
+	while (!fin.eof()) {
+		getline(fin, stringForComparison);
+		TechLit.insert(stringForComparison);
+		
+	} int TechRes = count_if(TechLit.begin(), TechLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
 	fin.close();
+	fin.open(ArtLitDBname);
+	while (!fin.eof()) {
+		getline(fin, stringForComparison);
+		ArtLit.insert(stringForComparison);
+	} int ArtRes = count_if(ArtLit.begin(), ArtLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
+	fin.close();
+	if (TechRes == 0 && ArtRes == 0) {
+		return false;
+	}
+	else return true;
 }
 // Разрезает полученную запись данных и присваивает атрибутам
 void Admin::splitEntry(std::string inpText, std::string& nameBook,
@@ -88,7 +97,6 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 	{ // Если записи нет, то добавляем и возвращаем true
 		fout.open(typeLit, std::fstream::in | std::fstream::out | std::fstream::app);
 		if (fout.is_open()) {
-			std::cout << "Файл 'DBLibTech.txt' успешно открыт" << std::endl;
 
 			fout << line << "\n";
 			fout.close();
@@ -213,4 +221,5 @@ Admin::~Admin()
 	delete yearsOfRelease;
 	delete availability;
 	delete littleDB;
+	Leaks _l;
 }
