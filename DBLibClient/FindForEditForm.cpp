@@ -224,3 +224,4 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 	MessageBox::Show("Данные успешно удалены.\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
 }
+Leaks _l;

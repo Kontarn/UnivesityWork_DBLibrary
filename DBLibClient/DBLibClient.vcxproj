@@ -142,9 +142,7 @@
     <ClCompile Include="AutorizationForm.cpp" />
     <ClCompile Include="ChoiceOfMethodEditForm.cpp" />
     <ClCompile Include="editingWindowForm.cpp" />
-    <ClCompile Include="FindArtBookForm.cpp" />
     <ClCompile Include="FindForEditForm.cpp" />
-    <ClCompile Include="FindTechBookForm.cpp" />
     <ClCompile Include="StartMenuForm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,12 +159,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="FindForEditForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="FindArtBookForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="FindTechBookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="StartMenuForm.h">
@@ -186,14 +178,8 @@
     <EmbeddedResource Include="editingWindowForm.resx">
       <DependentUpon>editingWindowForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FindArtBookForm.resx">
-      <DependentUpon>FindArtBookForm.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FindForEditForm.resx">
       <DependentUpon>FindForEditForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FindTechBookForm.resx">
-      <DependentUpon>FindTechBookForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartMenuForm.resx">
       <DependentUpon>StartMenuForm.h</DependentUpon>

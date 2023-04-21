@@ -1,7 +1,5 @@
 #include "AddElementsToDBForm.h"
 
-
-
 System::Void DBLibClient::AddElementsToDBForm::HelpButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
     MessageBox::Show("Шаблон по которому нужно вводить данные для добавления: Фамилия И.О., Название, Год выпуска; наличие");
@@ -31,6 +29,7 @@ System::Void DBLibClient::AddElementsToDBForm::выходНаНачальныйЭкранToolStripMen
 	StartMenuForm^ form = gcnew StartMenuForm();
 	this->Hide();
 	form->Show();
+	
 }
 
 System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -62,9 +61,11 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 			if (admin.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел технические", "Успешно");
 			}
+			
 			else {
 				MessageBox::Show("Запись уже существует, введите другую", "Ошибка");
 			}
+			
 		}
 	}
 	else if (typeBookComboBox->Text == "Художественная") {
@@ -88,6 +89,7 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	
 }
 
 

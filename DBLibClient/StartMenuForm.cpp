@@ -27,18 +27,10 @@ System::Void DBLibClient::StartMenuForm::Exit_Click(System::Object^ sender, Syst
 	Application::Exit();
 }
 
-System::Void DBLibClient::StartMenuForm::TechBookButt_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	FindTechBookForm^ form = gcnew FindTechBookForm();
-	this->Hide();
-	form->Show();
-}
 
-System::Void DBLibClient::StartMenuForm::ArtBookButt_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void DBLibClient::StartMenuForm::DataBaseSearch_Click_1(System::Object^ sender, System::EventArgs^ e)
 {
-	FindArtBookForm^ form = gcnew FindArtBookForm();
-	this->Hide();
-	form->Show();
+	MessageBox::Show("К сожалению поиск пока не работает", "Предупреждение");
 }
 
 System::Void DBLibClient::StartMenuForm::AdminButt_Click(System::Object^ sender, System::EventArgs^ e)
@@ -47,3 +39,5 @@ System::Void DBLibClient::StartMenuForm::AdminButt_Click(System::Object^ sender,
 	this->Hide();
 	form->Show();
 }
+
+

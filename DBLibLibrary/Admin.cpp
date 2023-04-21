@@ -4,13 +4,14 @@
 
 Admin::Admin()
 {
-	nameBook = new std::string;
-	nameAutor = new std::string;
-	yearsOfRelease = new std::string;
-	availability = new std::string;
-	littleDB = new std::vector <std::string>;
+	nameBook = DBG_NEW std::string;
+	nameAutor = DBG_NEW std::string;
+	yearsOfRelease = DBG_NEW std::string;
+	availability = DBG_NEW std::string;
+	littleDB = DBG_NEW std::vector <std::string>;
 }
 Leaks::~Leaks() {
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
 	_CrtDumpMemoryLeaks();
 }
 // Ищет похожие записи в выбранной БД
@@ -85,6 +86,7 @@ void Admin::splitEntry(std::string inpText, std::string& nameBook,
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
 	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
 {
+	
 	std::string typeLit;
 	if (typeOfLit == "Техническая") {
 		typeLit = TechLitDBname;
@@ -92,6 +94,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 	else typeLit = ArtLitDBname;
 	std::fstream fout;
 	std::string line = nameBook + ", " + nameAutor + ", " + yearsOfRelease + "; " + availability; // введённая строка
+	
 	// Проверяем наличие записи в файле
 	if (recordExistenceCheck(line, typeOfLit) == false)
 	{ // Если записи нет, то добавляем и возвращаем true
@@ -101,7 +104,6 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 			fout << line << "\n";
 			fout.close();
 		}
-		else std::cout << "Ошибка открытия файла 'DBLibTech.txt'" << std::endl;
 		return true;
 	}
 	// Если запись уже есть, то возвращаем false
@@ -177,6 +179,7 @@ void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 	for (auto it = strSet.begin(); it != strSet.end(); ++it) {
 		fs << *it << "\n";
 	}
+	fs.close();
 }
 // Перезаписывает файл с отредактированной записью
 void Admin::EditingNotation(std::string sourceString, std::string changedLine,
@@ -212,6 +215,7 @@ void Admin::EditingNotation(std::string sourceString, std::string changedLine,
 	}
 	// Добавляем изменённую строку
 	fs << changedLine << "\n";
+	fs.close();
 }
 
 Admin::~Admin()
@@ -221,5 +225,5 @@ Admin::~Admin()
 	delete yearsOfRelease;
 	delete availability;
 	delete littleDB;
-	Leaks _l;
+	
 }

@@ -1,9 +1,17 @@
 #pragma once
-
+#define _CRTDBG_MAP_ALLOC
 #ifdef DBLIBLIBRARY_EXPORTS
 	#define DBLIBLIBRARY __declspec(dllexport)
 #else
 	#define DBLIBLIBRARY __declspec(dllimport)
+#endif
+#include <crtdbg.h>
+#ifdef _DEBUG
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#else
+#define DBG_NEW new
 #endif
 
 #include <string>
@@ -54,7 +62,7 @@ public:
 	// Редактирование записей
 	void EditingNotation(std::string sourceString, std::string changedLine, 
 		std::string typeOfLit);
-	~Admin();
+	virtual ~Admin();
 	
 };
 //class DBLIBLIBRARY User : public Admin {
