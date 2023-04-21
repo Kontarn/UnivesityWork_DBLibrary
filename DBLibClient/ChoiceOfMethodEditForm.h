@@ -168,7 +168,7 @@ namespace DBLibClient {
 			this->Name = L"ChoiceOfMethodEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Способ редактирования БД";
+			this->Text = L"Редактирования БД";
 			this->groupBox1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();

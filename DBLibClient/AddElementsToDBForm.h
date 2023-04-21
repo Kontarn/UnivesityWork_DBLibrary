@@ -296,10 +296,13 @@ namespace DBLibClient {
 			this->Controls->Add(this->nameBookTextBox);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(974, 261);
+			this->MinimumSize = System::Drawing::Size(974, 261);
 			this->Name = L"AddElementsToDBForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AddElementsToDBForm";
+			this->Text = L"Добавление новых записей";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);

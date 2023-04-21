@@ -110,7 +110,7 @@ namespace DBLibClient {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(991, 35);
+			this->menuStrip1->Size = System::Drawing::Size(992, 35);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -299,7 +299,7 @@ namespace DBLibClient {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(991, 499);
+			this->ClientSize = System::Drawing::Size(992, 503);
 			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
 			this->Controls->Add(this->ShowAllLinesButton);
@@ -317,6 +317,9 @@ namespace DBLibClient {
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(1014, 559);
+			this->MinimumSize = System::Drawing::Size(1014, 559);
 			this->Name = L"FindForEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -326,7 +329,7 @@ namespace DBLibClient {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-			
+
 		}
 #pragma endregion
 	private: System::Void âûõîäÈçÏğîãğàììûToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);

@@ -87,7 +87,7 @@ namespace DBLibClient {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(325, 33);
+			this->menuStrip1->Size = System::Drawing::Size(327, 33);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -176,12 +176,15 @@ namespace DBLibClient {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(325, 456);
+			this->ClientSize = System::Drawing::Size(327, 456);
 			this->Controls->Add(this->Exit);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->groupBox2);
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(349, 512);
+			this->MinimumSize = System::Drawing::Size(349, 512);
 			this->Name = L"StartMenuForm";
 			this->ShowIcon = false;
 			this->ShowInTaskbar = false;
