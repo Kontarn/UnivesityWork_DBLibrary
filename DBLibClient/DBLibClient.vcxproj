@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AddElementsToDBForm.cpp" />
-    <ClCompile Include="AutorizationForm.cpp" />
     <ClCompile Include="ChoiceOfMethodEditForm.cpp" />
     <ClCompile Include="editingWindowForm.cpp" />
     <ClCompile Include="FindForEditForm.cpp" />
@@ -147,9 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddElementsToDBForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="AutorizationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ChoiceOfMethodEditForm.h">
@@ -168,9 +164,6 @@
   <ItemGroup>
     <EmbeddedResource Include="AddElementsToDBForm.resx">
       <DependentUpon>AddElementsToDBForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutorizationForm.resx">
-      <DependentUpon>AutorizationForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChoiceOfMethodEditForm.resx">
       <DependentUpon>ChoiceOfMethodEditForm.h</DependentUpon>

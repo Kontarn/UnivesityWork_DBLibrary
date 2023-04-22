@@ -35,7 +35,7 @@ System::Void DBLibClient::StartMenuForm::DataBaseSearch_Click_1(System::Object^ 
 
 System::Void DBLibClient::StartMenuForm::AdminButt_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	AutorizationForm^ form = gcnew AutorizationForm();
+	ChoiceOfMethodEditForm^ form = gcnew ChoiceOfMethodEditForm();
 	this->Hide();
 	form->Show();
 }

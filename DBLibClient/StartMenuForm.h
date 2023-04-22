@@ -1,5 +1,5 @@
 #pragma once
-#include "AutorizationForm.h"
+#include "ChoiceOfMethodEditForm.h"
 namespace DBLibClient {
 
 	using namespace System;
