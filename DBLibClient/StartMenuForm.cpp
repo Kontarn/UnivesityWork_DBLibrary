@@ -27,6 +27,11 @@ System::Void DBLibClient::StartMenuForm::DataBaseSearch_Click_1(System::Object^ 
 	form->Show();
 }
 
+System::Void DBLibClient::StartMenuForm::StartMenuForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+{
+	Application::Exit();
+}
+
 
 System::Void DBLibClient::StartMenuForm::AdminButt_Click(System::Object^ sender, System::EventArgs^ e)
 {

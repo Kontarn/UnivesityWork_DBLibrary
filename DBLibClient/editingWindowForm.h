@@ -290,6 +290,6 @@ namespace DBLibClient {
 	private: System::Void BackButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void выхоодЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void edititngDataButton_Click(System::Object^ sender, System::EventArgs^ e);
-	};
+};
 }
 

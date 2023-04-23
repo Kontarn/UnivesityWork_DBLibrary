@@ -126,3 +126,8 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 	}
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
+
+System::Void DBLibClient::LibrarySearchForm::LibrarySearchForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+{
+	Application::Exit();
+}

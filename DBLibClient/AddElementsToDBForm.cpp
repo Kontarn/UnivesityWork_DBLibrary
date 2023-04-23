@@ -92,4 +92,9 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	
 }
 
+System::Void DBLibClient::AddElementsToDBForm::AddElementsToDBForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+{
+	Application::Exit();
+}
+
 

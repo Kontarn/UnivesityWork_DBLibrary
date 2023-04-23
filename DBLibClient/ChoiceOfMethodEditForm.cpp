@@ -32,3 +32,8 @@ System::Void DBLibClient::ChoiceOfMethodEditForm::AddElementsButton_Click(System
 	this->Hide();
 	form->Show();
 }
+
+System::Void DBLibClient::ChoiceOfMethodEditForm::ChoiceOfMethodEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+{
+	Application::Exit();
+}

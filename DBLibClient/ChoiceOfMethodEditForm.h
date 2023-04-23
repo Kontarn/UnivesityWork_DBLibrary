@@ -169,6 +169,7 @@ namespace DBLibClient {
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Редактирования БД";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &ChoiceOfMethodEditForm::ChoiceOfMethodEditForm_FormClosing);
 			this->groupBox1->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -182,5 +183,6 @@ namespace DBLibClient {
 private: System::Void выходИзПрограммыToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void EditElementsButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void AddElementsButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ChoiceOfMethodEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 }

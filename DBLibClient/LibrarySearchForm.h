@@ -273,6 +273,7 @@ namespace DBLibClient {
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Поиск литературы";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &LibrarySearchForm::LibrarySearchForm_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -284,5 +285,6 @@ private: System::Void BackToMenu_Click(System::Object^ sender, System::EventArgs
 private: System::Void helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void FindButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void LibrarySearchForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 }

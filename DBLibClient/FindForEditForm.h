@@ -324,6 +324,7 @@ namespace DBLibClient {
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Поиск наличия записи";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FindForEditForm::FindForEditForm_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
@@ -344,6 +345,7 @@ private: System::Void ExitButton_Click(System::Object^ sender, System::EventArgs
 private: System::Void EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e);
 	   
+private: System::Void FindForEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 
 }

@@ -303,6 +303,7 @@ namespace DBLibClient {
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ƒобавление новых записей";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &AddElementsToDBForm::AddElementsToDBForm_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -316,5 +317,6 @@ private: System::Void toStartButton_Click(System::Object^ sender, System::EventA
 private: System::Void выход»зѕрограммыToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void выходЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void AddDataButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void AddElementsToDBForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 }

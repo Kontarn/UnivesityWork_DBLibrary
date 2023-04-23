@@ -48,3 +48,5 @@ System::Void DBLibClient::editingWindowForm::edititngDataButton_Click(System::Ob
         this->Hide();
     }
 }
+
+

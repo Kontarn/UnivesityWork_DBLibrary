@@ -151,6 +151,7 @@ namespace DBLibClient {
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Μενώ";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &StartMenuForm::StartMenuForm_FormClosing);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox2->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -161,5 +162,6 @@ namespace DBLibClient {
 private: System::Void Exit_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void AdminButt_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void DataBaseSearch_Click_1(System::Object^ sender, System::EventArgs^ e);
+private: System::Void StartMenuForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 }
