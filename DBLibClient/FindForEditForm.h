@@ -63,6 +63,7 @@ namespace DBLibClient {
 	private: System::Windows::Forms::Button^ ShowAllLinesButton;
 	private: System::Windows::Forms::Button^ ExitButton;
 	private: System::Windows::Forms::Button^ deleteLineButton;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -98,6 +99,7 @@ namespace DBLibClient {
 			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
 			this->ExitButton = (gcnew System::Windows::Forms::Button());
 			this->deleteLineButton = (gcnew System::Windows::Forms::Button());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -143,7 +145,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Техническая", L"Художественная" });
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Техническая", L"Художественная" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 401);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 378);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -151,7 +153,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(706, 378);
+			this->label1->Location = System::Drawing::Point(706, 355);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 22);
 			this->label1->TabIndex = 2;
@@ -295,11 +297,22 @@ namespace DBLibClient {
 			this->deleteLineButton->UseVisualStyleBackColor = true;
 			this->deleteLineButton->Click += gcnew System::EventHandler(this, &FindForEditForm::deleteLineButton_Click);
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Location = System::Drawing::Point(710, 414);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(175, 26);
+			this->checkBox1->TabIndex = 20;
+			this->checkBox1->Text = L"Книги в наличии";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			// 
 			// FindForEditForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(992, 503);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
 			this->Controls->Add(this->ShowAllLinesButton);
@@ -333,9 +346,8 @@ namespace DBLibClient {
 
 		}
 #pragma endregion
-	private: System::Void выходИзПрограммыToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void вернутсяНаНачальныйЭкранToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
-
+private: System::Void выходИзПрограммыToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void вернутсяНаНачальныйЭкранToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void BackToStartMenu_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void BackToMenu_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void FindButton_Click(System::Object^ sender, System::EventArgs^ e);
@@ -344,8 +356,6 @@ private: System::Void ShowAllLinesButton_Click(System::Object^ sender, System::E
 private: System::Void ExitButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e);
-	   
 private: System::Void FindForEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
-
 }

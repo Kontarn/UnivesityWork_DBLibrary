@@ -44,7 +44,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 }
 
 // Добавляет все записи из файла в контейнер для последующего вывода
-void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfLit)
+void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
 {
 	std::string typeLit;
 	if (typeOfLit == "Техническая") {
@@ -58,11 +58,23 @@ void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfL
 		while (!fin.eof()) {
 			getline(fin, str);
 			if (str != "") {
-				littleDB->push_back(str);
+				littleDB.push_back(str);
 			}
 		}
 	}
 	fin.close();
+	// Убираем книги, которых нет в наличии
+	if (flag == 1) {
+		std::vector <std::string> ::iterator it = std::remove_if(littleDB.begin(), littleDB.end(), [](std::string a) {
+			std::size_t pos;
+			std::string avail; // наличие в библиотеке
+			pos = a.find(";");
+			avail = a;
+			avail = avail.erase(0, pos + 2);
+			return std::stoi(avail) == 0;
+		});
+		littleDB.erase(it, littleDB.end());
+	}
 }
 
 // Удаляет строку из файла

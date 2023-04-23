@@ -29,7 +29,6 @@ struct DBLIBLIBRARY Leaks {
 	~Leaks();
 };
 
-
 class DBLIBLIBRARY User {
 	std::string* nameBook;				// Название книги
 	std::string* nameAutor;				// Автор
@@ -41,7 +40,7 @@ public:
 	// Функция производит поиск по запросу и возвращает все найденные записи
 	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText, std::string typeOfLit);
 	// Вывод все записи определённой базы данных
-	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
+	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
@@ -66,16 +65,13 @@ public:
 	// Поиск записей по запросу
 	//void searchByRequest(std::vector <std::string>* littleDB, 
 	//	std::string inpText, std::string typeOfLit) override;
-	//// Показывает все записи
-	void showAllLines(std::vector <std::string>* littleDB, std::string typeOfLit);
+	
+	// Добавляет записи в контейнер для последующего вывода в таблицу
+	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
 	// Удаление записи из БД
 	void deleteLine(std::string delLine, std::string typeOfLit);
 	// Редактирование записей
 	void EditingNotation(std::string sourceString, std::string changedLine, 
 		std::string typeOfLit);
-	virtual ~Admin();
-	
-
-
-
+	~Admin();
 };

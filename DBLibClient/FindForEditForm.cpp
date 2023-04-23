@@ -101,22 +101,25 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 	std::string nameAutor;		// Имя автора
 	std::string yearOfRelease;	// Год выпуска книги
 	std::string availability;	// Количество экземпляров книги, в наличии
-
+	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображать ли только книги в наличии
 	System::String^ typeOfLit = choiceOfTypeBook->Text;
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
 	std::string sTypeOfLit(cTypeOfLit); 
 	size_t i = 0;
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
+	if (checkBox1->Checked == false)
+		flag = 0;
+	else if (checkBox1->Checked == true)
+		flag = 1;
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для отображения", "Внимание");
 	// Заполняем контейнер только записями из файла с технической литературой
 	else if (choiceOfTypeBook->Text == "Техническая") {
-		admin.showAllLines(&littleDB, sTypeOfLit); // Добавляем в вектор littleDb, что бы вывести в таблицу
-		
+		admin.showAllLines(littleDB, sTypeOfLit, flag); // Добавляем в вектор littleDb, что бы вывести в таблицу
 	}
 	// Заполняем контейнер только записями из файла с художественной литературой
 	else if (choiceOfTypeBook->Text == "Художественная") {
-		admin.showAllLines(&littleDB, sTypeOfLit);
+		admin.showAllLines(littleDB, sTypeOfLit, flag);
 	}
 	// Выводим все записи из контейнера в таблицу
 	if (littleDB.size() != 0) {
