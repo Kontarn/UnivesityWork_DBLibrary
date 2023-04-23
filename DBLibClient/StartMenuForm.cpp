@@ -12,15 +12,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	return 0;
 }
 
-System::Void DBLibClient::StartMenuForm::âûõîäToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	Application::Exit();
-}
 
-System::Void DBLibClient::StartMenuForm::îÏðîãðàììåToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
-{
-	MessageBox::Show("Ïðîãðàììà äëÿ ïîèñêà êíèã", "Î ïðîãðàììå");
-}
 
 System::Void DBLibClient::StartMenuForm::Exit_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -30,8 +22,11 @@ System::Void DBLibClient::StartMenuForm::Exit_Click(System::Object^ sender, Syst
 
 System::Void DBLibClient::StartMenuForm::DataBaseSearch_Click_1(System::Object^ sender, System::EventArgs^ e)
 {
-	MessageBox::Show("Ê ñîæàëåíèþ ïîèñê ïîêà íå ðàáîòàåò", "Ïðåäóïðåæäåíèå");
+	LibrarySearchForm^ form = gcnew LibrarySearchForm();
+	this->Hide();
+	form->Show();
 }
+
 
 System::Void DBLibClient::StartMenuForm::AdminButt_Click(System::Object^ sender, System::EventArgs^ e)
 {

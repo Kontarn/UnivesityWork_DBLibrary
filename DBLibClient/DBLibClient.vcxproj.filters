@@ -30,6 +30,9 @@
     <ClCompile Include="editingWindowForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LibrarySearchForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StartMenuForm.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AddElementsToDBForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LibrarySearchForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="editingWindowForm.h">

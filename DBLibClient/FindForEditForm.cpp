@@ -97,47 +97,40 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 	setlocale(LC_ALL, "ru");
 	Admin admin;
 	std::vector <std::string> littleDB; 
-	std::string nameBook;
-	std::string nameAutor;
-	std::string yearOfRelease; // Год выпуска книги
-	std::string availability; // Количество определённой книги, в библиотеке
+	std::string nameBook;		// Название книги
+	std::string nameAutor;		// Имя автора
+	std::string yearOfRelease;	// Год выпуска книги
+	std::string availability;	// Количество экземпляров книги, в наличии
 
 	System::String^ typeOfLit = choiceOfTypeBook->Text;
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	std::string sTypeOfLit(cTypeOfLit);
+	std::string sTypeOfLit(cTypeOfLit); 
 	size_t i = 0;
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
-	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для поиска", "Внимание");
+	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для отображения", "Внимание");
+	// Заполняем контейнер только записями из файла с технической литературой
 	else if (choiceOfTypeBook->Text == "Техническая") {
 		admin.showAllLines(&littleDB, sTypeOfLit); // Добавляем в вектор littleDb, что бы вывести в таблицу
-		if (littleDB.size() != 0) {
-			do
-			{
-				admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
+		
 	}
+	// Заполняем контейнер только записями из файла с художественной литературой
 	else if (choiceOfTypeBook->Text == "Художественная") {
 		admin.showAllLines(&littleDB, sTypeOfLit);
-		if (littleDB.size() != 0) {
-			do
-			{
-				admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
+	}
+	// Выводим все записи из контейнера в таблицу
+	if (littleDB.size() != 0) {
+		do
+		{
+			// Разбиваем строку на параметры, для передачи в datagridview
+			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			System::String^ SnameBook = gcnew String(nameBook.c_str());
+			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
+			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
+			System::String^ Savailability = gcnew String(availability.c_str());
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			i++;
+		} while (i < littleDB.size());
 	}
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }

@@ -25,7 +25,7 @@ namespace DBLibClient {
 		String^ oldInpString; // ѕереданна€ строка дл€ редактировани€
 		String^ typeOfLit;
 	public:
-		editingWindowForm(String^ nameBook, String^ nameAutor, 
+		editingWindowForm(String^ nameBook, String^ nameAutor,
 			String^ yearOfRelease, String^ availability, String^ TypeOfLit)
 		{
 			InitializeComponent();
@@ -87,7 +87,7 @@ namespace DBLibClient {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -285,10 +285,11 @@ namespace DBLibClient {
 
 		}
 #pragma endregion
-private: System::Void HelpButton_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void выход»зѕрограммыToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void BackButton_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void выхоодЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void edititngDataButton_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	private: System::Void HelpButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void выход»зѕрограммыToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void BackButton_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void выхоодЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void edititngDataButton_Click(System::Object^ sender, System::EventArgs^ e);
+	};
 }
+

@@ -2,6 +2,11 @@
 #include "DBLibLibrary.h"
 
 
+
+Leaks::~Leaks() {
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
+	_CrtDumpMemoryLeaks();
+}
 Admin::Admin()
 {
 	nameBook = DBG_NEW std::string;
@@ -9,78 +14,6 @@ Admin::Admin()
 	yearsOfRelease = DBG_NEW std::string;
 	availability = DBG_NEW std::string;
 	littleDB = DBG_NEW std::vector <std::string>;
-}
-Leaks::~Leaks() {
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-	_CrtDumpMemoryLeaks();
-}
-// Ищет похожие записи в выбранной БД
-bool Admin::recordExistenceCheck(std::string inputText, std::string typeOfLit)
-{
-	std::string typeLit;
-	std::string otherTypeLit;
-	if (typeOfLit == "Техническая") {
-		typeLit = TechLitDBname;
-	}
-	else if (typeOfLit == "Художественная") { typeLit = ArtLitDBname; }
-	std::set <std::string> TechLit;
-	std::set <std::string> ArtLit;
-	bool found = false;	// 
-	std::string stringForComparison; // Строка с которой сравнивают
-	int quantOfRepeat = 0; // Количество повторений
-	std::ifstream fin;
-	fin.open(TechLitDBname);
-	while (!fin.eof()) {
-		getline(fin, stringForComparison);
-		TechLit.insert(stringForComparison);
-		
-	} int TechRes = count_if(TechLit.begin(), TechLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
-	fin.close();
-	fin.open(ArtLitDBname);
-	while (!fin.eof()) {
-		getline(fin, stringForComparison);
-		ArtLit.insert(stringForComparison);
-	} int ArtRes = count_if(ArtLit.begin(), ArtLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
-	fin.close();
-	if (TechRes == 0 && ArtRes == 0) {
-		return false;
-	}
-	else return true;
-}
-// Разрезает полученную запись данных и присваивает атрибутам
-void Admin::splitEntry(std::string inpText, std::string& nameBook,
-	std::string& nameAutor, std::string& yearOfRelease, std::string& availability)
-{
-	std::string InpText = inpText;
-	std::string INPText;
-	std::size_t pos = 0;
-	// nameBook - название книги
-	pos = InpText.find(",", pos);
-	INPText = inpText;
-	INPText.erase(pos);
-	nameBook = INPText;
-	// nameAutor - ФИО автора
-	INPText = inpText;
-	INPText.erase(0, pos + 2);
-	pos = 0;
-	pos = INPText.find(",", pos);
-	INPText.erase(pos);
-	nameAutor = INPText;
-	// yearOfRelease - год выпуска книги
-	pos = 0;
-	INPText = inpText;
-	pos = INPText.find_last_of(",");
-	INPText.erase(0, pos + 2);
-	pos = 0;
-	pos = INPText.find(";", pos);
-	INPText.erase(pos);
-	yearOfRelease = INPText;
-	// availability - наличие книиги в библиотеке
-	pos = 0;
-	INPText = inpText;
-	pos = INPText.find(";", pos);
-	INPText.erase(0, pos + 2);
-	availability = INPText;
 }
 // Добавляет запись в БД
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
@@ -109,27 +42,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 	// Если запись уже есть, то возвращаем false
 	else return false;
 }
-// Ищет запись по введённому запросу
-void Admin::searchByRequest(std::vector<std::string>* littleDB, std::string inpText, std::string typeOfLit)
-{
-	std::string typeLit;
-	if (typeOfLit == "Техническая") {
-		typeLit = TechLitDBname;
-	}
-	else typeLit = ArtLitDBname;
-	std::ifstream fin;
-	fin.open(typeLit);
-	std::string stringForComparison; // Строка с которой сравнивают
-	if (fin.is_open()) {
-		while (!fin.eof()) {
-			getline(fin, stringForComparison);
-			if (stringForComparison.find(inpText) != std::string::npos) {
-				littleDB->push_back(stringForComparison);
-			}
-		}
-	}
-	fin.close();
-}
+
 // Добавляет все записи из файла в контейнер для последующего вывода
 void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfLit)
 {
@@ -151,6 +64,7 @@ void Admin::showAllLines(std::vector<std::string>* littleDB, std::string typeOfL
 	}
 	fin.close();
 }
+
 // Удаляет строку из файла
 void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 {

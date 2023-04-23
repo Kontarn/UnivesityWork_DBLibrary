@@ -142,6 +142,7 @@
     <ClCompile Include="ChoiceOfMethodEditForm.cpp" />
     <ClCompile Include="editingWindowForm.cpp" />
     <ClCompile Include="FindForEditForm.cpp" />
+    <ClCompile Include="LibrarySearchForm.cpp" />
     <ClCompile Include="StartMenuForm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="FindForEditForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="LibrarySearchForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="StartMenuForm.h">
@@ -173,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FindForEditForm.resx">
       <DependentUpon>FindForEditForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibrarySearchForm.resx">
+      <DependentUpon>LibrarySearchForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartMenuForm.resx">
       <DependentUpon>StartMenuForm.h</DependentUpon>
