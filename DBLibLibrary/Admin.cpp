@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "DBLibLibrary.h"
 
-
-
 Leaks::~Leaks() {
 	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
 	_CrtDumpMemoryLeaks();

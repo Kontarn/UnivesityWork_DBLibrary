@@ -20,10 +20,8 @@
 #define DBG_NEW new
 #endif
 
-
 #define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
 #define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
-
 
 struct DBLIBLIBRARY Leaks {
 	~Leaks();
@@ -38,13 +36,21 @@ class DBLIBLIBRARY User {
 public:
 	User();
 	// Функция производит поиск по запросу и возвращает все найденные записи
-	void searchByRequest(std::vector <std::string>* littleDB, std::string inpText, std::string typeOfLit);
+	void searchByRequest(std::vector <std::string>& littleDB, std::string inpText, std::string typeOfLit);
 	// Вывод все записи определённой базы данных
 	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
+	// Сортировка по выбранному способу
+	void sorting(std::vector <std::string>& littleDB, std::string sortingMethod);
+	// Сортировка названия книг по алфавиту
+	void sortNameBookAlphabet(std::vector <std::string>& littleDB);
+	// Сортировка автора книг, по алфавиту
+	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
+	// Соритровка по году выпуска, по возрастанию или убыванию
+	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
 	~User();
 };
 class DBLIBLIBRARY Admin : public User {
@@ -55,17 +61,9 @@ class DBLIBLIBRARY Admin : public User {
 	std::vector <std::string>* littleDB;
 public:
 	Admin();
-	//bool recordExistenceCheck(std::string inputText, std::string typeOfLit) override; // Проверка наличия строки в базе данных
-	// Разбивает строку inpText на парметры и присваивает прередаваемым переменным
-	//void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
-	//	std::string& yearOfRelease, std::string& availability);
 	// Добавление записей в БД
 	bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit);
-	// Поиск записей по запросу
-	//void searchByRequest(std::vector <std::string>* littleDB, 
-	//	std::string inpText, std::string typeOfLit) override;
-	
 	// Добавляет записи в контейнер для последующего вывода в таблицу
 	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
 	// Удаление записи из БД

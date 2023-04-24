@@ -51,7 +51,11 @@ namespace DBLibClient {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::ComboBox^ choiceOfTypeBook;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::ComboBox^ choiceOfSortingMethod;
+
+
+
+
 	private: System::Windows::Forms::CheckBox^ checkBox1;
 
 	private:
@@ -82,7 +86,7 @@ namespace DBLibClient {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->choiceOfTypeBook = (gcnew System::Windows::Forms::ComboBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->choiceOfSortingMethod = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
@@ -223,18 +227,21 @@ namespace DBLibClient {
 			this->label2->TabIndex = 32;
 			this->label2->Text = L"Способ отображения";
 			// 
-			// comboBox1
+			// choiceOfSortingMethod
 			// 
-			this->comboBox1->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Техническая", L"Художественная" });
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+			this->choiceOfSortingMethod->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) {
+				L"Техническая",
+					L"Художественная"
+			});
+			this->choiceOfSortingMethod->FormattingEnabled = true;
+			this->choiceOfSortingMethod->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
 				L"по названию, по алфавиту", L"по автору, по алфавиту",
 					L"по году, в порядке возрастания", L"по году, в порядке убывания"
 			});
-			this->comboBox1->Location = System::Drawing::Point(520, 446);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(262, 30);
-			this->comboBox1->TabIndex = 31;
+			this->choiceOfSortingMethod->Location = System::Drawing::Point(520, 446);
+			this->choiceOfSortingMethod->Name = L"choiceOfSortingMethod";
+			this->choiceOfSortingMethod->Size = System::Drawing::Size(262, 30);
+			this->choiceOfSortingMethod->TabIndex = 31;
 			// 
 			// checkBox1
 			// 
@@ -253,7 +260,7 @@ namespace DBLibClient {
 			this->ClientSize = System::Drawing::Size(992, 528);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->comboBox1);
+			this->Controls->Add(this->choiceOfSortingMethod);
 			this->Controls->Add(this->ExitButton);
 			this->Controls->Add(this->ShowAllLinesButton);
 			this->Controls->Add(this->helpOfSearchButton);

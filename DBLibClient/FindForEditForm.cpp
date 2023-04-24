@@ -30,13 +30,13 @@ System::Void DBLibClient::FindForEditForm::BackToMenu_Click(System::Object^ send
 System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
 
-	System::String^ request = nameBookTextBox->Text; // Введённые данные
-	System::String^ typeOfLit = choiceOfTypeBook->Text;
+	System::String^ request = nameBookTextBox->Text;	// Введённй запрос для поиска
+	System::String^ typeOfLit = choiceOfTypeBook->Text; // Тип литературы
 	char* cRequest = (char*)(Marshal::StringToHGlobalAnsi(request)).ToPointer();
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	std::string sRequest(cRequest);
-	std::string sTypeOfLit(cTypeOfLit);
-	std::vector <std::string> littleDB;
+	std::string sRequest(cRequest); // Запрос на выборку
+	std::string sTypeOfLit(cTypeOfLit); // Тип литературы из которой будет прозведена выборка
+	std::vector <std::string> littleDB; // Хранит данные для вывода в таблицу
 	std::string nameBook;
 	std::string nameAutor;
 	std::string yearOfRelease;
@@ -44,42 +44,22 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 	size_t i = 0;
 	Admin admin;
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
-	else if (choiceOfTypeBook->Text == "Техническая") {
-		
-		admin.searchByRequest(&littleDB, sRequest, sTypeOfLit);
-		dataGridView1->Rows->Clear();
-		dataGridView1->Refresh();
-		if (littleDB.size() != 0) {
-			do
-			{
-				
-				admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
-	}
-	else if (choiceOfTypeBook->Text == "Художественная") {
-		
-		admin.searchByRequest(&littleDB, sRequest, sTypeOfLit);
-		dataGridView1->Rows->Clear();
-		dataGridView1->Refresh();
-		if (littleDB.size() != 0) {
-			do
-			{
-				admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
+	else
+		admin.searchByRequest(littleDB, sRequest, sTypeOfLit);
+	// Чистим таблицу перед выводом данных вектора
+	dataGridView1->Rows->Clear();
+	dataGridView1->Refresh();
+	// Выводим данные в таблицу
+	if (littleDB.size() != 0) {
+		do {
+			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			System::String^ SnameBook = gcnew String(nameBook.c_str());
+			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
+			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
+			System::String^ Savailability = gcnew String(availability.c_str());
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			i++;
+		} while (i < littleDB.size());
 	}
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
@@ -220,6 +200,7 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 	MessageBox::Show("Данные успешно удалены.\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
 }
+// Полный выход из программы
 System::Void DBLibClient::FindForEditForm::FindForEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
 {
 	Application::Exit();

@@ -77,9 +77,20 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 	for (std::vector <char>::iterator it = POS + 2; it != InpTEXT.end(); ++it)
 		availability += *it;
 }
-
+// Вызывает опредлённый способ сортировки
+void User::sorting(std::vector<std::string>& littleDB, std::string sortingMethod)
+{
+	if (sortingMethod == "по названию, по алфавиту")
+		sortNameBookAlphabet(littleDB);
+	else if (sortingMethod == "по автору, по алфавиту")
+		sortAutorNameAlphabet(littleDB);
+	else if (sortingMethod == "по году, в порядке возрастания")
+		sortYearOfReleaseAscending(littleDB, sortingMethod);
+	else if (sortingMethod == "по году, в порядке убывания")
+		sortYearOfReleaseAscending(littleDB, sortingMethod);
+}
 // Ищет запись по введённому запросу
-void User::searchByRequest(std::vector<std::string>* littleDB, std::string inpText, std::string typeOfLit)
+void User::searchByRequest(std::vector<std::string>& littleDB, std::string inpText, std::string typeOfLit)
 {
 	std::string typeLit;
 	if (typeOfLit == "Техническая") {
@@ -87,21 +98,45 @@ void User::searchByRequest(std::vector<std::string>* littleDB, std::string inpTe
 	}
 	else typeLit = ArtLitDBname;
 	std::ifstream fin;
-	fin.open(typeLit);
+	
 	std::string stringForComparison; // Строка с которой сравнивают
-	if (fin.is_open()) {
-		while (!fin.eof()) {
-			getline(fin, stringForComparison);
-			if (stringForComparison.find(inpText) != std::string::npos) {
-				littleDB->push_back(stringForComparison);
+	if (typeOfLit != "Оба типа") {
+		fin.open(typeLit);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				if (stringForComparison.find(inpText) != std::string::npos) {
+					littleDB.push_back(stringForComparison);
+				}
 			}
 		}
+		fin.close();
 	}
-	fin.close();
+	else if (typeOfLit == "Оба типа") {
+		fin.open(TechLitDBname);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				if (stringForComparison.find(inpText) != std::string::npos) {
+					littleDB.push_back(stringForComparison);
+				}
+			}
+		}
+		fin.close();
+		fin.open(ArtLitDBname);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				if (stringForComparison.find(inpText) != std::string::npos) {
+					littleDB.push_back(stringForComparison);
+				}
+			}
+		}
+		fin.close();
+	}
 }
 // Добавляет все записи из файла контейнер для последующего вывода в таблицу
-void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit,
-	bool flag)
+void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
 {
 	std::string typeLit;
 	if (typeOfLit == "Техническая")
@@ -157,6 +192,54 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 			});
 		littleDB.erase(it, littleDB.end());
 	}		
+}
+// Сортировка названия книг по алфавиту
+void User::sortNameBookAlphabet(std::vector<std::string>& littleDB)
+{
+	sort(littleDB.begin(), littleDB.end());
+}
+// Сортировка автора книг, по алфавиту
+void User::sortAutorNameAlphabet(std::vector<std::string>& littleDB)
+{
+	sort(littleDB.begin(), littleDB.end(), [](const std::string& par, const std::string& par1) {
+		size_t pos, pos1;
+		std::vector <char> parVect, par1Vect;
+		std::string nameAutor, nameAutor1;
+		nameAutor = par;
+		pos = nameAutor.find(',');
+		nameAutor.erase(0, pos + 2);
+		pos1 = nameAutor.find_last_of(',');
+		nameAutor.erase(pos1);
+		nameAutor1 = par1;
+		pos = nameAutor1.find(',');
+		nameAutor1.erase(0, pos + 2);
+		pos1 = nameAutor1.find_last_of(',');
+		nameAutor1.erase(pos1);
+		return nameAutor < nameAutor1;
+		});
+}
+// Соритровка по году выпуска, по возрастанию или убыванию
+void User::sortYearOfReleaseAscending(std::vector<std::string>& littleDB, std::string sortMethod)
+{
+	sort(littleDB.begin(), littleDB.end(), [&sortMethod](const std::string& par, const std::string& par1) {
+		size_t pos, pos1;
+		std::vector <char> parVect, par1Vect;
+		std::string yearOfRelease, yearOfRelease1;
+		yearOfRelease = par;
+		pos = yearOfRelease.find_last_of(',');
+		yearOfRelease.erase(0, pos + 2);
+		pos1 = yearOfRelease.find(';');
+		yearOfRelease.erase(pos1);
+		yearOfRelease1 = par1;
+		pos = yearOfRelease1.find_last_of(',');
+		yearOfRelease1.erase(0, pos + 2);
+		pos1 = yearOfRelease1.find(';');
+		yearOfRelease1.erase(pos1);
+		if (sortMethod == "по году, в порядке возрастания")
+			return stoi(yearOfRelease) < stoi(yearOfRelease1);
+		else if (sortMethod == "по году, в порядке убывания")
+			return stoi(yearOfRelease) > stoi(yearOfRelease1);
+		});
 }
 
 User::~User()

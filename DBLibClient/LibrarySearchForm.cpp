@@ -1,7 +1,5 @@
 #include "LibrarySearchForm.h"
 
-
-
 System::Void DBLibClient::LibrarySearchForm::ExitButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
     Application::Exit();
@@ -26,10 +24,13 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 
 	System::String^ request = nameBookTextBox->Text; // введённый запрос для поиска книги
 	System::String^ typeOfLit = choiceOfTypeBook->Text; // Тип выбранной литературы
+	System::String^ sortingMethod = choiceOfSortingMethod->Text; // Способ соритровки
 	char* cRequest = (char*)(Marshal::StringToHGlobalAnsi(request)).ToPointer(); 
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
+	char* cSortingMethod = (char*)(Marshal::StringToHGlobalAnsi(sortingMethod)).ToPointer();
 	std::string sRequest(cRequest);
 	std::string sTypeOfLit(cTypeOfLit);
+	std::string sSortingMethod(cSortingMethod); // Способ сортировки
 	std::vector <std::string> littleDB;
 	std::string nameBook;
 	std::string nameAutor;
@@ -38,42 +39,27 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 	size_t i = 0;
 	User user;
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
-	else if (choiceOfTypeBook->Text == "Техническая") {
-		// Ищем совпадения с запросом
-		user.searchByRequest(&littleDB, sRequest, sTypeOfLit);
-		dataGridView1->Rows->Clear();
-		dataGridView1->Refresh();
-		if (littleDB.size() != 0) {
-			do
-			{
-				// Разбиваем строку из вектора на параметры, для вывода в таблицу
-				user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
+	else {
+		user.searchByRequest(littleDB, sRequest, sTypeOfLit);
+		// Сортирум определённым образом
+		if (choiceOfSortingMethod->Text != "")
+			user.sorting(littleDB, sSortingMethod);
 	}
-	else if (choiceOfTypeBook->Text == "Художественная") {
-
-		user.searchByRequest(&littleDB, sRequest, sTypeOfLit);
-		dataGridView1->Rows->Clear();
-		dataGridView1->Refresh();
-		if (littleDB.size() != 0) {
-			do
-			{
-				user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-				System::String^ SnameBook = gcnew String(nameBook.c_str());
-				System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-				System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-				System::String^ Savailability = gcnew String(availability.c_str());
-				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-				i++;
-			} while (i < littleDB.size());
-		}
+	dataGridView1->Rows->Clear();
+	dataGridView1->Refresh();
+	// Выводим данные в таблицу из littleDB
+	if (littleDB.size() != 0) {
+		do
+		{
+			// Разбиваем строку из вектора на параметры, для вывода в таблицу
+			user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			System::String^ SnameBook = gcnew String(nameBook.c_str());
+			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
+			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
+			System::String^ Savailability = gcnew String(availability.c_str());
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			i++;
+		} while (i < littleDB.size());
 	}
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
@@ -90,8 +76,11 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 	std::string availability; // Количество определённой книги, в библиотеке
 	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображать ли только книги в наличии
 	System::String^ typeOfLit = choiceOfTypeBook->Text; // Тип выбранной литературы
+	System::String^ sortingMethod = choiceOfSortingMethod->Text; // Способ соритровки
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	std::string sTypeOfLit(cTypeOfLit);
+	char* cSortingMethod = (char*)(Marshal::StringToHGlobalAnsi(sortingMethod)).ToPointer();
+	std::string sTypeOfLit(cTypeOfLit); // Тип литературы для отображения
+	std::string sSortingMethod(cSortingMethod); // Способ сортировки
 	size_t i = 0;
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
@@ -101,14 +90,11 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 		flag = 1;
 
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для поиска", "Внимание");
-	else if (choiceOfTypeBook->Text == "Техническая") {
+	else {
 		user.showAllLines(littleDB, sTypeOfLit, flag); // Добавляем в вектор littleDb, что бы вывести в таблицу
-	}
-	else if (choiceOfTypeBook->Text == "Художественная") {
-		user.showAllLines(littleDB, sTypeOfLit, flag);
-	}
-	else if (choiceOfTypeBook->Text == "Оба типа") {
-		user.showAllLines(littleDB, sTypeOfLit, flag); // Добавляем в вектор littleDb, что бы вывести в таблицу
+		// Сортирум определённым образом
+		if (choiceOfSortingMethod->Text != "")
+			user.sorting(littleDB, sSortingMethod);
 	}
 	// Выводим данные из вектора в datagridview
 	if (littleDB.size() != 0) {
