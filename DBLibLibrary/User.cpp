@@ -144,7 +144,7 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 	else if (typeOfLit == "Художественная")
 		typeLit = ArtLitDBname;
 	std::ifstream fin;
-	
+	std::vector <std::string> littleDB1, littleDB2;
 	std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
 	
 	if (typeOfLit != "Оба типа") {
@@ -164,7 +164,7 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 			while (!fin.eof()) {
 				getline(fin, str);
 				if (str != "") {
-					littleDB.push_back(str);
+					littleDB1.push_back(str);
 				}
 			}
 		}
@@ -174,11 +174,20 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 			while (!fin.eof()) {
 				getline(fin, str);
 				if (str != "") {
-					littleDB.push_back(str);
+					littleDB2.push_back(str);
 				}
 			}
 		}
 		fin.close();
+		std::vector <std::string> littledb(littleDB1.size() + littleDB2.size());
+
+		std::sort(littleDB1.begin(), littleDB1.end());
+		std::sort(littleDB2.begin(), littleDB2.end());
+		std::set_union(littleDB1.begin(), littleDB1.end(),
+			littleDB2.begin(), littleDB2.end(), littledb.begin());
+		for (std::string i : littledb) {
+			littleDB.push_back(i);
+		}
 	}
 	// Убираем книги, которых нет в наличии
 	if (flag == 1) {
