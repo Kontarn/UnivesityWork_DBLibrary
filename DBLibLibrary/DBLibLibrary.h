@@ -53,6 +53,7 @@ public:
 	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
 	// Соритровка по году выпуска, по возрастанию или убыванию
 	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
+	int getSizeOfDB(string typeOfLit);
 	~User();
 };
 class DBLIBLIBRARY Admin : public User {
@@ -61,6 +62,8 @@ class DBLIBLIBRARY Admin : public User {
 	std::string* yearsOfRelease;		// Год выпуска
 	std::string* availability;			// Наличие в библиотеке
 	std::vector <std::string>* littleDB;
+	
+	
 public:
 	Admin();
 	// Добавление записей в БД
@@ -74,4 +77,8 @@ public:
 	void EditingNotation(std::string sourceString, std::string changedLine, 
 		std::string typeOfLit);
 	~Admin();
+};
+struct DBLIBLIBRARY LibInterface : public Admin{
+	LibInterface();
+	~LibInterface();
 };

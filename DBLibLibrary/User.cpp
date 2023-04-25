@@ -261,6 +261,43 @@ void User::sortYearOfReleaseAscending(std::vector<std::string>& littleDB, std::s
 		});
 }
 
+int User::getSizeOfDB(string typeOfLit)
+{
+	ifstream fin;
+	int size = 0;
+	string str, typeLit;
+	if (typeOfLit == "Техническая")
+		typeLit = TechLitDBname;
+	else if (typeOfLit == "Художественная")
+		typeLit = ArtLitDBname;
+	if (typeOfLit != "Оба типа") {
+		fin.open(typeLit);
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "")
+				size++;
+		}
+		fin.close();
+	}
+	else if (typeOfLit == "Оба типа") {
+		fin.open(TechLitDBname);
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "")
+				size++;
+		}
+		fin.close();
+		fin.open(TechLitDBname);
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "")
+				size++;
+		}
+		fin.close();
+	}
+	return size;
+}
+
 User::~User()
 {
 	delete nameAutor;

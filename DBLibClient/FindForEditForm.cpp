@@ -76,15 +76,19 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 {
 	setlocale(LC_ALL, "ru");
 	Admin admin;
+	LibInterface libInter;
+	System::String^ typeOfLit = choiceOfTypeBook->Text;
+	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
+	std::string sTypeOfLit(cTypeOfLit);
+	//int Size = libInter.getSizeOfDB(sTypeOfLit);
+	//string* littledb = new string[Size];
 	std::vector <std::string> littleDB; 
 	std::string nameBook;		// Название книги
 	std::string nameAutor;		// Имя автора
 	std::string yearOfRelease;	// Год выпуска книги
 	std::string availability;	// Количество экземпляров книги, в наличии
 	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображать ли только книги в наличии
-	System::String^ typeOfLit = choiceOfTypeBook->Text;
-	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
-	std::string sTypeOfLit(cTypeOfLit); 
+	
 	size_t i = 0;
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
@@ -125,7 +129,7 @@ System::Void DBLibClient::FindForEditForm::ExitButton_Click(System::Object^ send
 // Кнопка редактирования записей
 System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	Admin admin;
+	//Admin admin;
 	if (dataGridView1->SelectedRows->Count != 1) {
 		MessageBox::Show("Выберите поле для редактирования, а после нажмите кнопку редактировать", "Ошибка");
 		return;
@@ -163,7 +167,8 @@ System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^
 // Удаление записи из базы данных
 System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	Admin admin;
+	//Admin admin;
+	LibInterface libInter;
 	if (dataGridView1->SelectedRows->Count != 1) {
 		MessageBox::Show("Выберите одну строку для удаления", "Ошибка");
 		return;
@@ -188,10 +193,13 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	std::string sAvailability(cAvailability);
 	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
 	if (choiceOfTypeBook->Text == "Техническая") {
-		admin.deleteLine(line, sTypeOfLit);
+		
+		libInter.deleteLine(line, sTypeOfLit);
+		//admin.deleteLine(line, sTypeOfLit);
 	}
 	else if (choiceOfTypeBook->Text == "Художественная") {
-		admin.deleteLine(line, sTypeOfLit);
+		libInter.deleteLine(line, sTypeOfLit);
+		//admin.deleteLine(line, sTypeOfLit);
 	}
 	Marshal::FreeHGlobal((IntPtr)cNameBook);
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
