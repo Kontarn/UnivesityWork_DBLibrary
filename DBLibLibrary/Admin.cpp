@@ -46,7 +46,7 @@ void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfL
 {
 	std::ifstream fin;
 	std::string str, availability;
-	int pos;
+	size_t pos;
 	std::vector <pair<int, string>> littledb;
 	std::string typeLit;
 	if (typeOfLit == "Техническая") {

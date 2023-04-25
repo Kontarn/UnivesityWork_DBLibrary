@@ -99,13 +99,17 @@ void User::searchByRequest(std::vector<std::string>& littleDB, std::string inpTe
 	else typeLit = ArtLitDBname;
 	std::ifstream fin;
 	
-	std::string stringForComparison; // Строка с которой сравнивают
+	std::string stringForComparison, stringToLower;
+	// Строка с которой сравнивают
 	if (typeOfLit != "Оба типа") {
 		fin.open(typeLit);
 		if (fin.is_open()) {
 			while (!fin.eof()) {
 				getline(fin, stringForComparison);
-				if (stringForComparison.find(inpText) != std::string::npos) {
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
 					littleDB.push_back(stringForComparison);
 				}
 			}
@@ -117,7 +121,10 @@ void User::searchByRequest(std::vector<std::string>& littleDB, std::string inpTe
 		if (fin.is_open()) {
 			while (!fin.eof()) {
 				getline(fin, stringForComparison);
-				if (stringForComparison.find(inpText) != std::string::npos) {
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
 					littleDB.push_back(stringForComparison);
 				}
 			}
@@ -127,7 +134,10 @@ void User::searchByRequest(std::vector<std::string>& littleDB, std::string inpTe
 		if (fin.is_open()) {
 			while (!fin.eof()) {
 				getline(fin, stringForComparison);
-				if (stringForComparison.find(inpText) != std::string::npos) {
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
 					littleDB.push_back(stringForComparison);
 				}
 			}
