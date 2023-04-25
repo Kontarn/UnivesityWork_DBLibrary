@@ -191,16 +191,17 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 	}
 	// Убираем книги, которых нет в наличии
 	if (flag == 1) {
-		std::vector <std::string> ::iterator it = std::remove_if(littleDB.begin(), littleDB.end(), [](std::string a) {
-			std::size_t pos;
-			std::string avail; // наличие в библиотеке
-			pos = a.find(";");
-			avail = a;
-			avail = avail.erase(0, pos + 2);
-			return std::stoi(avail) == 0;
-			});
-		littleDB.erase(it, littleDB.end());
-	}		
+			std::vector <std::string> ::iterator it = std::remove_if(littleDB.begin(), littleDB.end(), [](std::string a) {
+				std::size_t pos;
+				std::string avail; // наличие в библиотеке
+				pos = a.find(";");
+				avail = a;
+				avail = avail.erase(0, pos + 2);
+				return std::stoi(avail) == 0;
+				});
+			littleDB.erase(it, littleDB.end());	
+
+	}
 }
 // Сортировка названия книг по алфавиту
 void User::sortNameBookAlphabet(std::vector<std::string>& littleDB)

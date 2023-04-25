@@ -22,7 +22,7 @@
 
 #define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
 #define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
-
+using namespace std;
 struct DBLIBLIBRARY Leaks {
 	~Leaks();
 };
