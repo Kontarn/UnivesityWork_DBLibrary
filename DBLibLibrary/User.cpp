@@ -200,7 +200,6 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 				return std::stoi(avail) == 0;
 				});
 			littleDB.erase(it, littleDB.end());	
-
 	}
 }
 // Сортировка названия книг по алфавиту

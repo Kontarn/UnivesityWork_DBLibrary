@@ -40,7 +40,9 @@ public:
 	// Вывод все записи определённой базы данных
 	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
+	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
+	// Разрезает полученную запись данных и присваивает атрибутам
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
 	// Сортировка по выбранному способу
