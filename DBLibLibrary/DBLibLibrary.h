@@ -27,25 +27,18 @@ struct DBLIBLIBRARY Leaks {
 	~Leaks();
 };
 
-class DBLIBLIBRARY User : public LibInterface {
-	//std::string* nameBook;				// Название книги
-	//std::string* nameAutor;				// Автор
-	//std::string* yearsOfRelease;			// Год выпуска
-	//std::string* availability;			// Наличие в библиотеке
-	std::vector <std::string>* littleDB;
+class DBLIBLIBRARY User {
 	int size;
-	string line;
 public:
 	User();
-	User(string& line);
 	int getSize();
-	string getLine();
 	// Функция производит поиск по запросу и возвращает все найденные записи
 	void searchByRequest(std::vector <std::string>& littleDB, std::string inpText, std::string typeOfLit);
+
 	// Вывод все записи определённой базы данных
 	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
-	User* showAllLinesMass(string typeOfLit, bool flag);
+	virtual string** showAllLinesMass(string typeOfLit, bool flag);
 	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	// Разрезает полученную запись данных и присваивает атрибутам
@@ -61,14 +54,10 @@ public:
 	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
 	~User();
 };
-class DBLIBLIBRARY Admin : public User, public LibInterface {
-	std::string* nameBook;				// Название книги
-	std::string* nameAutor;				// Автор
-	std::string* yearsOfRelease;		// Год выпуска
-	std::string* availability;			// Наличие в библиотеке
+class DBLIBLIBRARY Admin : public User {
 	std::vector <std::string>* littleDB;
 	
-	
+	size_t size;
 public:
 	Admin();
 	// Добавление записей в БД
@@ -76,6 +65,7 @@ public:
 		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit);
 	// Добавляет записи в контейнер для последующего вывода в таблицу
 	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
+	//string** showAllLinesMass(string typeOfLit, bool flag) override;
 	// Удаление записи из БД
 	void deleteLine(std::string delLine, std::string typeOfLit);
 	// Редактирование записей

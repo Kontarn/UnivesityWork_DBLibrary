@@ -5,26 +5,12 @@ User::User()
 {
 	size = 0;
 }
-
-User::User(string& line)
-{
-	//nameBook = DBG_NEW std::string;
-	//nameAutor = DBG_NEW std::string;
-	//yearsOfRelease = DBG_NEW std::string;
-	//availability = DBG_NEW std::string;
-	littleDB = DBG_NEW std::vector <std::string>;
-	this->line = line;
-	
-}
+// Возварщает размер массива
 int User::getSize()
 {
 	return size;
 }
-string User::getLine()
-{
-	return line;
-}
-// Ищет похожие записи в выбранной БД
+// Ищет похожие записи в выбранной БД    Проверена
 bool User::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
@@ -65,31 +51,30 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 	nameAutor = "";
 	yearOfRelease = "";
 	availability = "";
-	std::vector <char> InpTEXT;
-	std::vector <char>::iterator POS;
-	std::vector <char>::iterator POS1;
-	char znak1{ ',' };
-	char znak2{ ';' };
+	std::vector <char> line; // Хранит взятую из БД строку
+	vector<char>::iterator pos, pos1;
+	char znak{ ',' };
+	char znak1{ ';' };
 	for (int i = 0; i < inpText.size(); i++) {
-		InpTEXT.push_back(inpText[i]);
+		line.push_back(inpText[i]);
 	}
 	// nameBook - название книги
-	POS = find_if(InpTEXT.begin(), InpTEXT.end(), [&znak1](const char& a) {return a == znak1; });
-	for (std::vector <char> ::iterator it = InpTEXT.begin(); it < POS; ++it)
+	pos = find_if(line.begin(), line.end(), [&znak](const char& a) {return a == znak; });
+	for (std::vector <char> ::iterator it = line.begin(); it < pos; ++it)
 		nameBook += *it;
 
 	// nameAutor - ФИО автора
-	POS1 = find(POS + 2, InpTEXT.end(), znak1);
-	for (std::vector <char>::iterator it = POS + 2; it != POS1; ++it)
+	pos1 = find(pos + 2, line.end(), znak);
+	for (std::vector <char>::iterator it = pos + 2; it != pos1; ++it)
 		nameAutor += *it;
 
 	// yearOfRelease - год выпуска книги
-	POS = find(POS1 + 2, InpTEXT.end(), znak2);
-	for (std::vector <char>::iterator it = POS1 + 2; it != POS; ++it)
+	pos = find(pos1 + 2, line.end(), znak1);
+	for (std::vector <char>::iterator it = pos1 + 2; it != pos; ++it)
 		yearOfRelease += *it;
 
 	// availability - наличие в библиотеке
-	for (std::vector <char>::iterator it = POS + 2; it != InpTEXT.end(); ++it)
+	for (std::vector <char>::iterator it = pos + 2; it != line.end(); ++it)
 		availability += *it;
 }
 // Вызывает опредлённый способ сортировки
@@ -227,64 +212,49 @@ void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLi
 			littleDB.erase(it, littleDB.end());	
 	}
 }
-
-User* User::showAllLinesMass(string typeOfLit, bool flag)
+string** User::showAllLinesMass(string typeOfLit, bool flag)
 {
-	std::string typeLit;
+	ifstream fin;
+	User user;
+	string typeLit, str;
+	string nameBook, nameAutor, yearOfRelease, availability;
+	vector <string> littledb;
 	if (typeOfLit == "Техническая")
 		typeLit = TechLitDBname;
 	else if (typeOfLit == "Художественная")
 		typeLit = ArtLitDBname;
-	std::ifstream fin;
-	std::vector <std::string> littleDB, littleDB1, littleDB2;
-	std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
-
 	if (typeOfLit != "Оба типа") {
 		fin.open(typeLit);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, str);
-				if (str != "")
-					littleDB.push_back(str);
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "") {
+				littledb.push_back(str);
 			}
 		}
 		fin.close();
 	}
-	else if (typeOfLit == "Оба типа") {
+	if (typeOfLit == "Оба типа") {
 		fin.open(TechLitDBname);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, str);
-				if (str != "") {
-					littleDB1.push_back(str);
-				}
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "") {
+				littledb.push_back(str);
 			}
 		}
 		fin.close();
 		fin.open(ArtLitDBname);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, str);
-				if (str != "") {
-					littleDB2.push_back(str);
-				}
+		while (!fin.eof()) {
+			getline(fin, str);
+			if (str != "") {
+				littledb.push_back(str);
 			}
 		}
 		fin.close();
-		std::vector <std::string> littledb(littleDB1.size() + littleDB2.size());
-
-		std::sort(littleDB1.begin(), littleDB1.end());
-		std::sort(littleDB2.begin(), littleDB2.end());
-		std::set_union(littleDB1.begin(), littleDB1.end(),
-			littleDB2.begin(), littleDB2.end(), littledb.begin());
-		for (std::string i : littledb) {
-			littleDB.push_back(i);
-		}
 	}
 	// Убираем книги, которых нет в наличии
 	if (flag == 1) {
-		std::vector <std::string> ::iterator it = std::remove_if(littleDB.begin(),
-			littleDB.end(), [](std::string a) {
+		std::vector <std::string> ::iterator it = std::remove_if(littledb.begin(),
+			littledb.end(), [](std::string a) {
 				std::size_t pos;
 				std::string avail; // наличие в библиотеке
 				pos = a.find(";");
@@ -292,18 +262,20 @@ User* User::showAllLinesMass(string typeOfLit, bool flag)
 				avail = avail.erase(0, pos + 2);
 				return std::stoi(avail) == 0;
 			});
-		littleDB.erase(it, littleDB.end());
+		littledb.erase(it, littledb.end());
 	}
-
-	string availability;
-	//int pos;
-	size = littleDB.size();
-	User* Mass = new User[size];
-	for (int i = 0; i < littleDB.size(); i++) {
-		Mass[i] = User(littleDB[i]);
+	this->size = littledb.size();
+	string** littleDB = DBG_NEW string * [size];
+	for (int i = 0; i < size; i++)
+		littleDB[i] = DBG_NEW string[4];
+	for (int i = 0; i < size; i++) {
+		user.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
+		littleDB[i][0] = nameBook;
+		littleDB[i][1] = nameAutor;
+		littleDB[i][2] = yearOfRelease;
+		littleDB[i][3] = availability;
 	}
-	return Mass;
-	delete Mass;
+	return littleDB;
 }
 // Сортировка названия книг по алфавиту
 void User::sortNameBookAlphabet(std::vector<std::string>& littleDB)
@@ -356,9 +328,4 @@ void User::sortYearOfReleaseAscending(std::vector<std::string>& littleDB, std::s
 
 User::~User()
 {
-	//delete nameAutor;
-	//delete nameBook;
-	//delete yearsOfRelease;
-	//delete availability;
-	delete littleDB;
 }

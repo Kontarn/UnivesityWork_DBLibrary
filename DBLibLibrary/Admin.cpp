@@ -7,13 +7,9 @@ Leaks::~Leaks() {
 }
 Admin::Admin()
 {
-	nameBook = DBG_NEW std::string;
-	nameAutor = DBG_NEW std::string;
-	yearsOfRelease = DBG_NEW std::string;
-	availability = DBG_NEW std::string;
-	littleDB = DBG_NEW std::vector <std::string>;
+	size = 0;
 }
-// Добавляет запись в БД
+// Добавляет запись в БД	Проверена
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
 	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
 {
@@ -42,7 +38,6 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 }
 
 // Добавляет все записи из файла в контейнер для последующего вывода
-
 void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
 {
 	std::ifstream fin;
@@ -89,6 +84,53 @@ void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfL
 		littleDB.push_back(i.second);
 	}
 }
+//
+//string** Admin::showAllLinesMass(string typeOfLit, bool flag)
+//{
+//	ifstream fin;
+//	Admin admin;
+//	string typeLit, str;
+//	string nameBook, nameAutor, yearOfRelease, availability;
+//	vector <string> littledb;
+//	if (typeOfLit == "Техническая")
+//		typeLit = TechLitDBname;
+//	else if (typeOfLit == "Художественная")
+//		typeLit = ArtLitDBname;
+//	fin.open(typeLit);
+//	while (!fin.eof()) {
+//		getline(fin, str);
+//		if (str != "") {
+//			littledb.push_back(str);
+//		}
+//	}
+//	fin.close();
+//	
+//	// Убираем книги, которых нет в наличии
+//	if (flag == 1) {
+//		std::vector <std::string> ::iterator it = std::remove_if(littledb.begin(),
+//			littledb.end(), [](std::string a) {
+//				std::size_t pos;
+//				std::string avail; // наличие в библиотеке
+//				pos = a.find(";");
+//				avail = a;
+//				avail = avail.erase(0, pos + 2);
+//				return std::stoi(avail) == 0;
+//			});
+//		littledb.erase(it, littledb.end());
+//	}
+//	this->size = littledb.size();
+//	string** littleDB = DBG_NEW string * [size];
+//	for (int i = 0; i < size; i++)
+//		littleDB[i] = DBG_NEW string[4];
+//	for (int i = 0; i < size; i++) {
+//		admin.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
+//		littleDB[i][0] = nameBook;
+//		littleDB[i][1] = nameAutor;
+//		littleDB[i][2] = yearOfRelease;
+//		littleDB[i][3] = availability;
+//	}
+//	return littleDB;
+//}
 
 // Удаляет строку из файла
 void Admin::deleteLine(std::string delLine, std::string typeOfLit)
@@ -159,10 +201,4 @@ void Admin::EditingNotation(std::string sourceString, std::string changedLine,
 
 Admin::~Admin()
 {
-	delete nameAutor;
-	delete nameBook;
-	delete yearsOfRelease;
-	delete availability;
-	delete littleDB;
-	
 }
