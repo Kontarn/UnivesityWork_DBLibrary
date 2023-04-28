@@ -42,6 +42,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 }
 
 // Добавляет все записи из файла в контейнер для последующего вывода
+
 void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
 {
 	std::ifstream fin;

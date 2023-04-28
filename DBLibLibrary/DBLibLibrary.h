@@ -27,19 +27,25 @@ struct DBLIBLIBRARY Leaks {
 	~Leaks();
 };
 
-class DBLIBLIBRARY User {
-	std::string* nameBook;				// Название книги
-	std::string* nameAutor;				// Автор
-	std::string* yearsOfRelease;			// Год выпуска
-	std::string* availability;			// Наличие в библиотеке
+class DBLIBLIBRARY User : public LibInterface {
+	//std::string* nameBook;				// Название книги
+	//std::string* nameAutor;				// Автор
+	//std::string* yearsOfRelease;			// Год выпуска
+	//std::string* availability;			// Наличие в библиотеке
 	std::vector <std::string>* littleDB;
+	int size;
+	string line;
 public:
 	User();
+	User(string& line);
+	int getSize();
+	string getLine();
 	// Функция производит поиск по запросу и возвращает все найденные записи
 	void searchByRequest(std::vector <std::string>& littleDB, std::string inpText, std::string typeOfLit);
 	// Вывод все записи определённой базы данных
 	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
+	User* showAllLinesMass(string typeOfLit, bool flag);
 	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	// Разрезает полученную запись данных и присваивает атрибутам
@@ -53,10 +59,9 @@ public:
 	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
 	// Соритровка по году выпуска, по возрастанию или убыванию
 	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
-	int getSizeOfDB(string typeOfLit);
 	~User();
 };
-class DBLIBLIBRARY Admin : public User {
+class DBLIBLIBRARY Admin : public User, public LibInterface {
 	std::string* nameBook;				// Название книги
 	std::string* nameAutor;				// Автор
 	std::string* yearsOfRelease;		// Год выпуска
@@ -78,7 +83,7 @@ public:
 		std::string typeOfLit);
 	~Admin();
 };
-struct DBLIBLIBRARY LibInterface : public Admin{
+struct DBLIBLIBRARY LibInterface : public Admin {
 	LibInterface();
 	~LibInterface();
 };
