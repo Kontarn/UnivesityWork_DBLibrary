@@ -78,8 +78,9 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 		availability += *it;
 }
 // Вызывает опредлённый способ сортировки
-void User::sorting(std::vector<std::string>& littleDB, std::string sortingMethod)
+void User::sorting(vector <string>&littleDB, std::string sortingMethod)
 {
+	//string** littledb = littleDB;
 	if (sortingMethod == "по названию, по алфавиту")
 		sortNameBookAlphabet(littleDB);
 	else if (sortingMethod == "по автору, по алфавиту")
@@ -277,9 +278,42 @@ string** User::showAllLinesMass(string typeOfLit, bool flag)
 	}
 	return littleDB;
 }
-// Сортировка названия книг по алфавиту
-void User::sortNameBookAlphabet(std::vector<std::string>& littleDB)
+void User::sortingMass(string**& littleDB, string sortingMethod, size_t size)
 {
+	LibInterface libInter;
+
+	vector <string> littledb;
+	string line;
+	string nameBook, nameAutor, yearOfRelease, availability;
+	for (int i = 0; i < size; i++) {
+		line = "";
+		line = littleDB[i][0] + ", " + littleDB[i][1] + ", " + littleDB[i][2] + "; " + littleDB[i][3];
+		littledb.push_back(line);
+	}
+	if (sortingMethod == "по названию, по алфавиту")
+		sortNameBookAlphabet(littledb);
+	else if (sortingMethod == "по автору, по алфавиту")
+		sortAutorNameAlphabet(littledb);
+	else if (sortingMethod == "по году, в порядке возрастания")
+		sortYearOfReleaseAscending(littledb, sortingMethod);
+	else if (sortingMethod == "по году, в порядке убывания")
+		sortYearOfReleaseAscending(littledb, sortingMethod);
+	string** newLittleDB = DBG_NEW string*[size];
+	for (int i = 0; i < size; i++) {
+		newLittleDB[i] = DBG_NEW string[4];
+		libInter.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
+		newLittleDB[i][0] = nameBook;
+		newLittleDB[i][1] = nameAutor;
+		newLittleDB[i][2] = yearOfRelease;
+		newLittleDB[i][3] = availability;
+	}
+	littleDB = newLittleDB;
+
+}
+
+// Сортировка названия книг по алфавиту
+void User::sortNameBookAlphabet(vector <string>& littleDB)
+{	
 	sort(littleDB.begin(), littleDB.end());
 }
 // Сортировка автора книг, по алфавиту

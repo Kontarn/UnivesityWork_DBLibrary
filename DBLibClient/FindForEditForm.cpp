@@ -89,26 +89,29 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 		flag = 1;
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для отображения", "Внимание");
 	// Заполняем контейнер только записями из файла с технической литературой
-	else if (choiceOfTypeBook->Text == "Техническая") {
+	else if (choiceOfTypeBook->Text == "Техническая" || choiceOfTypeBook->Text == "Художественная"
+		|| choiceOfTypeBook->Text == "Оба типа") {
 		littledb = libInter.showAllLinesMass(sTypeOfLit, flag);
-	}
-	// Заполняем контейнер только записями из файла с художественной литературой
-	else if (choiceOfTypeBook->Text == "Художественная") {
-		littledb = libInter.showAllLinesMass(sTypeOfLit, flag);
-	}
-	size_t size = libInter.getSize();
-	if (size != 0) {
-		for (size_t i = 0; i < size; i++) {
-			System::String^ SnameBook = gcnew String(littledb[i][0].c_str());
-			System::String^ SnameAutor = gcnew String(littledb[i][1].c_str());
-			System::String^ SyearOfRelease = gcnew String(littledb[i][2].c_str());
-			System::String^ Savailability = gcnew String(littledb[i][3].c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+
+
+		// Заполняем контейнер только записями из файла с художественной литературой
+		//else if (choiceOfTypeBook->Text == "Художественная") {
+		//	littledb = libInter.showAllLinesMass(sTypeOfLit, flag);
+		//}
+		size_t size = libInter.getSize();
+		if (size != 0) {
+			for (size_t i = 0; i < size; i++) {
+				System::String^ SnameBook = gcnew String(littledb[i][0].c_str());
+				System::String^ SnameAutor = gcnew String(littledb[i][1].c_str());
+				System::String^ SyearOfRelease = gcnew String(littledb[i][2].c_str());
+				System::String^ Savailability = gcnew String(littledb[i][3].c_str());
+				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			}
 		}
+		for (size_t i = 0; i < size; i++)
+			delete[] littledb[i];
+		delete[] littledb;
 	}
-	for (size_t i = 0; i < size; i++)
-		delete[] littledb[i];
-	delete[] littledb;
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
 // Выход из программы

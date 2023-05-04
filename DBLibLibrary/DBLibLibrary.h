@@ -38,20 +38,25 @@ public:
 	// Вывод все записи определённой базы данных
 	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
 		bool flag);
-	virtual string** showAllLinesMass(string typeOfLit, bool flag);
+	
 	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	// Разрезает полученную запись данных и присваивает атрибутам
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
 	// Сортировка по выбранному способу
-	void sorting(std::vector <std::string>& littleDB, std::string sortingMethod);
+	void sorting(vector <string>& littleDB, std::string sortingMethod);
 	// Сортировка названия книг по алфавиту
-	void sortNameBookAlphabet(std::vector <std::string>& littleDB);
+	void sortNameBookAlphabet(vector <string>& littleDB);
+	
 	// Сортировка автора книг, по алфавиту
 	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
 	// Соритровка по году выпуска, по возрастанию или убыванию
 	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
+	// --------------------Код под новые требования--------------------------------------------------------
+	virtual string** showAllLinesMass(string typeOfLit, bool flag);
+	void sortingMass(string**& littleDB, string sortingMethod, size_t size);
+	void sortNameBookAlphabetMass(string**& littleDB, size_t size);
 	~User();
 };
 class DBLIBLIBRARY Admin : public User {
