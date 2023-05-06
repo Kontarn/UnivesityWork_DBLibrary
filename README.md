@@ -14,6 +14,4 @@
 
 (5) 3 алгоритма  
 
-[В ПРОЦЕССЕ]
-
 алгоритм equal_rang + один из алгоритмов действия над множествами (set_union, set_intersection, set_difference)
