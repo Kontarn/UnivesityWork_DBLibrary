@@ -54,16 +54,16 @@ namespace DBLibClient {
 	private: System::Windows::Forms::Button^ BackToMenu;
 	private: System::Windows::Forms::Button^ helpOfSearchButton;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
 	private: System::Windows::Forms::Button^ EditEntryButton;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ ShowAllLinesButton;
 	private: System::Windows::Forms::Button^ ExitButton;
 	private: System::Windows::Forms::Button^ deleteLineButton;
 	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -112,7 +112,7 @@ namespace DBLibClient {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(992, 35);
+			this->menuStrip1->Size = System::Drawing::Size(992, 36);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -123,7 +123,7 @@ namespace DBLibClient {
 					this->âûõîäÈçÏðîãðàììûToolStripMenuItem1
 			});
 			this->âûõîäToolStripMenuItem->Name = L"âûõîäToolStripMenuItem";
-			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 29);
+			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 30);
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			// 
 			// âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1
@@ -145,7 +145,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Òåõíè÷åñêàÿ", L"Õóäîæåñòâåííàÿ" });
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Òåõíè÷åñêàÿ", L"Õóäîæåñòâåííàÿ" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 378);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(699, 385);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -153,7 +153,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(706, 355);
+			this->label1->Location = System::Drawing::Point(695, 360);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(229, 22);
 			this->label1->TabIndex = 2;
@@ -161,14 +161,14 @@ namespace DBLibClient {
 			// 
 			// nameBookTextBox
 			// 
-			this->nameBookTextBox->Location = System::Drawing::Point(13, 403);
+			this->nameBookTextBox->Location = System::Drawing::Point(12, 385);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
 			this->nameBookTextBox->Size = System::Drawing::Size(437, 28);
 			this->nameBookTextBox->TabIndex = 3;
 			// 
 			// FindButton
 			// 
-			this->FindButton->Location = System::Drawing::Point(186, 453);
+			this->FindButton->Location = System::Drawing::Point(185, 454);
 			this->FindButton->Name = L"FindButton";
 			this->FindButton->Size = System::Drawing::Size(75, 34);
 			this->FindButton->TabIndex = 6;
@@ -178,7 +178,7 @@ namespace DBLibClient {
 			// 
 			// BackToStartMenu
 			// 
-			this->BackToStartMenu->Location = System::Drawing::Point(869, 453);
+			this->BackToStartMenu->Location = System::Drawing::Point(858, 456);
 			this->BackToStartMenu->Name = L"BackToStartMenu";
 			this->BackToStartMenu->Size = System::Drawing::Size(108, 34);
 			this->BackToStartMenu->TabIndex = 8;
@@ -189,7 +189,7 @@ namespace DBLibClient {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 378);
+			this->label3->Location = System::Drawing::Point(11, 360);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(249, 22);
 			this->label3->TabIndex = 9;
@@ -197,7 +197,7 @@ namespace DBLibClient {
 			// 
 			// BackToMenu
 			// 
-			this->BackToMenu->Location = System::Drawing::Point(790, 453);
+			this->BackToMenu->Location = System::Drawing::Point(779, 456);
 			this->BackToMenu->Name = L"BackToMenu";
 			this->BackToMenu->Size = System::Drawing::Size(73, 34);
 			this->BackToMenu->TabIndex = 11;
@@ -207,7 +207,7 @@ namespace DBLibClient {
 			// 
 			// helpOfSearchButton
 			// 
-			this->helpOfSearchButton->Location = System::Drawing::Point(466, 401);
+			this->helpOfSearchButton->Location = System::Drawing::Point(465, 383);
 			this->helpOfSearchButton->Name = L"helpOfSearchButton";
 			this->helpOfSearchButton->Size = System::Drawing::Size(159, 30);
 			this->helpOfSearchButton->TabIndex = 14;
@@ -259,7 +259,7 @@ namespace DBLibClient {
 			// 
 			// EditEntryButton
 			// 
-			this->EditEntryButton->Location = System::Drawing::Point(13, 453);
+			this->EditEntryButton->Location = System::Drawing::Point(12, 454);
 			this->EditEntryButton->Name = L"EditEntryButton";
 			this->EditEntryButton->Size = System::Drawing::Size(167, 34);
 			this->EditEntryButton->TabIndex = 16;
@@ -269,7 +269,7 @@ namespace DBLibClient {
 			// 
 			// ShowAllLinesButton
 			// 
-			this->ShowAllLinesButton->Location = System::Drawing::Point(267, 453);
+			this->ShowAllLinesButton->Location = System::Drawing::Point(266, 454);
 			this->ShowAllLinesButton->Name = L"ShowAllLinesButton";
 			this->ShowAllLinesButton->Size = System::Drawing::Size(193, 34);
 			this->ShowAllLinesButton->TabIndex = 17;
@@ -279,7 +279,7 @@ namespace DBLibClient {
 			// 
 			// ExitButton
 			// 
-			this->ExitButton->Location = System::Drawing::Point(710, 453);
+			this->ExitButton->Location = System::Drawing::Point(699, 456);
 			this->ExitButton->Name = L"ExitButton";
 			this->ExitButton->Size = System::Drawing::Size(74, 34);
 			this->ExitButton->TabIndex = 18;
@@ -289,7 +289,7 @@ namespace DBLibClient {
 			// 
 			// deleteLineButton
 			// 
-			this->deleteLineButton->Location = System::Drawing::Point(466, 453);
+			this->deleteLineButton->Location = System::Drawing::Point(465, 454);
 			this->deleteLineButton->Name = L"deleteLineButton";
 			this->deleteLineButton->Size = System::Drawing::Size(159, 34);
 			this->deleteLineButton->TabIndex = 19;
@@ -300,18 +300,18 @@ namespace DBLibClient {
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(710, 414);
+			this->checkBox1->Location = System::Drawing::Point(699, 421);
 			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(175, 26);
+			this->checkBox1->Size = System::Drawing::Size(180, 26);
 			this->checkBox1->TabIndex = 20;
-			this->checkBox1->Text = L"Êíèãè â íàëè÷èè";
+			this->checkBox1->Text = L"Êíèãè â íàëè÷èè:";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			// 
 			// FindForEditForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(992, 503);
+			this->ClientSize = System::Drawing::Size(992, 506);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
@@ -330,9 +330,6 @@ namespace DBLibClient {
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->MainMenuStrip = this->menuStrip1;
-			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(1014, 559);
-			this->MinimumSize = System::Drawing::Size(1014, 559);
 			this->Name = L"FindForEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;

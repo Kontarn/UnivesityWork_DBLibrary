@@ -33,11 +33,11 @@ public:
 	User();
 	int getSize();
 	// Функция производит поиск по запросу и возвращает все найденные записи
-	void searchByRequest(std::vector <std::string>& littleDB, std::string inpText, std::string typeOfLit);
+	//void searchByRequest(std::vector <std::string>& littleDB, std::string inpText, std::string typeOfLit);
 
 	// Вывод все записи определённой базы данных
-	virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
-		bool flag);
+	/*virtual void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit,
+		bool flag);*/
 	
 	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
@@ -45,22 +45,26 @@ public:
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
 	// Сортировка по выбранному способу
-	void sorting(vector <string>& littleDB, std::string sortingMethod);
+	//void sorting(vector <string>& littleDB, std::string sortingMethod);
+
+	// --------------------Код под новые требования--------------------------------------------------------
+	void showAllLinesMass(string**& littleDB, string typeOfLit, bool flag);
+	void sortingMass(string**& littleDB, string sortingMethod, size_t size);
+	void searchByRequestMass(string**& littleDB, string inpText, string typeOfLit);
+	
+	~User();
+private:
 	// Сортировка названия книг по алфавиту
 	void sortNameBookAlphabet(vector <string>& littleDB);
-	
+
 	// Сортировка автора книг, по алфавиту
 	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
 	// Соритровка по году выпуска, по возрастанию или убыванию
 	void sortYearOfReleaseAscending(std::vector <std::string>& littleDB, std::string sortMethod);
-	// --------------------Код под новые требования--------------------------------------------------------
-	virtual string** showAllLinesMass(string typeOfLit, bool flag);
-	void sortingMass(string**& littleDB, string sortingMethod, size_t size);
-	void sortNameBookAlphabetMass(string**& littleDB, size_t size);
-	~User();
+	//virtual void displayingAvailBook(vector <string>& littledb);
 };
 class DBLIBLIBRARY Admin : public User {
-	std::vector <std::string>* littleDB;
+	//std::vector <std::string>* littleDB;
 	
 	size_t size;
 public:
@@ -69,8 +73,8 @@ public:
 	bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit);
 	// Добавляет записи в контейнер для последующего вывода в таблицу
-	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
-	//string** showAllLinesMass(string typeOfLit, bool flag) override;
+	//void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
+	//void showAllLinesMass(string**& littleDB, string typeOfLit, bool flag) override;
 	// Удаление записи из БД
 	void deleteLine(std::string delLine, std::string typeOfLit);
 	// Редактирование записей

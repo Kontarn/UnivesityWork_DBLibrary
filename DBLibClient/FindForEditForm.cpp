@@ -29,38 +29,42 @@ System::Void DBLibClient::FindForEditForm::BackToMenu_Click(System::Object^ send
 // Ищем определённую запись в выбранной таблице
 System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-
+	LibInterface libInter;
 	System::String^ request = nameBookTextBox->Text;	// Введённй запрос для поиска
 	System::String^ typeOfLit = choiceOfTypeBook->Text; // Тип литературы
 	char* cRequest = (char*)(Marshal::StringToHGlobalAnsi(request)).ToPointer();
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
 	std::string sRequest(cRequest); // Запрос на выборку
 	std::string sTypeOfLit(cTypeOfLit); // Тип литературы из которой будет прозведена выборка
-	std::vector <std::string> littleDB; // Хранит данные для вывода в таблицу
-	std::string nameBook;
-	std::string nameAutor;
-	std::string yearOfRelease;
-	std::string availability;
-	size_t i = 0;
-	Admin admin;
+	//std::vector <std::string> littleDB; // Хранит данные для вывода в таблицу
+	//std::string nameBook;
+	//std::string nameAutor;
+	//std::string yearOfRelease;
+	//std::string availability;
+	string** littleDB;
+	size_t size;
+
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
 	else
-		admin.searchByRequest(littleDB, sRequest, sTypeOfLit);
+		libInter.searchByRequestMass(littleDB, sRequest, sTypeOfLit);
+	size = libInter.getSize();
 	// Чистим таблицу перед выводом данных вектора
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
 	// Выводим данные в таблицу
-	if (littleDB.size() != 0) {
-		do {
-			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-			System::String^ SnameBook = gcnew String(nameBook.c_str());
-			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
-			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
-			System::String^ Savailability = gcnew String(availability.c_str());
+	if (size != 0) {
+		for (int i = 0; i< size; i++){
+			//admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			System::String^ SnameBook = gcnew String(littleDB[i][0].c_str());
+			System::String^ SnameAutor = gcnew String(littleDB[i][1].c_str());
+			System::String^ SyearOfRelease = gcnew String(littleDB[i][2].c_str());
+			System::String^ Savailability = gcnew String(littleDB[i][3].c_str());
 			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
-			i++;
-		} while (i < littleDB.size());
+		}
 	}
+	for (int i = 0; i < size; i++)
+		delete[] littleDB[i];
+	delete[] littleDB;
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
@@ -85,15 +89,14 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 	dataGridView1->Refresh();
 	if (checkBox1->Checked == false)
 		flag = 0;
-	else if (checkBox1->Checked == true)
+	else if (checkBox1->Checked == true) {
 		flag = 1;
+	}
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для отображения", "Внимание");
 	// Заполняем контейнер только записями из файла с технической литературой
 	else if (choiceOfTypeBook->Text == "Техническая" || choiceOfTypeBook->Text == "Художественная"
 		|| choiceOfTypeBook->Text == "Оба типа") {
-		littledb = libInter.showAllLinesMass(sTypeOfLit, flag);
-
-
+		libInter.showAllLinesMass(littledb, sTypeOfLit, flag);
 		// Заполняем контейнер только записями из файла с художественной литературой
 		//else if (choiceOfTypeBook->Text == "Художественная") {
 		//	littledb = libInter.showAllLinesMass(sTypeOfLit, flag);

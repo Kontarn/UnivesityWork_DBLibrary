@@ -38,54 +38,53 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 }
 
 // Добавляет все записи из файла в контейнер для последующего вывода
-void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
-{
-	std::ifstream fin;
-	std::string str, availability;
-	size_t pos;
-	std::vector <pair<int, string>> littledb;
-	std::string typeLit;
-	if (typeOfLit == "Техническая") {
-		typeLit = TechLitDBname;
-	}
-	else typeLit = ArtLitDBname;
-	//std::ifstream fin;
-	//std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
-	fin.open(typeLit);
-	if (fin.is_open()) {
-		while (!fin.eof()) {
-			getline(fin, str);
-			if (str != "") {
-				availability = str;
-				pos = availability.find(';');
-				availability.erase(0, pos + 2);
-				littledb.push_back(make_pair(stoi(availability), str));
-			}
-		}
-	}
-	fin.close();
-	// Убираем книги, которых нет в наличии, применяя алгоритм equal_range
-	if (flag == 1) {
-		// Отсортруем вектор по первому элементу пары
-		sort(littledb.begin(), littledb.end(), [](const pair<int, string>& par, const pair<int, string>& par1) {
-			return par.first < par1.first;
-			});
-		// result хранит интервал книг, которых нет в наличии
-		pair <vector<pair<int, string>>::iterator, vector<pair<int, string>>::iterator> result;
-		pair<int, string> par{ 0, "" }; // Нужно работы алгоритма equal_range
-		result = equal_range(littledb.begin(), littledb.end(), par,
-			[par](const pair<int, string>& par, const pair<int, string>& par1) {
-				return par.first < par1.first;
-			});
-		// Удаляем все записи, которые имеют наличие 0
-		littledb.erase(result.first, result.second);
-	} 
-	for (pair<int, string> i : littledb) {
-		littleDB.push_back(i.second);
-	}
-}
-//
-//string** Admin::showAllLinesMass(string typeOfLit, bool flag)
+//void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
+//{
+//	ifstream fin;
+//	string str, availability;
+//	size_t pos;
+//	vector <pair<int, string>> littledb;
+//	string typeLit;
+//	if (typeOfLit == "Техническая") {
+//		typeLit = TechLitDBname;
+//	}
+//	else typeLit = ArtLitDBname;
+//	//std::ifstream fin;
+//	//std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
+//	fin.open(typeLit);
+//	if (fin.is_open()) {
+//		while (!fin.eof()) {
+//			getline(fin, str);
+//			if (str != "") {
+//				availability = str;
+//				pos = availability.find(';');
+//				availability.erase(0, pos + 2);
+//				littledb.push_back(make_pair(stoi(availability), str));
+//			}
+//		}
+//	}
+//	fin.close();
+//	// Убираем книги, которых нет в наличии, применяя алгоритм equal_range
+//	if (flag == 1) {
+//		// Отсортруем вектор по первому элементу пары
+//		sort(littledb.begin(), littledb.end(), [](const pair<int, string>& par, const pair<int, string>& par1) {
+//			return par.first < par1.first;
+//			});
+//		// result хранит интервал книг, которых нет в наличии
+//		pair <vector<pair<int, string>>::iterator, vector<pair<int, string>>::iterator> result;
+//		pair<int, string> par{ 0, "" }; // Нужно работы алгоритма equal_range
+//		result = equal_range(littledb.begin(), littledb.end(), par,
+//			[par](const pair<int, string>& par, const pair<int, string>& par1) {
+//				return par.first < par1.first;
+//			});
+//		// Удаляем все записи, которые имеют наличие 0
+//		littledb.erase(result.first, result.second);
+//	} 
+//	for (pair<int, string> i : littledb) {
+//		littleDB.push_back(i.second);
+//	}
+//}
+//void Admin::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 //{
 //	ifstream fin;
 //	Admin admin;
@@ -119,19 +118,18 @@ void Admin::showAllLines(std::vector<std::string>& littleDB, std::string typeOfL
 //		littledb.erase(it, littledb.end());
 //	}
 //	this->size = littledb.size();
-//	string** littleDB = DBG_NEW string * [size];
+//	string** LittleDB = DBG_NEW string * [size];
 //	for (int i = 0; i < size; i++)
-//		littleDB[i] = DBG_NEW string[4];
+//		LittleDB[i] = DBG_NEW string[4];
 //	for (int i = 0; i < size; i++) {
 //		admin.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
-//		littleDB[i][0] = nameBook;
-//		littleDB[i][1] = nameAutor;
-//		littleDB[i][2] = yearOfRelease;
-//		littleDB[i][3] = availability;
+//		LittleDB[i][0] = nameBook;
+//		LittleDB[i][1] = nameAutor;
+//		LittleDB[i][2] = yearOfRelease;
+//		LittleDB[i][3] = availability;
 //	}
-//	return littleDB;
+//	littleDB = LittleDB;
 //}
-
 // Удаляет строку из файла
 void Admin::deleteLine(std::string delLine, std::string typeOfLit)
 {
@@ -198,7 +196,6 @@ void Admin::EditingNotation(std::string sourceString, std::string changedLine,
 	fs << changedLine << "\n";
 	fs.close();
 }
-
 Admin::~Admin()
 {
 }

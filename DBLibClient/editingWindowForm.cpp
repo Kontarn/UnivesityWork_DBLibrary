@@ -27,7 +27,7 @@ System::Void DBLibClient::editingWindowForm::выхоодНаНачальныйЭкранToolStripMenu
 // Редактирует запись
 System::Void DBLibClient::editingWindowForm::edititngDataButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    Admin admin;
+    LibInterface libInter;
     char* cOldInpString = (char*)(Marshal::StringToHGlobalAnsi(oldInpString)).ToPointer();
     std::string sOldInpString(cOldInpString);
     Marshal::FreeHGlobal((IntPtr)cOldInpString);
@@ -43,7 +43,7 @@ System::Void DBLibClient::editingWindowForm::edititngDataButton_Click(System::Ob
         char* cNewString = (char*)(Marshal::StringToHGlobalAnsi(newString).ToPointer());
         std::string sTypeOfLit(cTypeOfLit);
         std::string sNewString(cNewString);
-        admin.EditingNotation(sOldInpString, sNewString, sTypeOfLit);
+        libInter.EditingNotation(sOldInpString, sNewString, sTypeOfLit);
         MessageBox::Show("Запись успешно отредактирована\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
         this->Hide();
     }
