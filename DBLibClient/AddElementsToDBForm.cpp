@@ -49,7 +49,7 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
 	std::string sTypeOfLit(cTypeOfLit);
-	Admin admin;
+	LibInterface libInter;
 	if (typeBookComboBox->Text == "Техническая") {
 		
 		if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" 
@@ -58,7 +58,7 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 		}
 		else {
 
-			if (admin.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
+			if (libInter.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел технические", "Успешно");
 			}
 			
@@ -75,7 +75,7 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 			MessageBox::Show("Данные введены не полностью!", "Ошибка");
 		}
 		else {
-			if (admin.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
+			if (libInter.addLine(sNameBook, sAutorName, sYearsOfRelease, sAvailability, sTypeOfLit) == true) {
 				MessageBox::Show("Данные добавлены в раздел художественные", "Успешно");
 			}
 			else {
