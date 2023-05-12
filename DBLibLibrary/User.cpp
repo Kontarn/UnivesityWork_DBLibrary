@@ -4,6 +4,7 @@
 User::User()
 {
 	size = 0;
+	
 }
 // Возварщает размер массива
 int User::getSize()
@@ -14,23 +15,23 @@ int User::getSize()
 bool User::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
-	std::string otherTypeLit;
+	//std::string otherTypeLit;
 	if (typeOfLit == "Техническая") {
 		typeLit = TechLitDBname;
 	}
-	else if (typeOfLit == "Художественная") { typeLit = ArtLitDBname; }
+	else if (typeOfLit == "Художественная") { 
+		typeLit = ArtLitDBname; 
+	}
 	std::set <std::string> TechLit;
 	std::set <std::string> ArtLit;
-	bool found = false;	// 
 	std::string stringForComparison; // Строка с которой сравнивают
-	int quantOfRepeat = 0; // Количество повторений
 	std::ifstream fin;
 	fin.open(TechLitDBname);
 	while (!fin.eof()) {
 		getline(fin, stringForComparison);
 		TechLit.insert(stringForComparison);
-
-	} int TechRes = count_if(TechLit.begin(), TechLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
+	} 
+	int TechRes = count_if(TechLit.begin(), TechLit.end(), [inputText](const std::string& a) { return !(a.find(inputText)); });
 	fin.close();
 	fin.open(ArtLitDBname);
 	while (!fin.eof()) {
@@ -77,78 +78,7 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 	for (std::vector <char>::iterator it = pos + 2; it != line.end(); ++it)
 		availability += *it;
 }
-// Вызывает опредлённый способ сортировки
-//void User::sorting(vector <string>&littleDB, std::string sortingMethod)
-//{
-//	//string** littledb = littleDB;
-//	if (sortingMethod == "по названию, по алфавиту")
-//		sortNameBookAlphabet(littleDB);
-//	else if (sortingMethod == "по автору, по алфавиту")
-//		sortAutorNameAlphabet(littleDB);
-//	else if (sortingMethod == "по году, в порядке возрастания")
-//		sortYearOfReleaseAscending(littleDB, sortingMethod);
-//	else if (sortingMethod == "по году, в порядке убывания")
-//		sortYearOfReleaseAscending(littleDB, sortingMethod);
-//}
-// Ищет запись по введённому запросу
-//void User::searchByRequest(std::vector<std::string>& littleDB, std::string inpText, std::string typeOfLit)
-//{
-//	std::string typeLit;
-//	if (typeOfLit == "Техническая") {
-//		typeLit = TechLitDBname;
-//	}
-//	else typeLit = ArtLitDBname;
-//	std::ifstream fin;
-//	
-//	std::string stringForComparison, stringToLower;
-//	// Строка с которой сравнивают
-//	if (typeOfLit != "Оба типа") {
-//		fin.open(typeLit);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, stringForComparison);
-//				stringToLower = stringForComparison;
-//				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-//				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-//				if (stringToLower.find(inpText) != std::string::npos) {
-//					littleDB.push_back(stringForComparison);
-//				}
-//			}
-//		}
-//		fin.close();
-//	}
-//	else if (typeOfLit == "Оба типа") {
-//		fin.open(TechLitDBname);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, stringForComparison);
-//				stringToLower = stringForComparison;
-//				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-//				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-//				if (stringToLower.find(inpText) != std::string::npos) {
-//					littleDB.push_back(stringForComparison);
-//				}
-//			}
-//		}
-//		fin.close();
-//		fin.open(ArtLitDBname);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, stringForComparison);
-//				stringToLower = stringForComparison;
-//				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-//				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-//				if (stringToLower.find(inpText) != std::string::npos) {
-//					littleDB.push_back(stringForComparison);
-//				}
-//			}
-//		}
-//		fin.close();
-//	}
-//}
-// Ищет запись по введённому запросу, но с добвлением массивов
 void User::searchByRequestMass(string**& littledb, string inpText, string typeOfLit) {
-
 	std::string typeLit;
 	LibInterface libInter;
 	if (typeOfLit == "Техническая") {
@@ -216,74 +146,9 @@ void User::searchByRequestMass(string**& littledb, string inpText, string typeOf
 		LittleDB[i][3] = availability;
 	}
 	littledb = LittleDB;
+
 }
-// Добавляет все записи из файла контейнер для последующего вывода в таблицу
-//void User::showAllLines(std::vector<std::string>& littleDB, std::string typeOfLit, bool flag)
-//{
-//	std::string typeLit;
-//	if (typeOfLit == "Техническая")
-//		typeLit = TechLitDBname;
-//	else if (typeOfLit == "Художественная")
-//		typeLit = ArtLitDBname;
-//	std::ifstream fin;
-//	std::vector <std::string> littleDB1, littleDB2;
-//	std::string str; // Нужна для временного хранения записи, перед добавленние в вектор
-//	
-//	if (typeOfLit != "Оба типа") {
-//		fin.open(typeLit);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, str);
-//				if (str != "")
-//					littleDB.push_back(str);
-//			}
-//		}
-//		fin.close();
-//	}
-//	else if (typeOfLit == "Оба типа") {
-//		fin.open(ArtLitDBname);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, str);
-//				if (str != "") {
-//					littleDB1.push_back(str);
-//				}
-//			}
-//		}
-//		fin.close();
-//		fin.open(TechLitDBname);
-//		if (fin.is_open()) {
-//			while (!fin.eof()) {
-//				getline(fin, str);
-//				if (str != "") {
-//					littleDB2.push_back(str);
-//				}
-//			}
-//		}
-//		fin.close();
-//		std::vector <std::string> littledb(littleDB1.size() + littleDB2.size());
-//
-//		std::sort(littleDB1.begin(), littleDB1.end());
-//		std::sort(littleDB2.begin(), littleDB2.end());
-//		std::set_union(littleDB1.begin(), littleDB1.end(),
-//			littleDB2.begin(), littleDB2.end(), littledb.begin());
-//		for (std::string i : littledb) {
-//			littleDB.push_back(i);
-//		}
-//	}
-//	// Убираем книги, которых нет в наличии
-//	if (flag == 1) {
-//			std::vector <std::string> ::iterator it = std::remove_if(littleDB.begin(), littleDB.end(), [](std::string a) {
-//				std::size_t pos;
-//				std::string avail; // наличие в библиотеке
-//				pos = a.find(";");
-//				avail = a;
-//				avail = avail.erase(0, pos + 2);
-//				return std::stoi(avail) == 0;
-//				});
-//			littleDB.erase(it, littleDB.end());	
-//	}
-//}
+// Заполняет массив всеми записями, для последующего вывода в таблицу
 void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 {
  	ifstream fin;
@@ -337,9 +202,10 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 		littledb.erase(it, littledb.end());
 	}
 	this->size = littledb.size();
-	string** LittleDB = DBG_NEW string * [size];
+	string** LittleDB = DBG_NEW string* [size];
 	for (int i = 0; i < size; i++)
 		LittleDB[i] = DBG_NEW string[4];
+	
 	for (int i = 0; i < size; i++) {
 		user.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
 		LittleDB[i][0] = nameBook;
@@ -349,6 +215,7 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 	}
 	littleDB = LittleDB;
 }
+// Сортировка массива определённым образом
 void User::sortingMass(string**& littleDB, string sortingMethod, size_t size)
 {
 	LibInterface libInter;
@@ -369,17 +236,14 @@ void User::sortingMass(string**& littleDB, string sortingMethod, size_t size)
 		sortYearOfReleaseAscending(littledb, sortingMethod);
 	else if (sortingMethod == "по году, в порядке убывания")
 		sortYearOfReleaseAscending(littledb, sortingMethod);
-	string** newLittleDB = DBG_NEW string*[size];
 	for (int i = 0; i < size; i++) {
-		newLittleDB[i] = DBG_NEW string[4];
 		libInter.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
-		newLittleDB[i][0] = nameBook;
-		newLittleDB[i][1] = nameAutor;
-		newLittleDB[i][2] = yearOfRelease;
-		newLittleDB[i][3] = availability;
+		littleDB[i][0] = nameBook;
+		littleDB[i][1] = nameAutor;
+		littleDB[i][2] = yearOfRelease;
+		littleDB[i][3] = availability;
 	}
-	littleDB = newLittleDB;
-
+	
 }
 // Сортировка названия книг по алфавиту
 void User::sortNameBookAlphabet(vector <string>& littleDB)

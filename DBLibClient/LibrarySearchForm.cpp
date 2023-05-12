@@ -38,25 +38,25 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 	else {
 		libInter.searchByRequestMass(littleDB, sRequest, sTypeOfLit);
 		size = libInter.getSize();
-	}
-	dataGridView1->Rows->Clear();
-	dataGridView1->Refresh();
-	// Выводим данные в таблицу из littleDB
-	if (size != 0) {
-		for (int i = 0; i < size; i++)
-		{
-			// Разбиваем строку из вектора на параметры, для вывода в таблицу
-			System::String^ SnameBook = gcnew String(littleDB[i][0].c_str());
-			System::String^ SnameAutor = gcnew String(littleDB[i][1].c_str());
-			System::String^ SyearOfRelease = gcnew String(littleDB[i][2].c_str());
-			System::String^ Savailability = gcnew String(littleDB[i][3].c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+
+		dataGridView1->Rows->Clear();
+		dataGridView1->Refresh();
+		// Выводим данные в таблицу из littleDB
+		if (size != 0) {
+			for (int i = 0; i < size; i++)
+			{
+				// Разбиваем строку из вектора на параметры, для вывода в таблицу
+				System::String^ SnameBook = gcnew String(littleDB[i][0].c_str());
+				System::String^ SnameAutor = gcnew String(littleDB[i][1].c_str());
+				System::String^ SyearOfRelease = gcnew String(littleDB[i][2].c_str());
+				System::String^ Savailability = gcnew String(littleDB[i][3].c_str());
+				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			}
 		}
+		for (int i = 0; i < size; i++) 
+			delete[] littleDB[i];
+		delete[] littleDB;
 	}
-	for (int i = 0; i < size; i++) {
-		delete[] littleDB[i];
-	}
-	delete[] littleDB;
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }
@@ -86,11 +86,6 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 		size_t size = libInter.getSize();
 		if (choiceOfSortingMethod->Text != "")
 			libInter.sortingMass(littledb, sSortingMethod, size);
-		// Заполняем контейнер только записями из файла с художественной литературой
-		//else if (choiceOfTypeBook->Text == "Художественная") {
-		//	littledb = libInter.showAllLinesMass(sTypeOfLit, flag);
-		//}
-		
 		if (size != 0) {
 			for (size_t i = 0; i < size; i++) {
 				System::String^ SnameBook = gcnew String(littledb[i][0].c_str());
