@@ -28,10 +28,12 @@ struct DBLIBLIBRARY Leaks {
 };
 
 class DBLIBLIBRARY User {
-	//string** newLittleDB;
-	size_t size;
+	vector <User*> NormalnayaDB;
+	size_t size = 0;
+	string line;
 public:
 	User();
+	User(string line);
 	//User(size_t size);
 	int getSize();
 	// Ищет похожие записи в выбранной БД
@@ -40,10 +42,11 @@ public:
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
 	void showAllLinesMass(string**& littleDB, string typeOfLit, bool flag);
+	
 	// Сортировка по выбранному способу
 	void sortingMass(string**& littleDB, string sortingMethod, size_t size);
-	void searchByRequestMass(string**& littleDB, string inpText, string typeOfLit);
-	
+	void searchByRequestMass(string**& littledb, string inpText, string typeOfLit);
+	void searchByRequest(string**& littledb, string inpText, string typeOfLit);
 	virtual ~User();
 private:
 	// Сортировка названия книг по алфавиту

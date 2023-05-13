@@ -3,6 +3,7 @@
 System::Void DBLibClient::LibrarySearchForm::ExitButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
     Application::Exit();
+	Leaks _l;
 }
 
 System::Void DBLibClient::LibrarySearchForm::BackToMenu_Click(System::Object^ sender, System::EventArgs^ e)
@@ -36,7 +37,7 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 	size_t size;
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
 	else {
-		libInter.searchByRequestMass(littleDB, sRequest, sTypeOfLit);
+		libInter.searchByRequest(littleDB, sRequest, sTypeOfLit);
 		size = libInter.getSize();
 
 		dataGridView1->Rows->Clear();

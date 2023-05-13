@@ -3,8 +3,10 @@
 
 User::User()
 {
-	size = 0;
-	
+}
+User::User(string line)
+{
+	this->line = line;
 }
 // Возварщает размер массива
 int User::getSize()
@@ -15,7 +17,6 @@ int User::getSize()
 bool User::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 {
 	std::string typeLit;
-	//std::string otherTypeLit;
 	if (typeOfLit == "Техническая") {
 		typeLit = TechLitDBname;
 	}
@@ -148,6 +149,81 @@ void User::searchByRequestMass(string**& littledb, string inpText, string typeOf
 	littledb = LittleDB;
 
 }
+
+void User::searchByRequest(string**& littledb, string inpText, string typeOfLit)
+{
+	std::string typeLit;
+	LibInterface libInter;
+	if (typeOfLit == "Техническая") {
+		typeLit = TechLitDBname;
+	}
+	else typeLit = ArtLitDBname;
+	std::ifstream fin;
+	vector <string> littleDB;
+	string nameBook, nameAutor, yearOfRelease, availability;
+	std::string stringForComparison, stringToLower;
+	
+	// Строка с которой сравнивают
+	if (typeOfLit != "Оба типа") {
+		fin.open(typeLit);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
+					NormalnayaDB.push_back(new User(stringForComparison));
+				}
+			}
+		}
+		fin.close();
+	}
+	else if (typeOfLit == "Оба типа") {
+		fin.open(TechLitDBname);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
+					NormalnayaDB.push_back(new User(stringForComparison));
+				}
+			}
+		}
+		fin.close();
+		fin.open(ArtLitDBname);
+		if (fin.is_open()) {
+			while (!fin.eof()) {
+				getline(fin, stringForComparison);
+				stringToLower = stringForComparison;
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
+				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				if (stringToLower.find(inpText) != std::string::npos) {
+					NormalnayaDB.push_back(new User(stringForComparison));
+				}
+			}
+		}
+		fin.close();
+	}
+
+	this->size = NormalnayaDB.size();
+	string** LittleDB = DBG_NEW string * [size];
+	for (int i = 0; i < size; i++)
+		LittleDB[i] = DBG_NEW string[4];
+	for (int i = 0; i < size; i++) {
+		libInter.splitEntry(NormalnayaDB[i]->line, nameBook, nameAutor, yearOfRelease, availability);
+		LittleDB[i][0] = nameBook;
+		LittleDB[i][1] = nameAutor;
+		LittleDB[i][2] = yearOfRelease;
+		LittleDB[i][3] = availability;
+	}
+	littledb = LittleDB;
+	for (User* i : NormalnayaDB)
+		delete i;
+}
+
 // Заполняет массив всеми записями, для последующего вывода в таблицу
 void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 {
