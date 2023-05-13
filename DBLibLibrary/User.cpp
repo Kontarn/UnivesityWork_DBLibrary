@@ -248,7 +248,7 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 		std::set_union(littleDBPair1.begin(), littleDBPair1.end(),
 			littleDBPair2.begin(), littleDBPair2.end(), littledb.begin(), 
 			[](const pair<int, string>& par, const pair<int, string>& par1) {
-				return par.second != par1.second;
+				return par.second == par1.second;
 			});
 		for (pair<int, string> i : littledb) {
 			littleDBPair.push_back(make_pair(i.first, i.second));
