@@ -245,14 +245,15 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 		sort(littleDBPair2.begin(), littleDBPair2.end(), [](const pair<int, string>& par, const pair<int, string>& par1) {
 			return par.first < par1.first;
 			});
-		std::set_union(littleDBPair1.begin(), littleDBPair1.end(),
-			littleDBPair2.begin(), littleDBPair2.end(), littledb.begin(), 
+		auto result = set_union(littleDBPair1.begin(), littleDBPair1.end(),
+			littleDBPair2.begin(), littleDBPair2.end(), littledb.begin()/*, 
 			[](const pair<int, string>& par, const pair<int, string>& par1) {
 				return par.second == par1.second;
-			});
+			}*/);
 		for (pair<int, string> i : littledb) {
 			littleDBPair.push_back(make_pair(i.first, i.second));
 		}
+		//littleDBPair.erase(result);
 	}
 	// Убираем книги, которых нет в наличии
 	//if (flag == 1) {
