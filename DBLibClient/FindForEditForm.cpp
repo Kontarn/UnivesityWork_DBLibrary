@@ -4,6 +4,7 @@
 System::Void DBLibClient::FindForEditForm::выходИзПрограммыToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
 {
     Application::Exit();
+	Leaks _l;
 }
 // Кнопка выхода на начальный экран, которая лежит в menuStrip
 System::Void DBLibClient::FindForEditForm::вернутсяНаНачальныйЭкранToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
@@ -62,6 +63,7 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 	}
 	Marshal::FreeHGlobal((IntPtr)cRequest);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
+	
 }
 // Выводит правила для ввода 
 System::Void DBLibClient::FindForEditForm::helpOfSearchButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -107,6 +109,7 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 		delete[] littledb;
 	}
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
+	
 }
 // Выход из программы
 System::Void DBLibClient::FindForEditForm::ExitButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -150,6 +153,7 @@ System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	
 }
 // Удаление записи из базы данных
 System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -191,10 +195,10 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 	MessageBox::Show("Данные успешно удалены.\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
+	
 }
 // Полный выход из программы
 System::Void DBLibClient::FindForEditForm::FindForEditForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
 {
 	Application::Exit();
 }
-Leaks _l;

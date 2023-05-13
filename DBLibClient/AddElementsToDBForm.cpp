@@ -89,7 +89,6 @@ System::Void DBLibClient::AddElementsToDBForm::AddDataButton_Click(System::Objec
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
-	
 }
 
 System::Void DBLibClient::AddElementsToDBForm::AddElementsToDBForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
