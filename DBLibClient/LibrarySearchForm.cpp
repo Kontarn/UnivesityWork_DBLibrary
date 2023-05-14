@@ -86,7 +86,7 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 		libInter.showAllLinesMass(littledb, sTypeOfLit, flag);
 		size_t size = libInter.getSize();
 		if (choiceOfSortingMethod->Text != "")
-			libInter.sortingMass(littledb, sSortingMethod, size);
+			libInter.sorting(littledb, sSortingMethod, size);
 		if (size != 0) {
 			for (size_t i = 0; i < size; i++) {
 				System::String^ SnameBook = gcnew String(littledb[i][0].c_str());

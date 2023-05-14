@@ -36,21 +36,25 @@ public:
 	User(string line);
 	//User(size_t size);
 	int getSize();
+	string getLine();
 	// Ищет похожие записи в выбранной БД
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	// Разрезает полученную запись данных и присваивает атрибутам
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
 		std::string& yearOfRelease, std::string& availability);
 	void showAllLinesMass(string**& littleDB, string typeOfLit, bool flag);
-	
+	bool operator()(const User* par, const User* par1);
+	bool operator<(const User* other);
 	// Сортировка по выбранному способу
 	void sortingMass(string**& littleDB, string sortingMethod, size_t size);
+	void sorting(string**& littleDB, string sortingMethod, size_t size);
 	void searchByRequestMass(string**& littledb, string inpText, string typeOfLit);
 	void searchByRequest(string**& littledb, string inpText, string typeOfLit);
 	virtual ~User();
 private:
 	// Сортировка названия книг по алфавиту
 	void sortNameBookAlphabet(vector <string>& littleDB);
+	void sortNameBookAlphabet();
 	// Сортировка автора книг, по алфавиту
 	void sortAutorNameAlphabet(std::vector <std::string>& littleDB);
 	// Соритровка по году выпуска, по возрастанию или убыванию
