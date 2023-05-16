@@ -10,6 +10,9 @@ Admin::Admin()
 	size = 0;
 }
 // Добавляет запись в БД	Проверена
+//string Admin::getLine() {
+//	return "ZHOPA";
+//}
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
 	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
 {

@@ -328,43 +328,8 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 	littleDB = LittleDB;
 }
 
-bool User::operator()(const User* par, const User* par1)
-{
-	return (*par).line < (*par1).line;
-}
-//bool User::operator<(const User* other) {
-//	return line < other->line;
-//}
 
 // Сортировка массива определённым образом
-void User::sortingMass(string**& littleDB, string sortingMethod, size_t size)
-{
-	LibInterface libInter;
-
-	vector <string> littledb;
-	string line;
-	string nameBook, nameAutor, yearOfRelease, availability;
-	for (int i = 0; i < size; i++) {
-		line = "";
-		line = littleDB[i][0] + ", " + littleDB[i][1] + ", " + littleDB[i][2] + "; " + littleDB[i][3];
-		littledb.push_back(line);
-	}
-	if (sortingMethod == "по названию, по алфавиту")
-		sortNameBookAlphabet(littledb);
-	else if (sortingMethod == "по автору, по алфавиту")
-		sortAutorNameAlphabet(littledb);
-	else if (sortingMethod == "по году, в порядке возрастания")
-		sortYearOfReleaseAscending(littledb, sortingMethod);
-	else if (sortingMethod == "по году, в порядке убывания")
-		sortYearOfReleaseAscending(littledb, sortingMethod);
-	for (int i = 0; i < size; i++) {
-		libInter.splitEntry(littledb[i], nameBook, nameAutor, yearOfRelease, availability);
-		littleDB[i][0] = nameBook;
-		littleDB[i][1] = nameAutor;
-		littleDB[i][2] = yearOfRelease;
-		littleDB[i][3] = availability;
-	}
-}
 void User::sorting(string**& littleDB, string sortingMethod, size_t size) {
 	User user;
 
@@ -378,12 +343,12 @@ void User::sorting(string**& littleDB, string sortingMethod, size_t size) {
 	}
 	if (sortingMethod == "по названию, по алфавиту")
 		sortNameBookAlphabet();
-	//else if (sortingMethod == "по автору, по алфавиту")
-	//	sortAutorNameAlphabet(littledb);
-	//else if (sortingMethod == "по году, в порядке возрастания")
-	//	sortYearOfReleaseAscending(littledb, sortingMethod);
-	//else if (sortingMethod == "по году, в порядке убывания")
-	//	sortYearOfReleaseAscending(littledb, sortingMethod);
+	else if (sortingMethod == "по автору, по алфавиту")
+		sortAutorNameAlphabet();
+	else if (sortingMethod == "по году, в порядке возрастания")
+		sortYearOfReleaseAscending(sortingMethod);
+	else if (sortingMethod == "по году, в порядке убывания")
+		sortYearOfReleaseAscending(sortingMethod);
 	for (int i = 0; i < size; i++) {
 		user.splitEntry(NormalnayaDB[i]->line, nameBook, nameAutor, yearOfRelease, availability);
 		littleDB[i][0] = nameBook;
@@ -393,27 +358,26 @@ void User::sorting(string**& littleDB, string sortingMethod, size_t size) {
 	}
 }
 // Сортировка названия книг по алфавиту
-void User::sortNameBookAlphabet(vector <string>& littleDB)
-{	
-	sort(littleDB.begin(), littleDB.end());
-}
 void User::sortNameBookAlphabet() {
-	
-	sort(NormalnayaDB.begin(), NormalnayaDB.end(), User());
+	sort(NormalnayaDB.begin(), NormalnayaDB.end(), [](User*& par, User*& par1) {
+		return par->getLine() < par->getLine();
+		});
 }
 // Сортировка автора книг, по алфавиту
-void User::sortAutorNameAlphabet(std::vector<std::string>& littleDB)
+void User::sortAutorNameAlphabet()
 {
-	sort(littleDB.begin(), littleDB.end(), [](const std::string& par, const std::string& par1) {
+	User user;
+	
+	sort(NormalnayaDB.begin(), NormalnayaDB.end(), [](User*& par, User*& par1) {
 		size_t pos, pos1;
 		std::vector <char> parVect, par1Vect;
 		std::string nameAutor, nameAutor1;
-		nameAutor = par;
+		nameAutor = par->getLine();
 		pos = nameAutor.find(',');
 		nameAutor.erase(0, pos + 2);
 		pos1 = nameAutor.find_last_of(',');
 		nameAutor.erase(pos1);
-		nameAutor1 = par1;
+		nameAutor1 = par1->getLine();
 		pos = nameAutor1.find(',');
 		nameAutor1.erase(0, pos + 2);
 		pos1 = nameAutor1.find_last_of(',');
@@ -422,18 +386,18 @@ void User::sortAutorNameAlphabet(std::vector<std::string>& littleDB)
 		});
 }
 // Соритровка по году выпуска, по возрастанию или убыванию
-void User::sortYearOfReleaseAscending(std::vector<std::string>& littleDB, std::string sortMethod)
+void User::sortYearOfReleaseAscending(std::string sortMethod)
 {
-	sort(littleDB.begin(), littleDB.end(), [&sortMethod](const std::string& par, const std::string& par1) {
+	sort(NormalnayaDB.begin(), NormalnayaDB.end(), [&sortMethod](User*& par, User*& par1) {
 		size_t pos, pos1;
 		std::vector <char> parVect, par1Vect;
 		std::string yearOfRelease, yearOfRelease1;
-		yearOfRelease = par;
+		yearOfRelease = par->getLine();
 		pos = yearOfRelease.find_last_of(',');
 		yearOfRelease.erase(0, pos + 2);
 		pos1 = yearOfRelease.find(';');
 		yearOfRelease.erase(pos1);
-		yearOfRelease1 = par1;
+		yearOfRelease1 = par1->getLine();
 		pos = yearOfRelease1.find_last_of(',');
 		yearOfRelease1.erase(0, pos + 2);
 		pos1 = yearOfRelease1.find(';');
