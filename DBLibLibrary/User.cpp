@@ -83,76 +83,6 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 	for (std::vector <char>::iterator it = pos + 2; it != line.end(); ++it)
 		availability += *it;
 }
-void User::searchByRequestMass(string**& littledb, string inpText, string typeOfLit) {
-	std::string typeLit;
-	LibInterface libInter;
-	if (typeOfLit == "Техническая") {
-		typeLit = TechLitDBname;
-	}
-	else typeLit = ArtLitDBname;
-	std::ifstream fin;
-	vector <string> littleDB;
-	string nameBook, nameAutor, yearOfRelease, availability;
-	std::string stringForComparison, stringToLower;
-	// Строка с которой сравнивают
-	if (typeOfLit != "Оба типа") {
-		fin.open(typeLit);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, stringForComparison);
-				stringToLower = stringForComparison;
-				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-				if (stringToLower.find(inpText) != std::string::npos) {
-					littleDB.push_back(stringForComparison);
-				}
-			}
-		}
-		fin.close();
-	}
-	else if (typeOfLit == "Оба типа") {
-		fin.open(TechLitDBname);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, stringForComparison);
-				stringToLower = stringForComparison;
-				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-				if (stringToLower.find(inpText) != std::string::npos) {
-					littleDB.push_back(stringForComparison);
-				}
-			}
-		}
-		fin.close();
-		fin.open(ArtLitDBname);
-		if (fin.is_open()) {
-			while (!fin.eof()) {
-				getline(fin, stringForComparison);
-				stringToLower = stringForComparison;
-				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
-				if (stringToLower.find(inpText) != std::string::npos) {
-					littleDB.push_back(stringForComparison);
-				}
-			}
-		}
-		fin.close();
-	}
-	
-	this->size = littleDB.size();
-	string** LittleDB = DBG_NEW string * [size];
-	for (int i = 0; i < size; i++)
-		LittleDB[i] = DBG_NEW string[4];
-	for (int i = 0; i < size; i++) {
-		libInter.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
-		LittleDB[i][0] = nameBook;
-		LittleDB[i][1] = nameAutor;
-		LittleDB[i][2] = yearOfRelease;
-		LittleDB[i][3] = availability;
-	}
-	littledb = LittleDB;
-
-}
 
 void User::searchByRequest(string**& littledb, string inpText, string typeOfLit)
 {
@@ -163,7 +93,6 @@ void User::searchByRequest(string**& littledb, string inpText, string typeOfLit)
 	}
 	else typeLit = ArtLitDBname;
 	std::ifstream fin;
-	//vector <string> littleDB;
 	string nameBook, nameAutor, yearOfRelease, availability;
 	std::string stringForComparison, stringToLower;
 	
@@ -174,8 +103,12 @@ void User::searchByRequest(string**& littledb, string inpText, string typeOfLit)
 			while (!fin.eof()) {
 				getline(fin, stringForComparison);
 				stringToLower = stringForComparison;
-				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), tolower);
-				transform(inpText.begin(), inpText.end(), inpText.begin(), tolower);
+				transform(stringToLower.begin(), stringToLower.end(), stringToLower.begin(), [](unsigned char par) {
+					return tolower(par);
+					});
+				transform(inpText.begin(), inpText.end(), inpText.begin(), [](unsigned char par) {
+					return tolower(par);
+					});
 				if (stringToLower.find(inpText) != std::string::npos) {
 					NormalnayaDB.push_back(new User(stringForComparison));
 				}
@@ -328,12 +261,9 @@ void User::showAllLinesMass(string**& littleDB, string typeOfLit, bool flag)
 	littleDB = LittleDB;
 }
 
-
 // Сортировка массива определённым образом
 void User::sorting(string**& littleDB, string sortingMethod, size_t size) {
 	User user;
-
-	vector <string> littledb;
 	string line;
 	string nameBook, nameAutor, yearOfRelease, availability;
 	for (int i = 0; i < size; i++) {

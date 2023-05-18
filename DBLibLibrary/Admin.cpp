@@ -9,14 +9,10 @@ Admin::Admin()
 {
 	size = 0;
 }
-// Добавляет запись в БД	Проверена
-//string Admin::getLine() {
-//	return "ZHOPA";
-//}
+// Добавляет запись в БД
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
 	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
-{
-	
+{	
 	std::string typeLit;
 	if (typeOfLit == "Техническая") {
 		typeLit = TechLitDBname;

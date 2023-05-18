@@ -42,7 +42,7 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
 	else {
-		libInter.searchByRequestMass(littleDB, sRequest, sTypeOfLit);
+		libInter.searchByRequest(littleDB, sRequest, sTypeOfLit);
 		size = libInter.getSize();
 		// Чистим таблицу перед выводом данных вектора
 		dataGridView1->Rows->Clear();

@@ -73,7 +73,7 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 	std::string sTypeOfLit(cTypeOfLit);
 	std::string sSortingMethod(cSortingMethod); // Способ сортировки
 	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображаение книг в наличии
-	string** littledb;
+	string** littleDB;
 	dataGridView1->Rows->Clear();
 	dataGridView1->Refresh();
 	if (checkBox1->Checked == false)
@@ -83,22 +83,22 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 	if (choiceOfTypeBook->Text == "") MessageBox::Show("Выберите тип литературы для отображения", "Внимание");
 	// Заполняем контейнер только записями из файла с технической литературой
 	else if (choiceOfTypeBook->Text == "Техническая" || choiceOfTypeBook->Text == "Художественная" || choiceOfTypeBook->Text == "Оба типа") {
-		libInter.showAllLinesMass(littledb, sTypeOfLit, flag);
+		libInter.showAllLinesMass(littleDB, sTypeOfLit, flag);
 		size_t size = libInter.getSize();
 		if (choiceOfSortingMethod->Text != "")
-			libInter.sorting(littledb, sSortingMethod, size);
+			libInter.sorting(littleDB, sSortingMethod, size);
 		if (size != 0) {
 			for (size_t i = 0; i < size; i++) {
-				System::String^ SnameBook = gcnew String(littledb[i][0].c_str());
-				System::String^ SnameAutor = gcnew String(littledb[i][1].c_str());
-				System::String^ SyearOfRelease = gcnew String(littledb[i][2].c_str());
-				System::String^ Savailability = gcnew String(littledb[i][3].c_str());
+				System::String^ SnameBook = gcnew String(littleDB[i][0].c_str());
+				System::String^ SnameAutor = gcnew String(littleDB[i][1].c_str());
+				System::String^ SyearOfRelease = gcnew String(littleDB[i][2].c_str());
+				System::String^ Savailability = gcnew String(littleDB[i][3].c_str());
 				dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
 			}
 		}
 		for (size_t i = 0; i < size; i++)
-			delete[] littledb[i];
-		delete[] littledb;
+			delete[] littleDB[i];
+		delete[] littleDB;
 	}
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 }

@@ -34,7 +34,6 @@ class DBLIBLIBRARY User {
 public:
 	User();
 	User(string line);
-	//User(size_t size);
 	int getSize();
 	string getLine();
 	// Ищет похожие записи в выбранной БД
@@ -45,7 +44,6 @@ public:
 	void showAllLinesMass(string**& littleDB, string typeOfLit, bool flag);
 	// Сортировка по выбранному способу
 	void sorting(string**& littleDB, string sortingMethod, size_t size);
-	void searchByRequestMass(string**& littledb, string inpText, string typeOfLit);
 	void searchByRequest(string**& littledb, string inpText, string typeOfLit);
 	virtual ~User();
 private:
@@ -60,7 +58,6 @@ class DBLIBLIBRARY Admin : public User {
 	size_t size;
 public:
 	Admin();
-	//string getLine() override;
 	// Добавление записей в БД
 	bool addLine(std::string& nameBook, std::string& nameAutor,
 		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit);
