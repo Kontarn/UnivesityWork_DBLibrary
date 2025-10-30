@@ -69,6 +69,11 @@ namespace DBLibClient {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ priceColumn;
+
+
+
+
+
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -82,6 +87,9 @@ namespace DBLibClient {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->âûõîäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -300,6 +308,8 @@ namespace DBLibClient {
 			// 
 			// yearOfRelease
 			// 
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->yearOfRelease->DefaultCellStyle = dataGridViewCellStyle1;
 			this->yearOfRelease->HeaderText = L"Ãîä âûïóñêà";
 			this->yearOfRelease->MinimumWidth = 8;
 			this->yearOfRelease->Name = L"yearOfRelease";
@@ -307,6 +317,8 @@ namespace DBLibClient {
 			// 
 			// Availability
 			// 
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->Availability->DefaultCellStyle = dataGridViewCellStyle2;
 			this->Availability->HeaderText = L"Íàëè÷èå";
 			this->Availability->MinimumWidth = 8;
 			this->Availability->Name = L"Availability";
@@ -314,6 +326,8 @@ namespace DBLibClient {
 			// 
 			// priceColumn
 			// 
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->priceColumn->DefaultCellStyle = dataGridViewCellStyle3;
 			this->priceColumn->HeaderText = L"Öåíà";
 			this->priceColumn->Name = L"priceColumn";
 			// 

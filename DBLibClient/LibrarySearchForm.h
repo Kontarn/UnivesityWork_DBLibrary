@@ -63,6 +63,11 @@ namespace DBLibClient {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ priceColumn;
 
+
+
+
+
+
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -76,6 +81,9 @@ namespace DBLibClient {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->ExitButton = (gcnew System::Windows::Forms::Button());
 			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
@@ -247,6 +255,8 @@ namespace DBLibClient {
 			// 
 			// yearOfRelease
 			// 
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->yearOfRelease->DefaultCellStyle = dataGridViewCellStyle1;
 			this->yearOfRelease->HeaderText = L"Год выпуска";
 			this->yearOfRelease->MinimumWidth = 8;
 			this->yearOfRelease->Name = L"yearOfRelease";
@@ -254,6 +264,8 @@ namespace DBLibClient {
 			// 
 			// Availability
 			// 
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->Availability->DefaultCellStyle = dataGridViewCellStyle2;
 			this->Availability->HeaderText = L"Наличие";
 			this->Availability->MinimumWidth = 8;
 			this->Availability->Name = L"Availability";
@@ -261,6 +273,8 @@ namespace DBLibClient {
 			// 
 			// priceColumn
 			// 
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->priceColumn->DefaultCellStyle = dataGridViewCellStyle3;
 			this->priceColumn->HeaderText = L"Цена";
 			this->priceColumn->Name = L"priceColumn";
 			// 
