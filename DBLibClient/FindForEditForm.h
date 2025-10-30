@@ -54,16 +54,21 @@ namespace DBLibClient {
 	private: System::Windows::Forms::Button^ BackToMenu;
 	private: System::Windows::Forms::Button^ helpOfSearchButton;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+
+
+
+
 	private: System::Windows::Forms::Button^ EditEntryButton;
 	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	private: System::Windows::Forms::Button^ ShowAllLinesButton;
 	private: System::Windows::Forms::Button^ ExitButton;
 	private: System::Windows::Forms::Button^ deleteLineButton;
 	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ priceColumn;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -90,29 +95,29 @@ namespace DBLibClient {
 			this->BackToMenu = (gcnew System::Windows::Forms::Button());
 			this->helpOfSearchButton = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->EditEntryButton = (gcnew System::Windows::Forms::Button());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
 			this->ExitButton = (gcnew System::Windows::Forms::Button());
 			this->deleteLineButton = (gcnew System::Windows::Forms::Button());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->priceColumn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->âûõîäToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(992, 35);
+			this->menuStrip1->Size = System::Drawing::Size(998, 25);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -123,20 +128,20 @@ namespace DBLibClient {
 					this->âûõîäÈçÏðîãðàììûToolStripMenuItem1
 			});
 			this->âûõîäToolStripMenuItem->Name = L"âûõîäToolStripMenuItem";
-			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 29);
+			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(54, 19);
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			// 
 			// âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1
 			// 
 			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1->Name = L"âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1";
-			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1->Size = System::Drawing::Size(357, 34);
+			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1->Size = System::Drawing::Size(240, 22);
 			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1->Text = L"Âåðíóòñÿ íà íà÷àëüíûé ýêðàí";
 			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1->Click += gcnew System::EventHandler(this, &FindForEditForm::âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1_Click);
 			// 
 			// âûõîäÈçÏðîãðàììûToolStripMenuItem1
 			// 
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem1->Name = L"âûõîäÈçÏðîãðàììûToolStripMenuItem1";
-			this->âûõîäÈçÏðîãðàììûToolStripMenuItem1->Size = System::Drawing::Size(357, 34);
+			this->âûõîäÈçÏðîãðàììûToolStripMenuItem1->Size = System::Drawing::Size(240, 22);
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem1->Text = L"Âûõîä èç ïðîãðàììû";
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem1->Click += gcnew System::EventHandler(this, &FindForEditForm::âûõîäÈçÏðîãðàììûToolStripMenuItem1_Click);
 			// 
@@ -147,7 +152,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Òåõíè÷åñêàÿ", L"Õóäîæåñòâåííàÿ" });
 			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 378);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
-			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 30);
+			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 23);
 			this->choiceOfTypeBook->TabIndex = 1;
 			// 
 			// label1
@@ -155,7 +160,7 @@ namespace DBLibClient {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(706, 355);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(229, 22);
+			this->label1->Size = System::Drawing::Size(163, 15);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Âûáåðèòå òèï ëèòåðàòóðû";
 			// 
@@ -163,7 +168,7 @@ namespace DBLibClient {
 			// 
 			this->nameBookTextBox->Location = System::Drawing::Point(13, 403);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
-			this->nameBookTextBox->Size = System::Drawing::Size(437, 28);
+			this->nameBookTextBox->Size = System::Drawing::Size(437, 21);
 			this->nameBookTextBox->TabIndex = 3;
 			// 
 			// FindButton
@@ -191,7 +196,7 @@ namespace DBLibClient {
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(12, 378);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(249, 22);
+			this->label3->Size = System::Drawing::Size(171, 15);
 			this->label3->TabIndex = 9;
 			this->label3->Text = L"Ââåäèòå äàííûå äëÿ ïîèñêà";
 			// 
@@ -218,44 +223,16 @@ namespace DBLibClient {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->nameBook,
-					this->nameAutor, this->yearOfRelease, this->Availability
+					this->nameAutor, this->yearOfRelease, this->Availability, this->priceColumn
 			});
-			this->dataGridView1->Location = System::Drawing::Point(13, 38);
+			this->dataGridView1->Location = System::Drawing::Point(12, 39);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 62;
 			this->dataGridView1->RowTemplate->Height = 28;
 			this->dataGridView1->Size = System::Drawing::Size(964, 313);
 			this->dataGridView1->TabIndex = 15;
-			// 
-			// nameBook
-			// 
-			this->nameBook->HeaderText = L"Íàçâàíèå";
-			this->nameBook->MinimumWidth = 8;
-			this->nameBook->Name = L"nameBook";
-			this->nameBook->Width = 350;
-			// 
-			// nameAutor
-			// 
-			this->nameAutor->HeaderText = L"Àâòîð";
-			this->nameAutor->MinimumWidth = 8;
-			this->nameAutor->Name = L"nameAutor";
-			this->nameAutor->Width = 250;
-			// 
-			// yearOfRelease
-			// 
-			this->yearOfRelease->HeaderText = L"Ãîä âûïóñêà";
-			this->yearOfRelease->MinimumWidth = 8;
-			this->yearOfRelease->Name = L"yearOfRelease";
-			this->yearOfRelease->Width = 150;
-			// 
-			// Availability
-			// 
-			this->Availability->HeaderText = L"Íàëè÷èå";
-			this->Availability->MinimumWidth = 8;
-			this->Availability->Name = L"Availability";
-			this->Availability->Width = 150;
 			// 
 			// EditEntryButton
 			// 
@@ -302,16 +279,49 @@ namespace DBLibClient {
 			this->checkBox1->AutoSize = true;
 			this->checkBox1->Location = System::Drawing::Point(710, 414);
 			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(175, 26);
+			this->checkBox1->Size = System::Drawing::Size(121, 19);
 			this->checkBox1->TabIndex = 20;
 			this->checkBox1->Text = L"Êíèãè â íàëè÷èè";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			// 
+			// nameBook
+			// 
+			this->nameBook->HeaderText = L"Íàçâàíèå";
+			this->nameBook->MinimumWidth = 8;
+			this->nameBook->Name = L"nameBook";
+			this->nameBook->Width = 350;
+			// 
+			// nameAutor
+			// 
+			this->nameAutor->HeaderText = L"Àâòîð";
+			this->nameAutor->MinimumWidth = 8;
+			this->nameAutor->Name = L"nameAutor";
+			this->nameAutor->Width = 250;
+			// 
+			// yearOfRelease
+			// 
+			this->yearOfRelease->HeaderText = L"Ãîä âûïóñêà";
+			this->yearOfRelease->MinimumWidth = 8;
+			this->yearOfRelease->Name = L"yearOfRelease";
+			this->yearOfRelease->Width = 150;
+			// 
+			// Availability
+			// 
+			this->Availability->HeaderText = L"Íàëè÷èå";
+			this->Availability->MinimumWidth = 8;
+			this->Availability->Name = L"Availability";
+			this->Availability->Width = 150;
+			// 
+			// priceColumn
+			// 
+			this->priceColumn->HeaderText = L"Öåíà";
+			this->priceColumn->Name = L"priceColumn";
+			// 
 			// FindForEditForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
+			this->AutoScaleDimensions = System::Drawing::SizeF(7, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(992, 503);
+			this->ClientSize = System::Drawing::Size(998, 520);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
@@ -329,6 +339,7 @@ namespace DBLibClient {
 			this->Controls->Add(this->menuStrip1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(1014, 559);

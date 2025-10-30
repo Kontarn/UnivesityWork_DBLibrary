@@ -32,13 +32,17 @@ System::Void DBLibClient::editingWindowForm::edititngDataButton_Click(System::Ob
     std::string sOldInpString(cOldInpString);
     Marshal::FreeHGlobal((IntPtr)cOldInpString);
     if (nameBookTextBox->Text == "" || AutorNameTextBox->Text == "" || 
-        yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "") {
+        yearOfReleaseTextBox->Text == "" || AvailabilityTextBox->Text == "" || priceTextBox->Text == "") {
         MessageBox::Show("Заполните все поля", "Внимание");
         return;
     }
     else {
-        String^ newString = nameBookTextBox->Text + ", " + 
-            AutorNameTextBox->Text + ", " + yearOfReleaseTextBox->Text + "; " + AvailabilityTextBox->Text;
+        String^ newString = 
+            nameBookTextBox->Text + ", " + 
+            AutorNameTextBox->Text + ", " + 
+            yearOfReleaseTextBox->Text + "; " + 
+            AvailabilityTextBox->Text + "; " +
+            priceTextBox->Text;
         char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit).ToPointer());
         char* cNewString = (char*)(Marshal::StringToHGlobalAnsi(newString).ToPointer());
         std::string sTypeOfLit(cTypeOfLit);

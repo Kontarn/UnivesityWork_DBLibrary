@@ -41,6 +41,7 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 	std::string nameAutor;
 	std::string yearOfRelease;
 	std::string availability;
+	std::string price;
 	size_t i = 0;
 	Admin admin;
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
@@ -52,12 +53,14 @@ System::Void DBLibClient::FindForEditForm::FindButton_Click(System::Object^ send
 	// Выводим данные в таблицу
 	if (littleDB.size() != 0) {
 		do {
-			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability, price);
 			System::String^ SnameBook = gcnew String(nameBook.c_str());
 			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
 			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
 			System::String^ Savailability = gcnew String(availability.c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			System::String^ Sprice = gcnew String(price.c_str());
+
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability, Sprice);
 			i++;
 		} while (i < littleDB.size());
 	}
@@ -81,6 +84,7 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 	std::string nameAutor;		// Имя автора
 	std::string yearOfRelease;	// Год выпуска книги
 	std::string availability;	// Количество экземпляров книги, в наличии
+	std::string price;
 	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображать ли только книги в наличии
 	System::String^ typeOfLit = choiceOfTypeBook->Text;
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
@@ -106,12 +110,13 @@ System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Obje
 		do
 		{
 			// Разбиваем строку на параметры, для передачи в datagridview
-			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			admin.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability, price);
 			System::String^ SnameBook = gcnew String(nameBook.c_str());
 			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
 			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
 			System::String^ Savailability = gcnew String(availability.c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			System::String^ Sprice = gcnew String(price.c_str());
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability, Sprice);
 			i++;
 		} while (i < littleDB.size());
 	}
@@ -138,20 +143,24 @@ System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^
 	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[1]->Value->ToString();
 	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[2]->Value->ToString();
 	String^ availability = dataGridView1->Rows[indexLine]->Cells[3]->Value->ToString();
+	String^ price = dataGridView1->Rows[indexLine]->Cells[4]->Value->ToString();
+
 	
 	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
 	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
 	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
 	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(availability).ToPointer();
-	
+	char* cPrice = (char*)Marshal::StringToHGlobalAnsi(price).ToPointer();
+
 	std::string sNameBook(cNameBook);
 	std::string sAutorName(cAutorName);
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
+	std::string sPrice(cPrice);
 	
-	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
+	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability + "; " + sPrice;
 	// Переходим в форму для редактирования
-	editingWindowForm^ form = gcnew editingWindowForm(nameBook, nameAutor, yearOfRelease, availability, typeOfLit);
+	editingWindowForm^ form = gcnew editingWindowForm(nameBook, nameAutor, yearOfRelease, availability, price, typeOfLit);
 	
 	form->ShowDialog();
 
@@ -159,6 +168,7 @@ System::Void DBLibClient::FindForEditForm::EditEntryButton_Click(System::Object^
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	Marshal::FreeHGlobal((IntPtr)cPrice);
 }
 // Удаление записи из базы данных
 System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object^ sender, System::EventArgs^ e)
@@ -175,10 +185,14 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	String^ nameAutor = dataGridView1->Rows[indexLine]->Cells[1]->Value->ToString();
 	String^ yearOfRelease = dataGridView1->Rows[indexLine]->Cells[2]->Value->ToString();
 	String^ availability = dataGridView1->Rows[indexLine]->Cells[3]->Value->ToString();
+	String^ price = dataGridView1->Rows[indexLine]->Cells[4]->Value->ToString();
+
 	char* cNameBook = (char*)(Marshal::StringToHGlobalAnsi(nameBook)).ToPointer();
 	char* cAutorName = (char*)Marshal::StringToHGlobalAnsi(nameAutor).ToPointer();
 	char* cYearsOfRelease = (char*)Marshal::StringToHGlobalAnsi(yearOfRelease).ToPointer();
 	char* cAvailability = (char*)Marshal::StringToHGlobalAnsi(availability).ToPointer();
+	char* cPrice = (char*)Marshal::StringToHGlobalAnsi(price).ToPointer();
+
 	System::String^ typeOfLit = choiceOfTypeBook->Text;
 	char* cTypeOfLit = (char*)(Marshal::StringToHGlobalAnsi(typeOfLit)).ToPointer();
 	std::string sTypeOfLit(cTypeOfLit);
@@ -186,7 +200,9 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	std::string sAutorName(cAutorName);
 	std::string sYearsOfRelease(cYearsOfRelease);
 	std::string sAvailability(cAvailability);
-	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability;
+	std::string sPrice(cPrice);
+
+	std::string line = sNameBook + ", " + sAutorName + ", " + sYearsOfRelease + "; " + sAvailability + "; " + sPrice;
 	if (choiceOfTypeBook->Text == "Техническая") {
 		admin.deleteLine(line, sTypeOfLit);
 	}
@@ -197,6 +213,7 @@ System::Void DBLibClient::FindForEditForm::deleteLineButton_Click(System::Object
 	Marshal::FreeHGlobal((IntPtr)cAutorName);
 	Marshal::FreeHGlobal((IntPtr)cYearsOfRelease);
 	Marshal::FreeHGlobal((IntPtr)cAvailability);
+	Marshal::FreeHGlobal((IntPtr)cPrice);
 	Marshal::FreeHGlobal((IntPtr)cTypeOfLit);
 	MessageBox::Show("Данные успешно удалены.\nНажмите 'Показать все записи', что бы увидеть изменения.", "Успешно");
 }

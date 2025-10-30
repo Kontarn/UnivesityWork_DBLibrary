@@ -20,8 +20,8 @@
 #define DBG_NEW new
 #endif
 
-#define TechLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLitTech.txt"
-#define ArtLitDBname	"..\\..\\Курсач\\DBLibLibrary\\DBLibArt.txt"
+#define TechLitDBname	"..\\DBLibLibrary\\DBLibTech.txt"
+#define ArtLitDBname	"..\\DBLibLibrary\\DBLibArt.txt"
 using namespace std;
 struct DBLIBLIBRARY Leaks {
 	~Leaks();
@@ -32,6 +32,7 @@ class DBLIBLIBRARY User {
 	std::string* nameAutor;				// Автор
 	std::string* yearsOfRelease;			// Год выпуска
 	std::string* availability;			// Наличие в библиотеке
+	std::string* price;					// Цена
 	std::vector <std::string>* littleDB;
 public:
 	User();
@@ -44,7 +45,7 @@ public:
 	bool recordExistenceCheck(std::string inputText, std::string typeOfLit);
 	// Разрезает полученную запись данных и присваивает атрибутам
 	void splitEntry(std::string inpText, std::string& nameBook, std::string& nameAutor,
-		std::string& yearOfRelease, std::string& availability);
+		std::string& yearOfRelease, std::string& availability, std::string& price);
 	// Сортировка по выбранному способу
 	void sorting(std::vector <std::string>& littleDB, std::string sortingMethod);
 	// Сортировка названия книг по алфавиту
@@ -60,12 +61,13 @@ class DBLIBLIBRARY Admin : public User {
 	std::string* nameAutor;				// Автор
 	std::string* yearsOfRelease;		// Год выпуска
 	std::string* availability;			// Наличие в библиотеке
+	std::string* price;					// Цена
 	std::vector <std::string>* littleDB;
 public:
 	Admin();
 	// Добавление записей в БД
 	bool addLine(std::string& nameBook, std::string& nameAutor,
-		std::string& yearsOfRelease, std::string& availability, std::string typeOfLit);
+		std::string& yearsOfRelease, std::string& availability, std::string& price, std::string typeOfLit);
 	// Добавляет записи в контейнер для последующего вывода в таблицу
 	void showAllLines(std::vector <std::string>& littleDB, std::string typeOfLit, bool flag) override;
 	// Удаление записи из БД

@@ -36,6 +36,7 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 	std::string nameAutor;
 	std::string yearOfRelease;
 	std::string availability; // Наличие книги в библиотеке
+	std::string price;
 	size_t i = 0;
 	User user;
 	if (choiceOfTypeBook->Text == "" || nameBookTextBox->Text == "") MessageBox::Show("Пожалуйста, заполните все поля", "Внимание");
@@ -52,12 +53,14 @@ System::Void DBLibClient::LibrarySearchForm::FindButton_Click(System::Object^ se
 		do
 		{
 			// Разбиваем строку из вектора на параметры, для вывода в таблицу
-			user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability, price);
 			System::String^ SnameBook = gcnew String(nameBook.c_str());
 			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
 			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
 			System::String^ Savailability = gcnew String(availability.c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			System::String^ Sprice = gcnew String(price.c_str());
+
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability, Sprice);
 			i++;
 		} while (i < littleDB.size());
 	}
@@ -74,6 +77,8 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 	std::string nameAutor;
 	std::string yearOfRelease; // Год выпуска книги
 	std::string availability; // Количество определённой книги, в библиотеке
+	std::string price;
+
 	bool flag = 0; // Хранит значение checkBox1, которые опредляет отображать ли только книги в наличии
 	System::String^ typeOfLit = choiceOfTypeBook->Text; // Тип выбранной литературы
 	System::String^ sortingMethod = choiceOfSortingMethod->Text; // Способ соритровки
@@ -101,12 +106,14 @@ System::Void DBLibClient::LibrarySearchForm::ShowAllLinesButton_Click(System::Ob
 		do
 		{
 			// Разбиваем строку на параметры для вывода в таблицу
-			user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability);
+			user.splitEntry(littleDB[i], nameBook, nameAutor, yearOfRelease, availability, price);
 			System::String^ SnameBook = gcnew String(nameBook.c_str());
 			System::String^ SnameAutor = gcnew String(nameAutor.c_str());
 			System::String^ SyearOfRelease = gcnew String(yearOfRelease.c_str());
 			System::String^ Savailability = gcnew String(availability.c_str());
-			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability);
+			System::String^ Sprice = gcnew String(price.c_str());
+
+			dataGridView1->Rows->Add(SnameBook, SnameAutor, SyearOfRelease, Savailability, Sprice);
 			i++;
 		} while (i < littleDB.size());
 	}

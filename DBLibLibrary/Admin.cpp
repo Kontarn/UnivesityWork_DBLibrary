@@ -11,11 +11,12 @@ Admin::Admin()
 	nameAutor = DBG_NEW std::string;
 	yearsOfRelease = DBG_NEW std::string;
 	availability = DBG_NEW std::string;
+	price = DBG_NEW std::string;
 	littleDB = DBG_NEW std::vector <std::string>;
 }
 // Добавляет запись в БД
 bool Admin::addLine(std::string& nameBook, std::string& nameAutor, 
-	std::string& yearsOfRelease, std::string& availability, std::string typeOfLit)
+	std::string& yearsOfRelease, std::string& availability, std::string& price, std::string typeOfLit)
 {
 	
 	std::string typeLit;
@@ -24,7 +25,7 @@ bool Admin::addLine(std::string& nameBook, std::string& nameAutor,
 	}
 	else typeLit = ArtLitDBname;
 	std::fstream fout;
-	std::string line = nameBook + ", " + nameAutor + ", " + yearsOfRelease + "; " + availability; // введённая строка
+	std::string line = nameBook + ", " + nameAutor + ", " + yearsOfRelease + "; " + availability + "; " + price; // введённая строка
 	
 	// Проверяем наличие записи в файле
 	if (recordExistenceCheck(line, typeOfLit) == false)
@@ -162,6 +163,7 @@ Admin::~Admin()
 	delete nameBook;
 	delete yearsOfRelease;
 	delete availability;
+	delete price;
 	delete littleDB;
 	
 }

@@ -36,10 +36,10 @@ namespace DBLibClient {
 		}
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	protected:
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+
+
+
+
 	private: System::Windows::Forms::Button^ ExitButton;
 	private: System::Windows::Forms::Button^ ShowAllLinesButton;
 	private: System::Windows::Forms::Button^ helpOfSearchButton;
@@ -57,6 +57,11 @@ namespace DBLibClient {
 
 
 	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameBook;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ nameAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ yearOfRelease;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Availability;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ priceColumn;
 
 	private:
 		/// <summary>
@@ -72,10 +77,6 @@ namespace DBLibClient {
 		void InitializeComponent(void)
 		{
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ExitButton = (gcnew System::Windows::Forms::Button());
 			this->ShowAllLinesButton = (gcnew System::Windows::Forms::Button());
 			this->helpOfSearchButton = (gcnew System::Windows::Forms::Button());
@@ -88,15 +89,20 @@ namespace DBLibClient {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->choiceOfSortingMethod = (gcnew System::Windows::Forms::ComboBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->nameBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->nameAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->yearOfRelease = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Availability = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->priceColumn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->nameBook,
-					this->nameAutor, this->yearOfRelease, this->Availability
+					this->nameAutor, this->yearOfRelease, this->Availability, this->priceColumn
 			});
 			this->dataGridView1->Location = System::Drawing::Point(13, 13);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -104,34 +110,6 @@ namespace DBLibClient {
 			this->dataGridView1->RowTemplate->Height = 28;
 			this->dataGridView1->Size = System::Drawing::Size(965, 376);
 			this->dataGridView1->TabIndex = 16;
-			// 
-			// nameBook
-			// 
-			this->nameBook->HeaderText = L"Название";
-			this->nameBook->MinimumWidth = 8;
-			this->nameBook->Name = L"nameBook";
-			this->nameBook->Width = 350;
-			// 
-			// nameAutor
-			// 
-			this->nameAutor->HeaderText = L"Автор";
-			this->nameAutor->MinimumWidth = 8;
-			this->nameAutor->Name = L"nameAutor";
-			this->nameAutor->Width = 250;
-			// 
-			// yearOfRelease
-			// 
-			this->yearOfRelease->HeaderText = L"Год выпуска";
-			this->yearOfRelease->MinimumWidth = 8;
-			this->yearOfRelease->Name = L"yearOfRelease";
-			this->yearOfRelease->Width = 150;
-			// 
-			// Availability
-			// 
-			this->Availability->HeaderText = L"Наличие";
-			this->Availability->MinimumWidth = 8;
-			this->Availability->Name = L"Availability";
-			this->Availability->Width = 150;
 			// 
 			// ExitButton
 			// 
@@ -178,7 +156,7 @@ namespace DBLibClient {
 			this->label3->AutoSize = true;
 			this->label3->Location = System::Drawing::Point(13, 418);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(249, 22);
+			this->label3->Size = System::Drawing::Size(171, 15);
 			this->label3->TabIndex = 25;
 			this->label3->Text = L"Введите данные для поиска";
 			// 
@@ -196,7 +174,7 @@ namespace DBLibClient {
 			// 
 			this->nameBookTextBox->Location = System::Drawing::Point(14, 446);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
-			this->nameBookTextBox->Size = System::Drawing::Size(485, 28);
+			this->nameBookTextBox->Size = System::Drawing::Size(485, 21);
 			this->nameBookTextBox->TabIndex = 22;
 			// 
 			// label1
@@ -204,7 +182,7 @@ namespace DBLibClient {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(785, 418);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(145, 22);
+			this->label1->Size = System::Drawing::Size(101, 15);
 			this->label1->TabIndex = 21;
 			this->label1->Text = L"Тип литературы";
 			// 
@@ -215,7 +193,7 @@ namespace DBLibClient {
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Техническая", L"Художественная", L"Оба типа" });
 			this->choiceOfTypeBook->Location = System::Drawing::Point(789, 446);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
-			this->choiceOfTypeBook->Size = System::Drawing::Size(189, 30);
+			this->choiceOfTypeBook->Size = System::Drawing::Size(189, 23);
 			this->choiceOfTypeBook->TabIndex = 20;
 			// 
 			// label2
@@ -223,7 +201,7 @@ namespace DBLibClient {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(516, 418);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(189, 22);
+			this->label2->Size = System::Drawing::Size(131, 15);
 			this->label2->TabIndex = 32;
 			this->label2->Text = L"Способ отображения";
 			// 
@@ -240,7 +218,7 @@ namespace DBLibClient {
 			});
 			this->choiceOfSortingMethod->Location = System::Drawing::Point(520, 446);
 			this->choiceOfSortingMethod->Name = L"choiceOfSortingMethod";
-			this->choiceOfSortingMethod->Size = System::Drawing::Size(262, 30);
+			this->choiceOfSortingMethod->Size = System::Drawing::Size(262, 23);
 			this->choiceOfSortingMethod->TabIndex = 31;
 			// 
 			// checkBox1
@@ -248,16 +226,49 @@ namespace DBLibClient {
 			this->checkBox1->AutoSize = true;
 			this->checkBox1->Location = System::Drawing::Point(520, 481);
 			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(175, 26);
+			this->checkBox1->Size = System::Drawing::Size(121, 19);
 			this->checkBox1->TabIndex = 33;
 			this->checkBox1->Text = L"Книги в наличии";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			// 
+			// nameBook
+			// 
+			this->nameBook->HeaderText = L"Название";
+			this->nameBook->MinimumWidth = 8;
+			this->nameBook->Name = L"nameBook";
+			this->nameBook->Width = 350;
+			// 
+			// nameAutor
+			// 
+			this->nameAutor->HeaderText = L"Автор";
+			this->nameAutor->MinimumWidth = 8;
+			this->nameAutor->Name = L"nameAutor";
+			this->nameAutor->Width = 250;
+			// 
+			// yearOfRelease
+			// 
+			this->yearOfRelease->HeaderText = L"Год выпуска";
+			this->yearOfRelease->MinimumWidth = 8;
+			this->yearOfRelease->Name = L"yearOfRelease";
+			this->yearOfRelease->Width = 150;
+			// 
+			// Availability
+			// 
+			this->Availability->HeaderText = L"Наличие";
+			this->Availability->MinimumWidth = 8;
+			this->Availability->Name = L"Availability";
+			this->Availability->Width = 150;
+			// 
+			// priceColumn
+			// 
+			this->priceColumn->HeaderText = L"Цена";
+			this->priceColumn->Name = L"priceColumn";
+			// 
 			// LibrarySearchForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(10, 22);
+			this->AutoScaleDimensions = System::Drawing::SizeF(7, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(992, 528);
+			this->ClientSize = System::Drawing::Size(998, 545);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->choiceOfSortingMethod);
@@ -273,6 +284,7 @@ namespace DBLibClient {
 			this->Controls->Add(this->dataGridView1);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(1014, 584);
 			this->MinimumSize = System::Drawing::Size(1014, 584);

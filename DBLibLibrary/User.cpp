@@ -7,6 +7,7 @@ User::User()
 	nameAutor = DBG_NEW std::string;
 	yearsOfRelease = DBG_NEW std::string;
 	availability = DBG_NEW std::string;
+	price = DBG_NEW std::string;
 	littleDB = DBG_NEW std::vector <std::string>;
 }
 // Ищет похожие записи в выбранной БД
@@ -44,12 +45,13 @@ bool User::recordExistenceCheck(std::string inputText, std::string typeOfLit)
 }
 // Разрезает полученную запись данных и присваивает атрибутам
 void User::splitEntry(std::string inpText, std::string& nameBook,
-	std::string& nameAutor, std::string& yearOfRelease, std::string& availability)
+	std::string& nameAutor, std::string& yearOfRelease, std::string& availability, std::string& price)
 {
 	nameBook = "";
 	nameAutor = "";
 	yearOfRelease = "";
 	availability = "";
+	price = "";
 	std::vector <char> InpTEXT;
 	std::vector <char>::iterator POS;
 	std::vector <char>::iterator POS1;
@@ -74,8 +76,13 @@ void User::splitEntry(std::string inpText, std::string& nameBook,
 		yearOfRelease += *it;
 
 	// availability - наличие в библиотеке
-	for (std::vector <char>::iterator it = POS + 2; it != InpTEXT.end(); ++it)
+	POS1 = find(POS + 2, InpTEXT.end(), znak2);
+	for (std::vector <char>::iterator it = POS + 2; it != POS1; ++it)
 		availability += *it;
+
+	// price
+	for (std::vector <char>::iterator it = POS1 + 2; it != InpTEXT.end(); ++it)
+		price += *it;
 }
 // Вызывает опредлённый способ сортировки
 void User::sorting(std::vector<std::string>& littleDB, std::string sortingMethod)

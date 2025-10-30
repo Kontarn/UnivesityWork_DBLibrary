@@ -66,10 +66,13 @@ namespace DBLibClient {
 
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::TextBox^ yearOfReleaseTextBox;
+
 
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ AvailabilityTextBox;
+	private: System::Windows::Forms::ComboBox^ yearOfReleaseComboBox;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::TextBox^ priceTextBox;
 
 
 
@@ -102,24 +105,28 @@ namespace DBLibClient {
 			this->AutorNameTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->yearOfReleaseTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->AvailabilityTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->yearOfReleaseComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->priceTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// nameBookTextBox
 			// 
-			this->nameBookTextBox->Location = System::Drawing::Point(12, 93);
+			this->nameBookTextBox->Location = System::Drawing::Point(8, 60);
+			this->nameBookTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
-			this->nameBookTextBox->Size = System::Drawing::Size(377, 26);
+			this->nameBookTextBox->Size = System::Drawing::Size(253, 20);
 			this->nameBookTextBox->TabIndex = 0;
 			// 
 			// toStartButton
 			// 
-			this->toStartButton->Location = System::Drawing::Point(729, 151);
+			this->toStartButton->Location = System::Drawing::Point(546, 101);
+			this->toStartButton->Margin = System::Windows::Forms::Padding(2);
 			this->toStartButton->Name = L"toStartButton";
-			this->toStartButton->Size = System::Drawing::Size(104, 37);
+			this->toStartButton->Size = System::Drawing::Size(69, 24);
 			this->toStartButton->TabIndex = 1;
 			this->toStartButton->Text = L"¬ начало";
 			this->toStartButton->UseVisualStyleBackColor = true;
@@ -127,9 +134,10 @@ namespace DBLibClient {
 			// 
 			// AddDataButton
 			// 
-			this->AddDataButton->Location = System::Drawing::Point(839, 151);
+			this->AddDataButton->Location = System::Drawing::Point(619, 101);
+			this->AddDataButton->Margin = System::Windows::Forms::Padding(2);
 			this->AddDataButton->Name = L"AddDataButton";
-			this->AddDataButton->Size = System::Drawing::Size(101, 37);
+			this->AddDataButton->Size = System::Drawing::Size(67, 24);
 			this->AddDataButton->TabIndex = 2;
 			this->AddDataButton->Text = L"ƒобавить";
 			this->AddDataButton->UseVisualStyleBackColor = true;
@@ -137,9 +145,10 @@ namespace DBLibClient {
 			// 
 			// BackButton
 			// 
-			this->BackButton->Location = System::Drawing::Point(648, 151);
+			this->BackButton->Location = System::Drawing::Point(492, 101);
+			this->BackButton->Margin = System::Windows::Forms::Padding(2);
 			this->BackButton->Name = L"BackButton";
-			this->BackButton->Size = System::Drawing::Size(75, 37);
+			this->BackButton->Size = System::Drawing::Size(50, 24);
 			this->BackButton->TabIndex = 3;
 			this->BackButton->Text = L"Ќазад";
 			this->BackButton->UseVisualStyleBackColor = true;
@@ -149,28 +158,30 @@ namespace DBLibClient {
 			// 
 			this->typeBookComboBox->FormattingEnabled = true;
 			this->typeBookComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"“ехническа€", L"’удожественна€" });
-			this->typeBookComboBox->Location = System::Drawing::Point(12, 160);
+			this->typeBookComboBox->Location = System::Drawing::Point(8, 104);
+			this->typeBookComboBox->Margin = System::Windows::Forms::Padding(2);
 			this->typeBookComboBox->Name = L"typeBookComboBox";
-			this->typeBookComboBox->Size = System::Drawing::Size(164, 28);
+			this->typeBookComboBox->Size = System::Drawing::Size(111, 21);
 			this->typeBookComboBox->TabIndex = 4;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(8, 44);
+			this->label1->Location = System::Drawing::Point(5, 29);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(142, 20);
+			this->label1->Size = System::Drawing::Size(93, 13);
 			this->label1->TabIndex = 5;
 			this->label1->Text = L"¬ведите данные:";
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->выходToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(952, 33);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 1, 0, 1);
+			this->menuStrip1->Size = System::Drawing::Size(697, 24);
 			this->menuStrip1->TabIndex = 6;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -181,28 +192,29 @@ namespace DBLibClient {
 					this->выход»зѕрограммыToolStripMenuItem
 			});
 			this->выходToolStripMenuItem->Name = L"выходToolStripMenuItem";
-			this->выходToolStripMenuItem->Size = System::Drawing::Size(80, 29);
+			this->выходToolStripMenuItem->Size = System::Drawing::Size(54, 22);
 			this->выходToolStripMenuItem->Text = L"¬ыход";
 			// 
 			// выходЌаЌачальныйЁкранToolStripMenuItem
 			// 
 			this->выходЌаЌачальныйЁкранToolStripMenuItem->Name = L"выходЌаЌачальныйЁкранToolStripMenuItem";
-			this->выходЌаЌачальныйЁкранToolStripMenuItem->Size = System::Drawing::Size(336, 34);
+			this->выходЌаЌачальныйЁкранToolStripMenuItem->Size = System::Drawing::Size(225, 22);
 			this->выходЌаЌачальныйЁкранToolStripMenuItem->Text = L"¬ыход на начальный экран";
 			this->выходЌаЌачальныйЁкранToolStripMenuItem->Click += gcnew System::EventHandler(this, &AddElementsToDBForm::выходЌаЌачальныйЁкранToolStripMenuItem_Click);
 			// 
 			// выход»зѕрограммыToolStripMenuItem
 			// 
 			this->выход»зѕрограммыToolStripMenuItem->Name = L"выход»зѕрограммыToolStripMenuItem";
-			this->выход»зѕрограммыToolStripMenuItem->Size = System::Drawing::Size(336, 34);
+			this->выход»зѕрограммыToolStripMenuItem->Size = System::Drawing::Size(225, 22);
 			this->выход»зѕрограммыToolStripMenuItem->Text = L"¬ыход из программы";
 			this->выход»зѕрограммыToolStripMenuItem->Click += gcnew System::EventHandler(this, &AddElementsToDBForm::выход»зѕрограммыToolStripMenuItem_Click);
 			// 
 			// HelpButton
 			// 
-			this->HelpButton->Location = System::Drawing::Point(843, 89);
+			this->HelpButton->Location = System::Drawing::Point(621, 58);
+			this->HelpButton->Margin = System::Windows::Forms::Padding(2);
 			this->HelpButton->Name = L"HelpButton";
-			this->HelpButton->Size = System::Drawing::Size(97, 34);
+			this->HelpButton->Size = System::Drawing::Size(65, 22);
 			this->HelpButton->TabIndex = 7;
 			this->HelpButton->Text = L"ѕомощь";
 			this->HelpButton->UseVisualStyleBackColor = true;
@@ -211,77 +223,107 @@ namespace DBLibClient {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(8, 137);
+			this->label2->Location = System::Drawing::Point(5, 89);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(319, 20);
+			this->label2->Size = System::Drawing::Size(210, 13);
 			this->label2->TabIndex = 8;
 			this->label2->Text = L"¬ыберите тип добавл€емой литературы";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(8, 70);
+			this->label3->Location = System::Drawing::Point(5, 46);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(129, 20);
+			this->label3->Size = System::Drawing::Size(89, 13);
 			this->label3->TabIndex = 9;
 			this->label3->Text = L"Ќазвание книги";
 			// 
 			// AutorNameTextBox
 			// 
-			this->AutorNameTextBox->Location = System::Drawing::Point(395, 93);
+			this->AutorNameTextBox->Location = System::Drawing::Point(263, 60);
+			this->AutorNameTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->AutorNameTextBox->Name = L"AutorNameTextBox";
-			this->AutorNameTextBox->Size = System::Drawing::Size(246, 26);
+			this->AutorNameTextBox->Size = System::Drawing::Size(165, 20);
 			this->AutorNameTextBox->TabIndex = 10;
+			this->AutorNameTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::AutorNameTextBox_KeyPress);
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(391, 70);
+			this->label4->Location = System::Drawing::Point(261, 46);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(56, 20);
+			this->label4->Size = System::Drawing::Size(37, 13);
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"јвтор";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(643, 70);
+			this->label5->Location = System::Drawing::Point(429, 46);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(103, 20);
+			this->label5->Size = System::Drawing::Size(71, 13);
 			this->label5->TabIndex = 12;
 			this->label5->Text = L"√од выпуска";
-			// 
-			// yearOfReleaseTextBox
-			// 
-			this->yearOfReleaseTextBox->Location = System::Drawing::Point(647, 93);
-			this->yearOfReleaseTextBox->Name = L"yearOfReleaseTextBox";
-			this->yearOfReleaseTextBox->Size = System::Drawing::Size(99, 26);
-			this->yearOfReleaseTextBox->TabIndex = 13;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(752, 70);
+			this->label6->Location = System::Drawing::Point(501, 46);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(76, 20);
+			this->label6->Size = System::Drawing::Size(50, 13);
 			this->label6->TabIndex = 15;
 			this->label6->Text = L"Ќаличие";
 			// 
 			// AvailabilityTextBox
 			// 
-			this->AvailabilityTextBox->Location = System::Drawing::Point(756, 93);
+			this->AvailabilityTextBox->Location = System::Drawing::Point(504, 60);
+			this->AvailabilityTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->AvailabilityTextBox->Name = L"AvailabilityTextBox";
-			this->AvailabilityTextBox->Size = System::Drawing::Size(72, 26);
+			this->AvailabilityTextBox->Size = System::Drawing::Size(49, 20);
 			this->AvailabilityTextBox->TabIndex = 16;
+			this->AvailabilityTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::AvailabilityTextBox_KeyPress);
+			this->AvailabilityTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &AddElementsToDBForm::AvailabilityTextBox_Validating);
+			// 
+			// yearOfReleaseComboBox
+			// 
+			this->yearOfReleaseComboBox->FormattingEnabled = true;
+			this->yearOfReleaseComboBox->Location = System::Drawing::Point(432, 59);
+			this->yearOfReleaseComboBox->Name = L"yearOfReleaseComboBox";
+			this->yearOfReleaseComboBox->Size = System::Drawing::Size(67, 21);
+			this->yearOfReleaseComboBox->TabIndex = 17;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(558, 46);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(33, 13);
+			this->label7->TabIndex = 18;
+			this->label7->Text = L"÷ена";
+			// 
+			// priceTextBox
+			// 
+			this->priceTextBox->Location = System::Drawing::Point(559, 60);
+			this->priceTextBox->Name = L"priceTextBox";
+			this->priceTextBox->Size = System::Drawing::Size(57, 20);
+			this->priceTextBox->TabIndex = 19;
+			this->priceTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::priceTextBox_KeyPress);
 			// 
 			// AddElementsToDBForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(952, 205);
+			this->ClientSize = System::Drawing::Size(697, 144);
+			this->Controls->Add(this->priceTextBox);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->yearOfReleaseComboBox);
 			this->Controls->Add(this->AvailabilityTextBox);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->yearOfReleaseTextBox);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->AutorNameTextBox);
@@ -295,15 +337,16 @@ namespace DBLibClient {
 			this->Controls->Add(this->toStartButton);
 			this->Controls->Add(this->nameBookTextBox);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(974, 261);
-			this->MinimumSize = System::Drawing::Size(974, 261);
 			this->Name = L"AddElementsToDBForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ƒобавление новых записей";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &AddElementsToDBForm::AddElementsToDBForm_FormClosing);
+			this->Load += gcnew System::EventHandler(this, &AddElementsToDBForm::AddElementsToDBForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -318,5 +361,10 @@ private: System::Void выход»зѕрограммыToolStripMenuItem_Click(System::Object^ se
 private: System::Void выходЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void AddDataButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void AddElementsToDBForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
+private: System::Void AutorNameTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void AddElementsToDBForm_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void AvailabilityTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void AvailabilityTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+private: System::Void priceTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 };
 }

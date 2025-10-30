@@ -22,11 +22,16 @@ namespace DBLibClient {
 		String^ nameAutor;
 		String^ yearOfRelease;
 		String^ availability;
+		String^ price;
 		String^ oldInpString; // ѕереданна€ строка дл€ редактировани€
-		String^ typeOfLit;
+	private: System::Windows::Forms::TextBox^ priceTextBox;
+
+
+	private: System::Windows::Forms::Label^ label2;
+		   String^ typeOfLit;
 	public:
 		editingWindowForm(String^ nameBook, String^ nameAutor,
-			String^ yearOfRelease, String^ availability, String^ TypeOfLit)
+			String^ yearOfRelease, String^ availability, String^ price, String^ TypeOfLit)
 		{
 			InitializeComponent();
 			this->typeOfLit = TypeOfLit;
@@ -34,13 +39,17 @@ namespace DBLibClient {
 			this->nameAutor = nameAutor;
 			this->yearOfRelease = yearOfRelease;
 			this->availability = availability;
+			this->price = price;
+
 			// —тара€ строка
-			oldInpString = nameBook + ", " + nameAutor + ", " + yearOfRelease + "; " + availability;
+			oldInpString = nameBook + ", " + nameAutor + ", " + yearOfRelease + "; " + availability + "; " + price;
 
 			nameBookTextBox->Text = nameBook;
 			AutorNameTextBox->Text = nameAutor;
 			yearOfReleaseTextBox->Text = yearOfRelease;
 			AvailabilityTextBox->Text = availability;
+			priceTextBox->Text = price;
+
 			//
 			//TODO: Add the constructor code here
 			//
@@ -112,71 +121,81 @@ namespace DBLibClient {
 			this->выходToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->выхоодЌаЌачальныйЁкранToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->выход»зѕрограммыToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->priceTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// AvailabilityTextBox
 			// 
-			this->AvailabilityTextBox->Location = System::Drawing::Point(754, 104);
+			this->AvailabilityTextBox->Location = System::Drawing::Point(503, 68);
+			this->AvailabilityTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->AvailabilityTextBox->Name = L"AvailabilityTextBox";
-			this->AvailabilityTextBox->Size = System::Drawing::Size(77, 26);
+			this->AvailabilityTextBox->Size = System::Drawing::Size(53, 20);
 			this->AvailabilityTextBox->TabIndex = 31;
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(750, 81);
+			this->label6->Location = System::Drawing::Point(500, 53);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(76, 20);
+			this->label6->Size = System::Drawing::Size(50, 13);
 			this->label6->TabIndex = 30;
 			this->label6->Text = L"Ќаличие";
 			// 
 			// yearOfReleaseTextBox
 			// 
-			this->yearOfReleaseTextBox->Location = System::Drawing::Point(645, 104);
+			this->yearOfReleaseTextBox->Location = System::Drawing::Point(430, 68);
+			this->yearOfReleaseTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->yearOfReleaseTextBox->Name = L"yearOfReleaseTextBox";
-			this->yearOfReleaseTextBox->Size = System::Drawing::Size(99, 26);
+			this->yearOfReleaseTextBox->Size = System::Drawing::Size(67, 20);
 			this->yearOfReleaseTextBox->TabIndex = 29;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(641, 81);
+			this->label5->Location = System::Drawing::Point(427, 53);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(103, 20);
+			this->label5->Size = System::Drawing::Size(71, 13);
 			this->label5->TabIndex = 28;
 			this->label5->Text = L"√од выпуска";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(389, 81);
+			this->label4->Location = System::Drawing::Point(259, 53);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(56, 20);
+			this->label4->Size = System::Drawing::Size(37, 13);
 			this->label4->TabIndex = 27;
 			this->label4->Text = L"јвтор";
 			// 
 			// AutorNameTextBox
 			// 
-			this->AutorNameTextBox->Location = System::Drawing::Point(393, 104);
+			this->AutorNameTextBox->Location = System::Drawing::Point(262, 68);
+			this->AutorNameTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->AutorNameTextBox->Name = L"AutorNameTextBox";
-			this->AutorNameTextBox->Size = System::Drawing::Size(246, 26);
+			this->AutorNameTextBox->Size = System::Drawing::Size(165, 20);
 			this->AutorNameTextBox->TabIndex = 26;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(6, 81);
+			this->label3->Location = System::Drawing::Point(4, 53);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(129, 20);
+			this->label3->Size = System::Drawing::Size(89, 13);
 			this->label3->TabIndex = 25;
 			this->label3->Text = L"Ќазвание книги";
 			// 
 			// HelpButton
 			// 
-			this->HelpButton->Location = System::Drawing::Point(841, 100);
+			this->HelpButton->Location = System::Drawing::Point(626, 66);
+			this->HelpButton->Margin = System::Windows::Forms::Padding(2);
 			this->HelpButton->Name = L"HelpButton";
-			this->HelpButton->Size = System::Drawing::Size(97, 34);
+			this->HelpButton->Size = System::Drawing::Size(65, 22);
 			this->HelpButton->TabIndex = 23;
 			this->HelpButton->Text = L"ѕомощь";
 			this->HelpButton->UseVisualStyleBackColor = true;
@@ -185,17 +204,19 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(6, 55);
+			this->label1->Location = System::Drawing::Point(4, 36);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(142, 20);
+			this->label1->Size = System::Drawing::Size(93, 13);
 			this->label1->TabIndex = 22;
 			this->label1->Text = L"¬ведите данные:";
 			// 
 			// BackButton
 			// 
-			this->BackButton->Location = System::Drawing::Point(656, 152);
+			this->BackButton->Location = System::Drawing::Point(504, 106);
+			this->BackButton->Margin = System::Windows::Forms::Padding(2);
 			this->BackButton->Name = L"BackButton";
-			this->BackButton->Size = System::Drawing::Size(107, 47);
+			this->BackButton->Size = System::Drawing::Size(71, 31);
 			this->BackButton->TabIndex = 20;
 			this->BackButton->Text = L"Ќазад";
 			this->BackButton->UseVisualStyleBackColor = true;
@@ -203,9 +224,10 @@ namespace DBLibClient {
 			// 
 			// edititngDataButton
 			// 
-			this->edititngDataButton->Location = System::Drawing::Point(769, 152);
+			this->edititngDataButton->Location = System::Drawing::Point(580, 106);
+			this->edititngDataButton->Margin = System::Windows::Forms::Padding(2);
 			this->edititngDataButton->Name = L"edititngDataButton";
-			this->edititngDataButton->Size = System::Drawing::Size(166, 47);
+			this->edititngDataButton->Size = System::Drawing::Size(111, 31);
 			this->edititngDataButton->TabIndex = 19;
 			this->edititngDataButton->Text = L"–едактировать";
 			this->edititngDataButton->UseVisualStyleBackColor = true;
@@ -213,19 +235,20 @@ namespace DBLibClient {
 			// 
 			// nameBookTextBox
 			// 
-			this->nameBookTextBox->Location = System::Drawing::Point(10, 104);
+			this->nameBookTextBox->Location = System::Drawing::Point(7, 68);
+			this->nameBookTextBox->Margin = System::Windows::Forms::Padding(2);
 			this->nameBookTextBox->Name = L"nameBookTextBox";
-			this->nameBookTextBox->Size = System::Drawing::Size(377, 26);
+			this->nameBookTextBox->Size = System::Drawing::Size(253, 20);
 			this->nameBookTextBox->TabIndex = 17;
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->выходToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(948, 33);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 1, 0, 1);
+			this->menuStrip1->Size = System::Drawing::Size(702, 24);
 			this->menuStrip1->TabIndex = 32;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -236,28 +259,46 @@ namespace DBLibClient {
 					this->выход»зѕрограммыToolStripMenuItem
 			});
 			this->выходToolStripMenuItem->Name = L"выходToolStripMenuItem";
-			this->выходToolStripMenuItem->Size = System::Drawing::Size(80, 29);
+			this->выходToolStripMenuItem->Size = System::Drawing::Size(54, 22);
 			this->выходToolStripMenuItem->Text = L"¬ыход";
 			// 
 			// выхоодЌаЌачальныйЁкранToolStripMenuItem
 			// 
 			this->выхоодЌаЌачальныйЁкранToolStripMenuItem->Name = L"выхоодЌаЌачальныйЁкранToolStripMenuItem";
-			this->выхоодЌаЌачальныйЁкранToolStripMenuItem->Size = System::Drawing::Size(347, 34);
+			this->выхоодЌаЌачальныйЁкранToolStripMenuItem->Size = System::Drawing::Size(232, 22);
 			this->выхоодЌаЌачальныйЁкранToolStripMenuItem->Text = L"¬ыхоод на начальный экран";
 			this->выхоодЌаЌачальныйЁкранToolStripMenuItem->Click += gcnew System::EventHandler(this, &editingWindowForm::выхоодЌаЌачальныйЁкранToolStripMenuItem_Click);
 			// 
 			// выход»зѕрограммыToolStripMenuItem
 			// 
 			this->выход»зѕрограммыToolStripMenuItem->Name = L"выход»зѕрограммыToolStripMenuItem";
-			this->выход»зѕрограммыToolStripMenuItem->Size = System::Drawing::Size(347, 34);
+			this->выход»зѕрограммыToolStripMenuItem->Size = System::Drawing::Size(232, 22);
 			this->выход»зѕрограммыToolStripMenuItem->Text = L"¬ыход из программы";
 			this->выход»зѕрограммыToolStripMenuItem->Click += gcnew System::EventHandler(this, &editingWindowForm::выход»зѕрограммыToolStripMenuItem_Click);
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(564, 53);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(33, 13);
+			this->label2->TabIndex = 33;
+			this->label2->Text = L"÷ена";
+			// 
+			// priceTextBox
+			// 
+			this->priceTextBox->Location = System::Drawing::Point(561, 68);
+			this->priceTextBox->Name = L"priceTextBox";
+			this->priceTextBox->Size = System::Drawing::Size(60, 20);
+			this->priceTextBox->TabIndex = 34;
+			// 
 			// editingWindowForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(948, 210);
+			this->ClientSize = System::Drawing::Size(702, 148);
+			this->Controls->Add(this->priceTextBox);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->AvailabilityTextBox);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->yearOfReleaseTextBox);
@@ -271,10 +312,10 @@ namespace DBLibClient {
 			this->Controls->Add(this->edititngDataButton);
 			this->Controls->Add(this->nameBookTextBox);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(970, 266);
-			this->MinimumSize = System::Drawing::Size(970, 266);
 			this->Name = L"editingWindowForm";
 			this->ShowIcon = false;
 			this->Text = L"–едактирование записей";

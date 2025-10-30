@@ -78,18 +78,21 @@ namespace DBLibClient {
 			this->groupBox1->Controls->Add(this->AddElementsButton);
 			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->groupBox1->Location = System::Drawing::Point(24, 36);
+			this->groupBox1->Location = System::Drawing::Point(16, 23);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(390, 158);
+			this->groupBox1->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->groupBox1->Size = System::Drawing::Size(260, 103);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Âûáåðèòå ñïîñîá ðåäàêòèðîâàíèÿ";
 			// 
 			// EditElementsButton
 			// 
-			this->EditElementsButton->Location = System::Drawing::Point(6, 86);
+			this->EditElementsButton->Location = System::Drawing::Point(4, 56);
+			this->EditElementsButton->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->EditElementsButton->Name = L"EditElementsButton";
-			this->EditElementsButton->Size = System::Drawing::Size(378, 58);
+			this->EditElementsButton->Size = System::Drawing::Size(252, 38);
 			this->EditElementsButton->TabIndex = 1;
 			this->EditElementsButton->Text = L"Ðåäàêòèðîâàíèå ñóùåñòâóþùèõ";
 			this->EditElementsButton->UseMnemonic = false;
@@ -98,9 +101,10 @@ namespace DBLibClient {
 			// 
 			// AddElementsButton
 			// 
-			this->AddElementsButton->Location = System::Drawing::Point(6, 25);
+			this->AddElementsButton->Location = System::Drawing::Point(4, 16);
+			this->AddElementsButton->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->AddElementsButton->Name = L"AddElementsButton";
-			this->AddElementsButton->Size = System::Drawing::Size(378, 55);
+			this->AddElementsButton->Size = System::Drawing::Size(252, 36);
 			this->AddElementsButton->TabIndex = 0;
 			this->AddElementsButton->Text = L"Äîáàâëåíèå ýëåìåíòîâ";
 			this->AddElementsButton->UseVisualStyleBackColor = true;
@@ -110,9 +114,10 @@ namespace DBLibClient {
 			// 
 			this->toStart->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->toStart->Location = System::Drawing::Point(277, 200);
+			this->toStart->Location = System::Drawing::Point(185, 130);
+			this->toStart->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->toStart->Name = L"toStart";
-			this->toStart->Size = System::Drawing::Size(137, 43);
+			this->toStart->Size = System::Drawing::Size(91, 28);
 			this->toStart->TabIndex = 1;
 			this->toStart->Text = L"Â íà÷àëî";
 			this->toStart->UseVisualStyleBackColor = true;
@@ -120,12 +125,12 @@ namespace DBLibClient {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->GripMargin = System::Windows::Forms::Padding(2, 2, 0, 2);
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(24, 24);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->âûõîäToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(426, 33);
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 1, 0, 1);
+			this->menuStrip1->Size = System::Drawing::Size(288, 24);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -136,35 +141,37 @@ namespace DBLibClient {
 					this->âûõîäÈçÏðîãðàììûToolStripMenuItem
 			});
 			this->âûõîäToolStripMenuItem->Name = L"âûõîäToolStripMenuItem";
-			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(80, 29);
+			this->âûõîäToolStripMenuItem->Size = System::Drawing::Size(54, 22);
 			this->âûõîäToolStripMenuItem->Text = L"Âûõîä";
 			// 
 			// âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem
 			// 
 			this->âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem->Name = L"âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem";
-			this->âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem->Size = System::Drawing::Size(336, 34);
+			this->âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem->Size = System::Drawing::Size(225, 22);
 			this->âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem->Text = L"Âûõîä íà íà÷àëüíûé ýêðàí";
 			this->âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem->Click += gcnew System::EventHandler(this, &ChoiceOfMethodEditForm::âûõîäÍàÍà÷àëüíûéÝêðàíToolStripMenuItem_Click);
 			// 
 			// âûõîäÈçÏðîãðàììûToolStripMenuItem
 			// 
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem->Name = L"âûõîäÈçÏðîãðàììûToolStripMenuItem";
-			this->âûõîäÈçÏðîãðàììûToolStripMenuItem->Size = System::Drawing::Size(336, 34);
+			this->âûõîäÈçÏðîãðàììûToolStripMenuItem->Size = System::Drawing::Size(225, 22);
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem->Text = L"Âûõîä èç ïðîãðàììû";
 			this->âûõîäÈçÏðîãðàììûToolStripMenuItem->Click += gcnew System::EventHandler(this, &ChoiceOfMethodEditForm::âûõîäÈçÏðîãðàììûToolStripMenuItem_Click);
 			// 
 			// ChoiceOfMethodEditForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(426, 249);
+			this->ClientSize = System::Drawing::Size(288, 173);
 			this->Controls->Add(this->toStart);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(448, 305);
-			this->MinimumSize = System::Drawing::Size(448, 305);
+			this->MaximumSize = System::Drawing::Size(304, 212);
+			this->MinimumSize = System::Drawing::Size(304, 212);
 			this->Name = L"ChoiceOfMethodEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
