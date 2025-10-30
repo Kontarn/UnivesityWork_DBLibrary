@@ -72,7 +72,9 @@ System::Void DBLibClient::FindForEditForm::helpOfSearchButton_Click(System::Obje
 {
 	MessageBox::Show("При поиске по более чем одному параметру требуется соответствовать следующиму шаблону,	\
 		ввод производится без скобок(Название книги, Имя автора, Год выпуска книги; наличие в библиотеке)		\
-		\nПример: Война и мир, Л.Н. Толстой или Война и мир, Л.Н. Толстой, 1865", "Внимание");
+		\nПример: Война и мир, Л.Н. Толстой или Война и мир, Л.Н. Толстой, 1865", "Внимание",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
 }
 // Показывает все записи в определённой таблице
 System::Void DBLibClient::FindForEditForm::ShowAllLinesButton_Click(System::Object^ sender, System::EventArgs^ e)

@@ -156,6 +156,7 @@ namespace DBLibClient {
 			// 
 			// typeBookComboBox
 			// 
+			this->typeBookComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->typeBookComboBox->FormattingEnabled = true;
 			this->typeBookComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Техническая", L"Художественная" });
 			this->typeBookComboBox->Location = System::Drawing::Point(8, 104);
@@ -296,6 +297,8 @@ namespace DBLibClient {
 			this->yearOfReleaseComboBox->Name = L"yearOfReleaseComboBox";
 			this->yearOfReleaseComboBox->Size = System::Drawing::Size(67, 21);
 			this->yearOfReleaseComboBox->TabIndex = 17;
+			this->yearOfReleaseComboBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::yearOfReleaseComboBox_KeyPress);
+			this->yearOfReleaseComboBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &AddElementsToDBForm::yearOfReleaseComboBox_Validating);
 			// 
 			// label7
 			// 
@@ -366,5 +369,7 @@ private: System::Void AddElementsToDBForm_Load(System::Object^ sender, System::E
 private: System::Void AvailabilityTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 private: System::Void AvailabilityTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
 private: System::Void priceTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void yearOfReleaseComboBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+private: System::Void yearOfReleaseComboBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 };
 }

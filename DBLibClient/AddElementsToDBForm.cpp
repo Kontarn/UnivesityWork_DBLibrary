@@ -136,7 +136,6 @@ System::Void DBLibClient::AddElementsToDBForm::AddElementsToDBForm_Load(System::
 		yearOfReleaseComboBox->Items->Add(i);
 	}
 	yearOfReleaseComboBox->SelectedIndex = currentYear - 1900;
-	
 }
 
 System::Void DBLibClient::AddElementsToDBForm::AvailabilityTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
@@ -162,6 +161,24 @@ System::Void DBLibClient::AddElementsToDBForm::AvailabilityTextBox_Validating(Sy
 System::Void DBLibClient::AddElementsToDBForm::priceTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e)
 {
 	if (!(Char::IsControl(e->KeyChar) || e->KeyChar == '.' || Char::IsDigit(e->KeyChar))) {
+		e->Handled = true;
+	}
+}
+
+System::Void DBLibClient::AddElementsToDBForm::yearOfReleaseComboBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+	int yearOfRelease = 0;
+	if (int::TryParse(yearOfReleaseComboBox->Text, yearOfRelease)) {
+		if (yearOfRelease < 1900 || yearOfRelease > 2025) {
+			MessageBox::Show("Год выпуска книги должен быть в диапазоне от 1900 до 2025", "Ошибка",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+			e->Cancel = true;
+		}
+	}
+}
+
+System::Void DBLibClient::AddElementsToDBForm::yearOfReleaseComboBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	if (!(Char::IsControl(e->KeyChar) || Char::IsDigit(e->KeyChar))) {
 		e->Handled = true;
 	}
 }

@@ -28,6 +28,7 @@ namespace DBLibClient {
 
 
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ComboBox^ yearOfReleaseComboBox;
 		   String^ typeOfLit;
 	public:
 		editingWindowForm(String^ nameBook, String^ nameAutor,
@@ -46,7 +47,7 @@ namespace DBLibClient {
 
 			nameBookTextBox->Text = nameBook;
 			AutorNameTextBox->Text = nameAutor;
-			yearOfReleaseTextBox->Text = yearOfRelease;
+			yearOfReleaseComboBox->Text = yearOfRelease;
 			AvailabilityTextBox->Text = availability;
 			priceTextBox->Text = price;
 
@@ -69,7 +70,7 @@ namespace DBLibClient {
 	public: System::Windows::Forms::TextBox^ AvailabilityTextBox;
 	protected:
 	private: System::Windows::Forms::Label^ label6;
-	public: System::Windows::Forms::TextBox^ yearOfReleaseTextBox;
+
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label4;
 	public: System::Windows::Forms::TextBox^ AutorNameTextBox;
@@ -107,7 +108,6 @@ namespace DBLibClient {
 		{
 			this->AvailabilityTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->yearOfReleaseTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->AutorNameTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -123,6 +123,7 @@ namespace DBLibClient {
 			this->выход»зѕрограммыToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->priceTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->yearOfReleaseComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -133,6 +134,7 @@ namespace DBLibClient {
 			this->AvailabilityTextBox->Name = L"AvailabilityTextBox";
 			this->AvailabilityTextBox->Size = System::Drawing::Size(53, 20);
 			this->AvailabilityTextBox->TabIndex = 31;
+			this->AvailabilityTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editingWindowForm::AvailabilityTextBox_KeyPress);
 			// 
 			// label6
 			// 
@@ -143,14 +145,6 @@ namespace DBLibClient {
 			this->label6->Size = System::Drawing::Size(50, 13);
 			this->label6->TabIndex = 30;
 			this->label6->Text = L"Ќаличие";
-			// 
-			// yearOfReleaseTextBox
-			// 
-			this->yearOfReleaseTextBox->Location = System::Drawing::Point(430, 68);
-			this->yearOfReleaseTextBox->Margin = System::Windows::Forms::Padding(2);
-			this->yearOfReleaseTextBox->Name = L"yearOfReleaseTextBox";
-			this->yearOfReleaseTextBox->Size = System::Drawing::Size(67, 20);
-			this->yearOfReleaseTextBox->TabIndex = 29;
 			// 
 			// label5
 			// 
@@ -179,6 +173,7 @@ namespace DBLibClient {
 			this->AutorNameTextBox->Name = L"AutorNameTextBox";
 			this->AutorNameTextBox->Size = System::Drawing::Size(165, 20);
 			this->AutorNameTextBox->TabIndex = 26;
+			this->AutorNameTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editingWindowForm::AutorNameTextBox_KeyPress);
 			// 
 			// label3
 			// 
@@ -291,17 +286,29 @@ namespace DBLibClient {
 			this->priceTextBox->Name = L"priceTextBox";
 			this->priceTextBox->Size = System::Drawing::Size(60, 20);
 			this->priceTextBox->TabIndex = 34;
+			this->priceTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editingWindowForm::priceTextBox_KeyPress);
+			this->priceTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editingWindowForm::priceTextBox_Validating);
+			// 
+			// yearOfReleaseComboBox
+			// 
+			this->yearOfReleaseComboBox->FormattingEnabled = true;
+			this->yearOfReleaseComboBox->Location = System::Drawing::Point(430, 67);
+			this->yearOfReleaseComboBox->Name = L"yearOfReleaseComboBox";
+			this->yearOfReleaseComboBox->Size = System::Drawing::Size(67, 21);
+			this->yearOfReleaseComboBox->TabIndex = 35;
+			this->yearOfReleaseComboBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &editingWindowForm::yearOfReleaseComboBox_KeyPress);
+			this->yearOfReleaseComboBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &editingWindowForm::yearOfReleaseComboBox_Validating);
 			// 
 			// editingWindowForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(702, 148);
+			this->Controls->Add(this->yearOfReleaseComboBox);
 			this->Controls->Add(this->priceTextBox);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->AvailabilityTextBox);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->yearOfReleaseTextBox);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->AutorNameTextBox);
@@ -318,7 +325,9 @@ namespace DBLibClient {
 			this->MaximizeBox = false;
 			this->Name = L"editingWindowForm";
 			this->ShowIcon = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"–едактирование записей";
+			this->Load += gcnew System::EventHandler(this, &editingWindowForm::editingWindowForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -331,6 +340,13 @@ namespace DBLibClient {
 	private: System::Void BackButton_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void выхоодЌаЌачальныйЁкранToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void edititngDataButton_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void priceTextBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+private: System::Void priceTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void editingWindowForm_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void yearOfReleaseComboBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void yearOfReleaseComboBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+private: System::Void AutorNameTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void AvailabilityTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 };
 }
 

@@ -74,6 +74,16 @@ namespace DBLibClient {
 
 
 
+
+
+
+
+
+
+
+
+
+
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -90,6 +100,7 @@ namespace DBLibClient {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->âûõîäToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->âåðíóòñÿÍàÍà÷àëüíûéÝêðàíToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -125,7 +136,7 @@ namespace DBLibClient {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(10, 3, 0, 3);
-			this->menuStrip1->Size = System::Drawing::Size(998, 25);
+			this->menuStrip1->Size = System::Drawing::Size(1102, 25);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -156,9 +167,10 @@ namespace DBLibClient {
 			// choiceOfTypeBook
 			// 
 			this->choiceOfTypeBook->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Òåõíè÷åñêàÿ", L"Õóäîæåñòâåííàÿ" });
+			this->choiceOfTypeBook->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->choiceOfTypeBook->FormattingEnabled = true;
 			this->choiceOfTypeBook->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Òåõíè÷åñêàÿ", L"Õóäîæåñòâåííàÿ" });
-			this->choiceOfTypeBook->Location = System::Drawing::Point(710, 378);
+			this->choiceOfTypeBook->Location = System::Drawing::Point(807, 378);
 			this->choiceOfTypeBook->Name = L"choiceOfTypeBook";
 			this->choiceOfTypeBook->Size = System::Drawing::Size(236, 23);
 			this->choiceOfTypeBook->TabIndex = 1;
@@ -166,7 +178,7 @@ namespace DBLibClient {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(706, 355);
+			this->label1->Location = System::Drawing::Point(803, 355);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(163, 15);
 			this->label1->TabIndex = 2;
@@ -191,7 +203,7 @@ namespace DBLibClient {
 			// 
 			// BackToStartMenu
 			// 
-			this->BackToStartMenu->Location = System::Drawing::Point(869, 453);
+			this->BackToStartMenu->Location = System::Drawing::Point(966, 453);
 			this->BackToStartMenu->Name = L"BackToStartMenu";
 			this->BackToStartMenu->Size = System::Drawing::Size(108, 34);
 			this->BackToStartMenu->TabIndex = 8;
@@ -210,7 +222,7 @@ namespace DBLibClient {
 			// 
 			// BackToMenu
 			// 
-			this->BackToMenu->Location = System::Drawing::Point(790, 453);
+			this->BackToMenu->Location = System::Drawing::Point(887, 453);
 			this->BackToMenu->Name = L"BackToMenu";
 			this->BackToMenu->Size = System::Drawing::Size(73, 34);
 			this->BackToMenu->TabIndex = 11;
@@ -220,7 +232,7 @@ namespace DBLibClient {
 			// 
 			// helpOfSearchButton
 			// 
-			this->helpOfSearchButton->Location = System::Drawing::Point(466, 401);
+			this->helpOfSearchButton->Location = System::Drawing::Point(464, 401);
 			this->helpOfSearchButton->Name = L"helpOfSearchButton";
 			this->helpOfSearchButton->Size = System::Drawing::Size(159, 30);
 			this->helpOfSearchButton->TabIndex = 14;
@@ -230,6 +242,15 @@ namespace DBLibClient {
 			// 
 			// dataGridView1
 			// 
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::SystemColors::WindowText;
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->nameBook,
@@ -239,7 +260,7 @@ namespace DBLibClient {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 62;
 			this->dataGridView1->RowTemplate->Height = 28;
-			this->dataGridView1->Size = System::Drawing::Size(964, 313);
+			this->dataGridView1->Size = System::Drawing::Size(1078, 313);
 			this->dataGridView1->TabIndex = 15;
 			// 
 			// EditEntryButton
@@ -254,7 +275,7 @@ namespace DBLibClient {
 			// 
 			// ShowAllLinesButton
 			// 
-			this->ShowAllLinesButton->Location = System::Drawing::Point(267, 453);
+			this->ShowAllLinesButton->Location = System::Drawing::Point(265, 453);
 			this->ShowAllLinesButton->Name = L"ShowAllLinesButton";
 			this->ShowAllLinesButton->Size = System::Drawing::Size(193, 34);
 			this->ShowAllLinesButton->TabIndex = 17;
@@ -264,7 +285,7 @@ namespace DBLibClient {
 			// 
 			// ExitButton
 			// 
-			this->ExitButton->Location = System::Drawing::Point(710, 453);
+			this->ExitButton->Location = System::Drawing::Point(807, 453);
 			this->ExitButton->Name = L"ExitButton";
 			this->ExitButton->Size = System::Drawing::Size(74, 34);
 			this->ExitButton->TabIndex = 18;
@@ -274,7 +295,7 @@ namespace DBLibClient {
 			// 
 			// deleteLineButton
 			// 
-			this->deleteLineButton->Location = System::Drawing::Point(466, 453);
+			this->deleteLineButton->Location = System::Drawing::Point(464, 453);
 			this->deleteLineButton->Name = L"deleteLineButton";
 			this->deleteLineButton->Size = System::Drawing::Size(159, 34);
 			this->deleteLineButton->TabIndex = 19;
@@ -285,7 +306,7 @@ namespace DBLibClient {
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(710, 414);
+			this->checkBox1->Location = System::Drawing::Point(807, 414);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(121, 19);
 			this->checkBox1->TabIndex = 20;
@@ -308,8 +329,10 @@ namespace DBLibClient {
 			// 
 			// yearOfRelease
 			// 
-			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
-			this->yearOfRelease->DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			dataGridViewCellStyle2->Format = L"N0";
+			dataGridViewCellStyle2->NullValue = nullptr;
+			this->yearOfRelease->DefaultCellStyle = dataGridViewCellStyle2;
 			this->yearOfRelease->HeaderText = L"Ãîä âûïóñêà";
 			this->yearOfRelease->MinimumWidth = 8;
 			this->yearOfRelease->Name = L"yearOfRelease";
@@ -317,8 +340,8 @@ namespace DBLibClient {
 			// 
 			// Availability
 			// 
-			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
-			this->Availability->DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			this->Availability->DefaultCellStyle = dataGridViewCellStyle3;
 			this->Availability->HeaderText = L"Íàëè÷èå";
 			this->Availability->MinimumWidth = 8;
 			this->Availability->Name = L"Availability";
@@ -326,8 +349,10 @@ namespace DBLibClient {
 			// 
 			// priceColumn
 			// 
-			dataGridViewCellStyle3->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
-			this->priceColumn->DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleRight;
+			dataGridViewCellStyle4->Format = L"N2";
+			dataGridViewCellStyle4->NullValue = nullptr;
+			this->priceColumn->DefaultCellStyle = dataGridViewCellStyle4;
 			this->priceColumn->HeaderText = L"Öåíà";
 			this->priceColumn->Name = L"priceColumn";
 			// 
@@ -335,7 +360,7 @@ namespace DBLibClient {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(7, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(998, 520);
+			this->ClientSize = System::Drawing::Size(1102, 506);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->deleteLineButton);
 			this->Controls->Add(this->ExitButton);
@@ -356,8 +381,6 @@ namespace DBLibClient {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
 			this->MaximizeBox = false;
-			this->MaximumSize = System::Drawing::Size(1014, 559);
-			this->MinimumSize = System::Drawing::Size(1014, 559);
 			this->Name = L"FindForEditForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
