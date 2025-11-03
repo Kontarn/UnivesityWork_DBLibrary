@@ -123,5 +123,46 @@ System::Void DBLibClient::editingWindowForm::AvailabilityTextBox_KeyPress(System
     }
 }
 
+System::Void DBLibClient::editingWindowForm::priceTextBox_Leave(System::Object^ sender, System::EventArgs^ e) {
+    auto tb = safe_cast<System::Windows::Forms::TextBox^>(sender);
+    if (String::IsNullOrWhiteSpace(tb->Text))
+        return;
+
+    try
+    {
+        // Используем Double::Parse с InvariantCulture для точки как разделителя
+        double value = Double::Parse(tb->Text, System::Globalization::CultureInfo::InvariantCulture);
+
+        // Округляем до 2 знаков
+        value = System::Math::Round(value, 2);
+
+        // Форматируем как "0.00"
+        tb->Text = value.ToString("F2", System::Globalization::CultureInfo::InvariantCulture);
+    }
+    catch (System::FormatException^)
+    {
+        // Некорректный ввод
+        System::Windows::Forms::MessageBox::Show(
+            "Пожалуйста, введите корректное число.",
+            "Ошибка ввода",
+            System::Windows::Forms::MessageBoxButtons::OK,
+            System::Windows::Forms::MessageBoxIcon::Warning
+        );
+        tb->Text = "";
+        tb->Focus();
+    }
+    catch (System::OverflowException^)
+    {
+        System::Windows::Forms::MessageBox::Show(
+            "Число слишком большое.",
+            "Ошибка",
+            System::Windows::Forms::MessageBoxButtons::OK,
+            System::Windows::Forms::MessageBoxIcon::Error
+        );
+        tb->Text = "";
+        tb->Focus();
+    }
+}
+
 
 

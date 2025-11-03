@@ -287,6 +287,7 @@ namespace DBLibClient {
 			this->AvailabilityTextBox->Name = L"AvailabilityTextBox";
 			this->AvailabilityTextBox->Size = System::Drawing::Size(49, 20);
 			this->AvailabilityTextBox->TabIndex = 16;
+			this->AvailabilityTextBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->AvailabilityTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::AvailabilityTextBox_KeyPress);
 			this->AvailabilityTextBox->Validating += gcnew System::ComponentModel::CancelEventHandler(this, &AddElementsToDBForm::AvailabilityTextBox_Validating);
 			// 
@@ -315,7 +316,9 @@ namespace DBLibClient {
 			this->priceTextBox->Name = L"priceTextBox";
 			this->priceTextBox->Size = System::Drawing::Size(57, 20);
 			this->priceTextBox->TabIndex = 19;
+			this->priceTextBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->priceTextBox->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &AddElementsToDBForm::priceTextBox_KeyPress);
+			this->priceTextBox->Leave += gcnew System::EventHandler(this, &AddElementsToDBForm::priceTextBox_Leave);
 			// 
 			// AddElementsToDBForm
 			// 
@@ -371,5 +374,6 @@ private: System::Void AvailabilityTextBox_Validating(System::Object^ sender, Sys
 private: System::Void priceTextBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 private: System::Void yearOfReleaseComboBox_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
 private: System::Void yearOfReleaseComboBox_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+private: System::Void priceTextBox_Leave(System::Object^ sender, System::EventArgs^ e);
 };
 }
